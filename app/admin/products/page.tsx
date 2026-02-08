@@ -1,0 +1,359 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import {
+  Search,
+  Plus,
+  Edit,
+  Trash2,
+  Loader2,
+  RefreshCw,
+  X,
+  AlertTriangle,
+} from "lucide-react";
+import { AdminHeader } from "@/components/fannoh/admin-header";
+import { AdminSidebar } from "@/components/fannoh/admin-sidebar";
+
+
+interface Product {
+  id: string;
+  name: string;
+  image: string;
+  routine_step: string;
+  price: number;
+  quantity_in_stock: number;
+  in_stock: boolean;
+  rating: number;
+  review_count: number;
+}
+
+export default function ProductsPage() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [deleting, setDeleting] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [deleteModal, setDeleteModal] = useState<Product | null>(null);
+
+  const fetchProducts = async () => {
+    setLoading(true);
+    setError(null);
+
+    // Mock data fetch
+    setTimeout(() => {
+      setProducts([
+        { id: "1", name: "Essence Mascara Lash Princess", price: 9.99, quantity_in_stock: 5, routine_step: "beauty", image: "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png", in_stock: true, rating: 4.5, review_count: 10 },
+        { id: "2", name: "Eyeshadow Palette with Mirror", price: 19.99, quantity_in_stock: 44, routine_step: "beauty", image: "https://cdn.dummyjson.com/products/images/beauty/Eyeshadow%20Palette%20with%20Mirror/thumbnail.png", in_stock: true, rating: 4.2, review_count: 25 },
+      ]);
+      setLoading(false);
+    }, 1000);
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const confirmDelete = async () => {
+    if (!deleteModal) return;
+    const id = deleteModal.id;
+    setDeleting(id);
+    // Mock delete
+    setTimeout(() => {
+      setProducts(products.filter((p) => p.id !== id));
+      setDeleteModal(null);
+      setDeleting(null);
+    }, 1000);
+  };
+
+  const filteredProducts = products.filter(
+    (product) =>
+      product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      product.routine_step.toLowerCase().includes(searchTerm.toLowerCase()),
+  );
+
+  const totalValue = products.reduce(
+    (sum, p) => sum + p.price * p.quantity_in_stock,
+    0,
+  );
+  const totalStock = products.reduce((sum, p) => sum + p.quantity_in_stock, 0);
+
+  return (
+    <div className="min-h-screen bg-background">
+      <AdminSidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+
+      <div className="lg:pl-64">
+        <AdminHeader onMenuClick={() => setSidebarOpen(true)} />
+
+        <main className="pt-20 pb-12">
+          <div className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            {/* Page Header */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 sm:mb-8 gap-4">
+              <div>
+                <h1 className="font-serif text-2xl sm:text-3xl text-foreground">
+                  Products
+                </h1>
+                <p className="text-muted-foreground mt-1 sm:mt-2 text-sm">
+                  Manage your product catalog
+                </p>
+              </div>
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={fetchProducts}
+                  className="flex items-center gap-2 px-4 py-2 rounded-lg border border-border hover:bg-foreground/5 fannoh-transition text-sm"
+                >
+                  <RefreshCw
+                    className={`w-4 h-4 ${loading ? "animate-spin" : ""}`}
+                  />
+                  <span className="hidden sm:inline">Refresh</span>
+                </button>
+                <Link
+                  href="/admin/products/new"
+                  className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 fannoh-transition font-medium text-sm"
+                >
+                  <Plus className="w-4 h-4" />
+                  <span className="hidden sm:inline">Add Product</span>
+                  <span className="sm:hidden">Add</span>
+                </Link>
+              </div>
+            </div>
+
+            {error && (
+              <div className="mb-6 p-4 bg-yellow-100 text-yellow-800 rounded-lg">
+                {error}
+              </div>
+            )}
+
+            {/* Stats */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
+              <div className="bg-card rounded-2xl p-6 fannoh-shadow">
+                <p className="text-sm text-muted-foreground mb-2">
+                  Total Products
+                </p>
+                <p className="text-3xl font-bold text-foreground">
+                  {products.length}
+                </p>
+              </div>
+              <div className="bg-card rounded-2xl p-6 fannoh-shadow">
+                <p className="text-sm text-muted-foreground mb-2">
+                  Total Stock
+                </p>
+                <p className="text-3xl font-bold text-foreground">
+                  {totalStock}
+                </p>
+              </div>
+              <div className="bg-card rounded-2xl p-6 fannoh-shadow">
+                <p className="text-sm text-muted-foreground mb-2">
+                  Inventory Value
+                </p>
+                <p className="text-3xl font-bold text-foreground">
+                  KES {totalValue.toLocaleString()}
+                </p>
+              </div>
+            </div>
+
+            {/* Search */}
+            <div className="mb-8">
+              <div className="relative">
+                <Search className="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
+                <input
+                  type="text"
+                  placeholder="Search products by name or category..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full pl-10 pr-4 py-3 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                />
+              </div>
+            </div>
+
+            {/* Products Table */}
+            <div className="bg-card rounded-2xl fannoh-shadow overflow-hidden">
+              {loading ? (
+                <div className="p-12 text-center">
+                  <Loader2 className="w-8 h-8 animate-spin text-primary mx-auto mb-4" />
+                  <p className="text-muted-foreground">Loading products...</p>
+                </div>
+              ) : filteredProducts.length === 0 ? (
+                <div className="p-12 text-center">
+                  <p className="text-muted-foreground">No products found</p>
+                </div>
+              ) : (
+                <div>
+                  <table className="w-full">
+                    <thead>
+                      <tr className="border-b border-border/50 bg-foreground/5">
+                        <th className="px-4 py-4 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                          Product
+                        </th>
+                        <th className="px-4 py-4 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                          Category
+                        </th>
+                        <th className="px-4 py-4 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                          Price
+                        </th>
+                        <th className="px-4 py-4 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                          Stock
+                        </th>
+                        <th className="px-4 py-4 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider hidden lg:table-cell">
+                          Rating
+                        </th>
+                        <th className="px-4 py-4 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider hidden md:table-cell">
+                          Status
+                        </th>
+                        <th className="px-4 py-4 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                          Actions
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {filteredProducts.map((product) => (
+                        <tr
+                          key={product.id}
+                          className="border-b border-border/50 hover:bg-foreground/5 fannoh-transition"
+                        >
+                          <td className="px-4 py-4">
+                            <div className="flex items-center gap-3">
+                              <div className="relative w-12 h-12 rounded-lg overflow-hidden shrink-0 bg-muted">
+                                <Image
+                                  src={product.image || "/placeholder.svg"}
+                                  alt={product.name}
+                                  fill
+                                  className="object-cover"
+                                  priority
+                                />
+                              </div>
+                              <p className="font-semibold text-foreground text-sm">
+                                {product.name}
+                              </p>
+                            </div>
+                          </td>
+                          <td className="px-4 py-4">
+                            <span className="text-sm text-foreground/70 capitalize">
+                              {product.routine_step}
+                            </span>
+                          </td>
+                          <td className="px-4 py-4">
+                            <p className="font-semibold text-foreground text-sm">
+                              KES {product.price.toLocaleString()}
+                            </p>
+                          </td>
+                          <td className="px-4 py-4">
+                            <span
+                              className={`inline-block px-2 py-1 rounded-full text-xs font-semibold ${product.quantity_in_stock > 20
+                                ? "bg-green-100 text-green-800"
+                                : product.quantity_in_stock > 5
+                                  ? "bg-yellow-100 text-yellow-800"
+                                  : "bg-red-100 text-red-800"
+                                }`}
+                            >
+                              {product.quantity_in_stock}
+                            </span>
+                          </td>
+                          <td className="px-4 py-4 hidden lg:table-cell">
+                            <p className="text-sm text-foreground">
+                              <span className="text-amber-400">★</span>{" "}
+                              {product.rating?.toFixed(1) || "5.0"}
+                            </p>
+                          </td>
+                          <td className="px-4 py-4 hidden md:table-cell">
+                            <span
+                              className={`inline-block px-2 py-1 rounded-full text-xs font-semibold ${product.in_stock
+                                ? "bg-green-100 text-green-800"
+                                : "bg-red-100 text-red-800"
+                                }`}
+                            >
+                              {product.in_stock ? "In Stock" : "Out"}
+                            </span>
+                          </td>
+                          <td className="px-4 py-4">
+                            <div className="flex items-center gap-1">
+                              <Link
+                                href={`/admin/products/${product.id}`}
+                                className="p-2 hover:bg-foreground/10 rounded-lg fannoh-transition"
+                                title="Edit"
+                              >
+                                <Edit className="w-4 h-4 text-foreground/50" />
+                              </Link>
+                              <button
+                                onClick={() => setDeleteModal(product)}
+                                disabled={deleting === product.id}
+                                className="p-2 hover:bg-red-50 rounded-lg fannoh-transition disabled:opacity-50"
+                                title="Delete"
+                              >
+                                {deleting === product.id ? (
+                                  <Loader2 className="w-4 h-4 animate-spin text-red-500" />
+                                ) : (
+                                  <Trash2 className="w-4 h-4 text-red-500" />
+                                )}
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
+          </div>
+        </main>
+      </div>
+
+      {/* Delete Confirmation Modal */}
+      {deleteModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-card rounded-2xl p-6 max-w-md w-full fannoh-shadow">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center">
+                <AlertTriangle className="w-6 h-6 text-red-600" />
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-foreground">
+                  Delete Product
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  This action cannot be undone
+                </p>
+              </div>
+            </div>
+
+            <p className="text-foreground mb-6">
+              Are you sure you want to delete{" "}
+              <strong>{deleteModal.name}</strong>? This will permanently remove
+              the product from your catalog.
+            </p>
+
+            <div className="flex gap-3 justify-end">
+              <button
+                onClick={() => setDeleteModal(null)}
+                disabled={deleting === deleteModal.id}
+                className="px-4 py-2 rounded-lg border border-border hover:bg-foreground/5 fannoh-transition font-medium"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={confirmDelete}
+                disabled={deleting === deleteModal.id}
+                className="px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 fannoh-transition font-medium flex items-center gap-2 disabled:opacity-50"
+              >
+                {deleting === deleteModal.id ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    Deleting...
+                  </>
+                ) : (
+                  <>
+                    <Trash2 className="w-4 h-4" />
+                    Delete Product
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}

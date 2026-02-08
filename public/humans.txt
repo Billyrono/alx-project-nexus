@@ -1,0 +1,20 @@
+/* TEAM */
+Developer: Billy Rono
+Site: https://billyrono.netlify.app
+Location: Kenya
+
+/* SITE */
+Name: Fannoh Naturals
+URL: https://fannohnaturals.com
+Last update: 2026/02/06
+Language: English
+Standards: HTML5, CSS3, JavaScript
+
+/* TECHNOLOGY */
+Framework: Next.js 15
+Styling: Tailwind CSS
+UI Components: shadcn/ui
+Hosting: Vercel
+Database: Supabase
+Payments: Paystack
+Analytics: Google Analytics, Vercel Analytics

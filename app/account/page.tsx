@@ -1,0 +1,239 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import Image from "next/image";
+import {
+  User,
+  Package,
+  Heart,
+  LogOut,
+  Loader2,
+  Mail,
+  ShoppingBag,
+} from "lucide-react";
+import { Header } from "@/components/fannoh/header";
+import { Footer } from "@/components/fannoh/footer";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { logout } from "@/store/slices/authSlice";
+
+export default function AccountPage() {
+  const { user, loading } = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!loading && !user) {
+      router.push("/login");
+    }
+  }, [user, loading, router]);
+
+  // Load avatar
+  useEffect(() => {
+    if (user?.image) {
+      setAvatarUrl(user.image);
+    }
+  }, [user]);
+
+  const handleSignOut = async () => {
+    dispatch(logout());
+    router.push("/");
+  };
+
+  if (loading) {
+    return (
+      <main className="min-h-screen">
+        <Header />
+        <div className="pt-28 pb-20 min-h-screen flex items-center justify-center">
+          <Loader2 className="w-8 h-8 animate-spin text-primary" />
+        </div>
+        <Footer />
+      </main>
+    );
+  }
+
+  if (!user) {
+    return null;
+  }
+
+  const menuItems = [
+    {
+      icon: Package,
+      label: "My Orders",
+      description: "Track your orders and view history",
+      href: "/account/orders",
+    },
+    {
+      icon: Heart,
+      label: "Wishlist",
+      description: "Products you've saved for later",
+      href: "/account/wishlist",
+    },
+    {
+      icon: User,
+      label: "Profile Settings",
+      description: "Update your personal information",
+      href: "/account/settings",
+    },
+
+    {
+      icon: ShoppingBag,
+      label: "Browse Shop",
+      description: "Explore our latest skincare products",
+      href: "/shop",
+    },
+  ];
+
+  return (
+    <main className="min-h-screen">
+      <Header />
+
+      <div className="pt-28 pb-20">
+        <div className="max-w-4xl mx-auto px-6">
+          {/* Welcome Section */}
+          <div className="bg-linear-to-br from-primary/10 to-secondary/10 rounded-3xl p-4 sm:p-8 mb-8">
+            <div className="flex items-start gap-3 sm:gap-4">
+              <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-primary/20 flex items-center justify-center shrink-0 overflow-hidden">
+                {avatarUrl ? (
+                  <Image
+                    src={avatarUrl}
+                    alt="Profile"
+                    width={64}
+                    height={64}
+                    className="w-full h-full object-cover"
+                    unoptimized
+                  />
+                ) : (
+                  <User className="w-6 h-6 sm:w-8 sm:h-8 text-primary" />
+                )}
+              </div>
+              <div className="min-w-0">
+                <h1 className="font-serif text-xl sm:text-3xl text-foreground mb-1 truncate">
+                  Welcome back
+                  {user.firstName
+                    ? `, ${user.firstName} ${user.lastName}`
+                    : ""}
+                  !
+                </h1>
+                <p className="text-muted-foreground flex items-center gap-2">
+                  <Mail className="w-4 h-4" />
+                  {user.email}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Quick Actions */}
+          <div className="grid md:grid-cols-2 gap-4 mb-8">
+            {menuItems.map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                className="bg-card border border-border rounded-2xl p-6 hover:border-primary/30 hover:shadow-lg transition-all group"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                    <item.icon className="w-6 h-6 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-foreground mb-1">
+                      {item.label}
+                    </h3>
+                    <p className="text-sm text-muted-foreground">
+                      {item.description}
+                    </p>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          {/* Admin Dashboard - Only show for admins */}
+          {(() => {
+            const adminEmails = (process.env.NEXT_PUBLIC_ADMIN_EMAILS || "")
+              .split(",")
+              .map((e) => e.trim().toLowerCase());
+            const isAdmin = adminEmails.includes(
+              user.email?.toLowerCase() || "",
+            );
+
+            if (!isAdmin) return null;
+
+            return (
+              <div className="bg-card border-2 border-primary/30 rounded-2xl p-4 sm:p-6 mb-6">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="w-6 h-6 text-primary"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                        />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-foreground">
+                        Admin Dashboard
+                      </h3>
+                      <p className="text-sm text-muted-foreground">
+                        Manage your store, orders & customers
+                      </p>
+                    </div>
+                  </div>
+                  <Link
+                    href="/admin"
+                    className="bg-primary text-primary-foreground px-6 py-2 rounded-full text-sm font-medium hover:bg-primary/90 transition-colors"
+                  >
+                    Open Dashboard
+                  </Link>
+                </div>
+              </div>
+            );
+          })()}
+
+          {/* Continue Shopping
+                    <div className="bg-card border border-border rounded-2xl p-6 mb-6">
+                        <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-4">
+                                <div className="w-12 h-12 rounded-xl bg-secondary/30 flex items-center justify-center">
+                                    <ShoppingBag className="w-6 h-6 text-foreground" />
+                                </div>
+                                <div>
+                                    <h3 className="font-semibold text-foreground">Ready to shop?</h3>
+                                    <p className="text-sm text-muted-foreground">Explore our latest skincare products</p>
+                                </div>
+                            </div>
+                            <Link
+                                href="/shop"
+                                className="bg-primary text-primary-foreground px-6 py-2 rounded-full text-sm font-medium hover:bg-primary/90 transition-colors"
+                            >
+                                Browse Shop
+                            </Link>
+                        </div>
+                    </div> */}
+
+          {/* Sign Out */}
+          <button
+            onClick={handleSignOut}
+            className="w-full flex items-center justify-center gap-2 py-3 text-destructive hover:bg-destructive/10 rounded-xl transition-colors"
+          >
+            <LogOut className="w-5 h-5" />
+            Sign Out
+          </button>
+        </div>
+      </div>
+
+      <Footer />
+    </main>
+  );
+}

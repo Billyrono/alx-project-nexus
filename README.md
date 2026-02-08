@@ -1,8 +1,15 @@
-# ALX ProDev Frontend Engineering Program
+# Fannoh Naturals - ALX Project Nexus
 
 ## Overview
 
-The **ALX ProDev Frontend Engineering** program is an intensive, project-based learning track designed to equip developers with industry-ready skills in modern frontend development. The program emphasizes hands-on experience with cutting-edge technologies, best practices, and real-world problem-solving — preparing learners to build scalable, performant, and accessible applications across web and mobile platforms.
+**Fannoh Naturals** is an e-commerce application developed as part of the ALX ProDev Frontend Engineering program. It demonstrates a modern, scalable frontend architecture using **Next.js**, **Redux Toolkit**, and **Tailwind CSS**.
+
+This project has been refactored to align with ALX Project Nexus requirements, featuring:
+- **State Management**: Centralized state for Authentication and Cart using **Redux Toolkit**.
+- **Data Fetching**: Integration with **DummyJSON** API for products and authentication.
+- **Mock Data**: Admin and Account features use mock data (simulating a backend) for demonstration purposes.
+- **No Backend Dependency**: The project is fully decoupled from Supabase and runs entirely on the client-side (for demo).
+- **UI/UX**: specialized design for a skincare brand with a responsive, mobile-first layout.
 
 ---
 
