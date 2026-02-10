@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { Search, Mail, Phone, Loader2, RefreshCw, User } from "lucide-react";
-import { AdminHeader } from "@/components/fannoh/admin-header";
-import { AdminSidebar } from "@/components/fannoh/admin-sidebar";
+import { AdminHeader } from "@/components/nexamart/admin-header";
+import { AdminSidebar } from "@/components/nexamart/admin-sidebar";
 
 
 interface Customer {
@@ -29,9 +29,9 @@ export default function CustomersPage() {
     // Mock data
     setTimeout(() => {
       setCustomers([
-        { id: "1", full_name: "John Doe", email: "john@example.com", phone: "1234567890", created_at: "2024-01-01T00:00:00Z", order_count: 5, total_spent: 2500 },
-        { id: "2", full_name: "Jane Smith", email: "jane@example.com", phone: "0987654321", created_at: "2024-01-15T00:00:00Z", order_count: 3, total_spent: 1500 },
-        { id: "3", full_name: "Alice Johnson", email: "alice@example.com", phone: null, created_at: "2024-02-01T00:00:00Z", order_count: 1, total_spent: 500 },
+        { id: "1", full_name: "Juma Otieno", email: "juma@example.com", phone: "0712345678", created_at: "2024-01-01T00:00:00Z", order_count: 5, total_spent: 12500 },
+        { id: "2", full_name: "Wanjiku Kamau", email: "wanjiku@example.com", phone: "0723456789", created_at: "2024-01-15T00:00:00Z", order_count: 3, total_spent: 4500 },
+        { id: "3", full_name: "Amina Mohamed", email: "amina@example.com", phone: "0734567890", created_at: "2024-02-01T00:00:00Z", order_count: 1, total_spent: 1500 },
       ]);
       setLoading(false);
     }, 1000);
@@ -81,7 +81,7 @@ export default function CustomersPage() {
               <button
                 onClick={fetchCustomers}
                 disabled={loading}
-                className="flex items-center gap-2 px-4 py-2 rounded-lg border border-border hover:bg-foreground/5 fannoh-transition disabled:opacity-50"
+                className="flex items-center gap-2 px-4 py-2 rounded-lg border border-border hover:bg-foreground/5 nexamart-transition disabled:opacity-50"
               >
                 <RefreshCw
                   className={`w-4 h-4 ${loading ? "animate-spin" : ""}`}
@@ -92,7 +92,7 @@ export default function CustomersPage() {
 
             {/* Stats */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-              <div className="bg-card rounded-2xl p-6 fannoh-shadow">
+              <div className="bg-card rounded-2xl p-6 nexamart-shadow">
                 <p className="text-sm text-muted-foreground mb-2">
                   Total Customers
                 </p>
@@ -100,7 +100,7 @@ export default function CustomersPage() {
                   {totalCustomers}
                 </p>
               </div>
-              <div className="bg-card rounded-2xl p-6 fannoh-shadow">
+              <div className="bg-card rounded-2xl p-6 nexamart-shadow">
                 <p className="text-sm text-muted-foreground mb-2">
                   Total Revenue
                 </p>
@@ -108,7 +108,7 @@ export default function CustomersPage() {
                   KES {totalRevenue.toLocaleString()}
                 </p>
               </div>
-              <div className="bg-card rounded-2xl p-6 fannoh-shadow">
+              <div className="bg-card rounded-2xl p-6 nexamart-shadow">
                 <p className="text-sm text-muted-foreground mb-2">
                   Avg Order Value
                 </p>
@@ -133,7 +133,7 @@ export default function CustomersPage() {
             </div>
 
             {/* Customers Table */}
-            <div className="bg-card rounded-2xl fannoh-shadow overflow-hidden">
+            <div className="bg-card rounded-2xl nexamart-shadow overflow-hidden">
               {loading ? (
                 <div className="p-12 text-center">
                   <Loader2 className="w-8 h-8 animate-spin text-primary mx-auto mb-4" />
@@ -186,7 +186,7 @@ export default function CustomersPage() {
                       {filteredCustomers.map((customer) => (
                         <tr
                           key={customer.id}
-                          className="border-b border-border/50 hover:bg-foreground/5 fannoh-transition"
+                          className="border-b border-border/50 hover:bg-foreground/5 nexamart-transition"
                         >
                           <td className="px-6 py-4">
                             <div className="flex items-center gap-3">
@@ -233,7 +233,7 @@ export default function CustomersPage() {
                             <div className="flex items-center gap-2">
                               <a
                                 href={`mailto:${customer.email}`}
-                                className="p-2 hover:bg-foreground/10 rounded-lg fannoh-transition"
+                                className="p-2 hover:bg-foreground/10 rounded-lg nexamart-transition"
                                 title="Send Email"
                               >
                                 <Mail className="w-4 h-4 text-foreground/50" />
@@ -241,7 +241,7 @@ export default function CustomersPage() {
                               {customer.phone && (
                                 <a
                                   href={`tel:${customer.phone}`}
-                                  className="p-2 hover:bg-foreground/10 rounded-lg fannoh-transition"
+                                  className="p-2 hover:bg-foreground/10 rounded-lg nexamart-transition"
                                   title="Call"
                                 >
                                   <Phone className="w-4 h-4 text-foreground/50" />

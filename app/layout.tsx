@@ -4,7 +4,7 @@ import { DM_Sans, Playfair_Display } from "next/font/google";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import { ReduxProvider } from "@/store/ReduxProvider";
-import { WhatsAppButton } from "@/components/fannoh/whatsapp-button";
+import { WhatsAppButton } from "@/components/nexamart/whatsapp-button";
 import "./globals.css";
 
 const GA_MEASUREMENT_ID = "G-NVBZ1T2S4V";
@@ -21,15 +21,19 @@ const playfairDisplay = Playfair_Display({
   weight: ["400", "500", "600", "700"],
 });
 
+
+
+
+
 export const metadata: Metadata = {
   title: {
-    default: "Fannoh Naturals — Premium Shopping Experience",
-    template: "%s | Fannoh Naturals",
+    default: "NexaMart Marketplace — Premium Shopping Experience",
+    template: "%s | NexaMart Marketplace",
   },
   description:
     "Discover a curated collection of premium products for your lifestyle. Shop the best in beauty, home, and more.",
-  applicationName: "Fannoh Naturals",
-  metadataBase: new URL("https://fannoh-naturals.vercel.app"),
+  applicationName: "NexaMart Marketplace",
+  metadataBase: new URL("https://nexamart-marketplace.vercel.app"),
 };
 
 export const viewport: Viewport = {

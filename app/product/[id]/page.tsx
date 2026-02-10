@@ -21,8 +21,8 @@ import {
   Heart,
   Truck,
 } from "lucide-react";
-import { Header } from "@/components/fannoh/header";
-import { Footer } from "@/components/fannoh/footer";
+import { Header } from "@/components/nexamart/header";
+import { Footer } from "@/components/nexamart/footer";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { addToCart } from "@/store/slices/cartSlice";
 import { api, Product } from "@/services/api";
@@ -183,7 +183,7 @@ export default function ProductPage() {
           {/* Back Link */}
           <Link
             href="/shop"
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground fannoh-transition mb-8"
+            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground nexamart-transition mb-8"
           >
             <ChevronLeft className="w-4 h-4" />
             Back to Shop
@@ -191,7 +191,7 @@ export default function ProductPage() {
 
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 mb-20">
             {/* Product Image */}
-            <div className="relative aspect-square rounded-3xl overflow-hidden bg-card fannoh-shadow">
+            <div className="relative aspect-square rounded-3xl overflow-hidden bg-card nexamart-shadow">
               <Image
                 src={product.thumbnail || "/placeholder.svg"}
                 alt={product.title}
@@ -253,7 +253,7 @@ export default function ProductPage() {
               </div>
 
               {/* Product Details */}
-              <div className="bg-card rounded-2xl p-5 mb-6 fannoh-shadow">
+              <div className="bg-card rounded-2xl p-5 mb-6 nexamart-shadow">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <p className="text-xs text-muted-foreground mb-1">Brand</p>
@@ -278,11 +278,11 @@ export default function ProductPage() {
                 <label className="text-sm font-medium text-foreground mb-3 block">
                   Quantity
                 </label>
-                <div className="inline-flex items-center gap-4 bg-card rounded-full px-2 py-2 fannoh-shadow">
+                <div className="inline-flex items-center gap-4 bg-card rounded-full px-2 py-2 nexamart-shadow">
                   <button
                     type="button"
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="w-10 h-10 rounded-full bg-background flex items-center justify-center text-foreground/60 hover:text-foreground fannoh-transition"
+                    className="w-10 h-10 rounded-full bg-background flex items-center justify-center text-foreground/60 hover:text-foreground nexamart-transition"
                     aria-label="Decrease quantity"
                   >
                     <Minus className="w-4 h-4" />
@@ -293,7 +293,7 @@ export default function ProductPage() {
                   <button
                     type="button"
                     onClick={() => setQuantity(quantity + 1)}
-                    className="w-10 h-10 rounded-full bg-background flex items-center justify-center text-foreground/60 hover:text-foreground fannoh-transition"
+                    className="w-10 h-10 rounded-full bg-background flex items-center justify-center text-foreground/60 hover:text-foreground nexamart-transition"
                     aria-label="Increase quantity"
                   >
                     <Plus className="w-4 h-4" />
@@ -307,7 +307,7 @@ export default function ProductPage() {
                   type="button"
                   onClick={handleAddToCart}
                   disabled={product.stock <= 0}
-                  className={`flex-1 inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-sm tracking-wide fannoh-transition fannoh-shadow ${isAdded
+                  className={`flex-1 inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-sm tracking-wide nexamart-transition nexamart-shadow ${isAdded
                     ? "bg-primary/80 text-primary-foreground"
                     : product.stock > 0
                       ? "bg-primary text-primary-foreground hover:bg-primary/90"
@@ -361,19 +361,19 @@ export default function ProductPage() {
                   <button
                     type="button"
                     onClick={() => toggleAccordion(item.key)}
-                    className="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-card/50 fannoh-transition"
+                    className="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-card/50 nexamart-transition"
                   >
                     <span className="font-medium text-foreground flex items-center gap-2">
                       <span className="text-lg">{item.icon}</span>
                       {item.title}
                     </span>
                     <ChevronDown
-                      className={`w-5 h-5 text-muted-foreground fannoh-transition ${openAccordion === item.key ? "rotate-180" : ""
+                      className={`w-5 h-5 text-muted-foreground nexamart-transition ${openAccordion === item.key ? "rotate-180" : ""
                         }`}
                     />
                   </button>
                   <div
-                    className={`overflow-hidden fannoh-transition ${openAccordion === item.key ? "max-h-96" : "max-h-0"
+                    className={`overflow-hidden nexamart-transition ${openAccordion === item.key ? "max-h-96" : "max-h-0"
                       }`}
                   >
                     <div className="px-6 py-5 bg-card/30 border-t border-border/50">
@@ -435,7 +435,7 @@ export default function ProductPage() {
               onClick={() => setShowLoginModal(false)}
               className="absolute top-4 right-4 text-muted-foreground hover:text-foreground"
             >
-              <div className="w-6 h-6 flex items-center justify-center rounded-full border border-border hover:bg-background fannoh-transition">
+              <div className="w-6 h-6 flex items-center justify-center rounded-full border border-border hover:bg-background nexamart-transition">
                 x
               </div>
             </button>
@@ -453,7 +453,7 @@ export default function ProductPage() {
             <div className="space-y-3">
               <Link
                 href={`/login?redirect=/product/${product?.id}`}
-                className="w-full inline-flex items-center justify-center bg-primary text-primary-foreground px-6 py-3 rounded-xl font-medium fannoh-transition hover:bg-primary/90"
+                className="w-full inline-flex items-center justify-center bg-primary text-primary-foreground px-6 py-3 rounded-xl font-medium nexamart-transition hover:bg-primary/90"
               >
                 Log In
               </Link>

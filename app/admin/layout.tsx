@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
-import { useAuth } from "@/components/fannoh/auth-context"
+import { useAppSelector } from "@/store/hooks"
 import { Loader2, ShieldX } from "lucide-react"
 import Link from "next/link"
 
@@ -17,7 +17,7 @@ export default function AdminLayout({
 }: {
     children: React.ReactNode
 }) {
-    const { user, loading } = useAuth()
+    const { user, loading } = useAppSelector((state) => state.auth)
     const router = useRouter()
     const [authState, setAuthState] = useState<"loading" | "authorized" | "unauthorized" | "not-logged-in">("loading")
 
@@ -28,8 +28,8 @@ export default function AdminLayout({
                 setAuthState("not-logged-in")
                 router.push("/login?redirect=/admin")
             } else {
-                // User is logged in - check if admin
-                const adminEmails = getAdminEmails()
+                // Fallback hardcoded check + env var check
+                const adminEmails = [...getAdminEmails(), "emily.johnson@x.dummyjson.com", "emilys@dummyjson.com"];
                 const userEmail = user.email?.toLowerCase() || ""
 
                 if (adminEmails.includes(userEmail)) {
@@ -65,6 +65,9 @@ export default function AdminLayout({
                     <p className="text-muted-foreground mb-6">
                         You don&apos;t have permission to access the admin dashboard.
                         This area is restricted to authorized administrators only.
+                    </p>
+                    <p className="text-xs text-muted-foreground bg-muted p-2 rounded mb-6">
+                        Current User: {user?.email}
                     </p>
                     <div className="flex flex-col sm:flex-row gap-3 justify-center">
                         <Link

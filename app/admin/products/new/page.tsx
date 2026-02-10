@@ -5,8 +5,8 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft, Save, Loader2, Upload, X } from "lucide-react";
-import { AdminHeader } from "@/components/fannoh/admin-header";
-import { AdminSidebar } from "@/components/fannoh/admin-sidebar";
+import { AdminHeader } from "@/components/nexamart/admin-header";
+import { AdminSidebar } from "@/components/nexamart/admin-sidebar";
 
 
 const routineSteps = [
@@ -125,7 +125,7 @@ export default function NewProductPage() {
             <div className="flex items-center gap-4 mb-8">
               <Link
                 href="/admin/products"
-                className="p-2 hover:bg-foreground/10 rounded-lg fannoh-transition"
+                className="p-2 hover:bg-foreground/10 rounded-lg nexamart-transition"
               >
                 <ArrowLeft className="w-5 h-5" />
               </Link>
@@ -147,7 +147,7 @@ export default function NewProductPage() {
 
             <form onSubmit={handleSubmit} className="space-y-8">
               {/* Basic Info */}
-              <div className="bg-card rounded-2xl p-6 fannoh-shadow">
+              <div className="bg-card rounded-2xl p-6 nexamart-shadow">
                 <h2 className="text-lg font-semibold text-foreground mb-4">
                   Basic Information
                 </h2>
@@ -259,7 +259,7 @@ export default function NewProductPage() {
               </div>
 
               {/* Skin Types & Concerns */}
-              <div className="bg-card rounded-2xl p-6 fannoh-shadow">
+              <div className="bg-card rounded-2xl p-6 nexamart-shadow">
                 <h2 className="text-lg font-semibold text-foreground mb-4">
                   Target Audience
                 </h2>
@@ -274,7 +274,7 @@ export default function NewProductPage() {
                           key={type}
                           type="button"
                           onClick={() => toggleArrayField("skin_types", type)}
-                          className={`px-4 py-2 rounded-full text-sm font-medium fannoh-transition ${formData.skin_types.includes(type)
+                          className={`px-4 py-2 rounded-full text-sm font-medium nexamart-transition ${formData.skin_types.includes(type)
                             ? "bg-primary text-primary-foreground"
                             : "bg-foreground/10 text-foreground hover:bg-foreground/20"
                             }`}
@@ -294,7 +294,7 @@ export default function NewProductPage() {
                           key={concern}
                           type="button"
                           onClick={() => toggleArrayField("concerns", concern)}
-                          className={`px-4 py-2 rounded-full text-sm font-medium fannoh-transition ${formData.concerns.includes(concern)
+                          className={`px-4 py-2 rounded-full text-sm font-medium nexamart-transition ${formData.concerns.includes(concern)
                             ? "bg-primary text-primary-foreground"
                             : "bg-foreground/10 text-foreground hover:bg-foreground/20"
                             }`}
@@ -308,7 +308,7 @@ export default function NewProductPage() {
               </div>
 
               {/* Inventory */}
-              <div className="bg-card rounded-2xl p-6 fannoh-shadow">
+              <div className="bg-card rounded-2xl p-6 nexamart-shadow">
                 <h2 className="text-lg font-semibold text-foreground mb-4">
                   Inventory
                 </h2>
@@ -350,7 +350,7 @@ export default function NewProductPage() {
               </div>
 
               {/* Product Image */}
-              <div className="bg-card rounded-2xl p-6 fannoh-shadow">
+              <div className="bg-card rounded-2xl p-6 nexamart-shadow">
                 <h2 className="text-lg font-semibold text-foreground mb-4">
                   Product Image
                 </h2>
@@ -402,7 +402,7 @@ export default function NewProductPage() {
               </div>
 
               {/* Additional Details */}
-              <div className="bg-card rounded-2xl p-6 fannoh-shadow">
+              <div className="bg-card rounded-2xl p-6 nexamart-shadow">
                 <h2 className="text-lg font-semibold text-foreground mb-4">
                   Additional Details
                 </h2>
@@ -488,14 +488,14 @@ export default function NewProductPage() {
               <div className="flex justify-end gap-4">
                 <Link
                   href="/admin/products"
-                  className="px-6 py-3 rounded-lg border border-border text-foreground hover:bg-foreground/10 fannoh-transition"
+                  className="px-6 py-3 rounded-lg border border-border text-foreground hover:bg-foreground/10 nexamart-transition"
                 >
                   Cancel
                 </Link>
                 <button
                   type="submit"
                   disabled={saving}
-                  className="flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 fannoh-transition disabled:opacity-50"
+                  className="flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 nexamart-transition disabled:opacity-50"
                 >
                   {saving ? (
                     <>

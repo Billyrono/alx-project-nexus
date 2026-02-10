@@ -3,8 +3,8 @@
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { CheckCircle, Mail, Smartphone, Download, ShoppingBag, Check } from 'lucide-react'
-import { Header } from '@/components/fannoh/header'
-import { Footer } from '@/components/fannoh/footer'
+import { Header } from "@/components/nexamart/header";
+import { Footer } from "@/components/nexamart/footer";
 
 export default function OrderConfirmationPage() {
   const searchParams = useSearchParams()
@@ -104,7 +104,7 @@ export default function OrderConfirmationPage() {
                 <div>
                   <h3 className="font-semibold text-foreground mb-1">Delivery & Enjoyment</h3>
                   <p className="text-muted-foreground text-sm">
-                    Your Fannoh Naturals products will arrive safely. Start your skincare ritual!
+                    Your NexaMart Marketplace products will arrive safely. Start your skincare ritual!
                   </p>
                 </div>
               </li>
@@ -156,7 +156,7 @@ export default function OrderConfirmationPage() {
           {/* Trust Message */}
           <div className="mt-12 pt-8 border-t border-border text-center">
             <p className="text-sm text-muted-foreground mb-4">
-              Thank you for choosing Fannoh Naturals. We're committed to transparency and safety in skincare.
+              Thank you for choosing NexaMart Marketplace. We're committed to transparency and safety in skincare.
             </p>
             <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
               <span className="flex items-center gap-1"><Check className="w-3 h-3" /> Dermatologist-tested</span>

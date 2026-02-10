@@ -13,10 +13,11 @@ import {
   CreditCard,
   AlertCircle,
 } from "lucide-react";
-import { Header } from "@/components/fannoh/header";
-import { Footer } from "@/components/fannoh/footer";
+import { Header } from "@/components/nexamart/header";
+import { Footer } from "@/components/nexamart/footer";
 import { useAppSelector, useAppDispatch } from "@/store/hooks";
 import { clearCart } from "@/store/slices/cartSlice";
+import { addOrder } from "@/store/slices/ordersSlice";
 
 type CheckoutStep = "cart" | "shipping" | "payment" | "confirmation";
 
@@ -137,8 +138,25 @@ export default function CheckoutPage() {
 
     // Mock payment processing
     setTimeout(() => {
+      const newOrder = {
+        id: `ORD-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
+        date: new Date().toISOString().split('T')[0],
+        status: 'pending' as const,
+        items: items,
+        total: orderTotal,
+        shippingDetails: {
+          ...shippingData,
+          country: shippingData.country || 'Kenya', // Ensure country is set
+          postalCode: shippingData.postalCode || ''
+        },
+        paymentMethod: paymentData.method,
+        userId: user?.id ? String(user.id) : undefined
+      };
+
+      setOrderNumber(newOrder.id);
+      dispatch(addOrder(newOrder));
+
       setIsProcessing(false);
-      setOrderNumber(`ORD-${Math.floor(Math.random() * 10000)}`);
       setCurrentStep("confirmation");
       dispatch(clearCart());
     }, 2000);
@@ -175,7 +193,7 @@ export default function CheckoutPage() {
                         setCurrentStep(item.step as CheckoutStep);
                       }
                     }}
-                    className={`flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full text-sm sm:text-base font-medium fannoh-transition ${currentStep === item.step
+                    className={`flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full text-sm sm:text-base font-medium nexamart-transition ${currentStep === item.step
                       ? "bg-primary text-primary-foreground"
                       : ["cart", "shipping", "payment"].includes(item.step) &&
                         (currentStep === "payment" ||
@@ -245,7 +263,7 @@ export default function CheckoutPage() {
                     </div>
                   ) : (
                     <>
-                      <div className="space-y-4 bg-card rounded-2xl p-6 fannoh-shadow">
+                      <div className="space-y-4 bg-card rounded-2xl p-6 nexamart-shadow">
                         {items.map((item) => (
                           <div
                             key={item.id}
@@ -286,7 +304,7 @@ export default function CheckoutPage() {
                       <button
                         type="button"
                         onClick={() => setCurrentStep("shipping")}
-                        className="w-full bg-primary text-primary-foreground py-4 rounded-full font-medium fannoh-transition hover:bg-primary/90"
+                        className="w-full bg-primary text-primary-foreground py-4 rounded-full font-medium nexamart-transition hover:bg-primary/90"
                       >
                         Proceed to Shipping
                       </button>
@@ -584,7 +602,7 @@ export default function CheckoutPage() {
                         return (
                           <label
                             key={method.value}
-                            className="flex items-center p-4 border border-border rounded-lg cursor-pointer fannoh-transition hover:bg-card/50"
+                            className="flex items-center p-4 border border-border rounded-lg cursor-pointer nexamart-transition hover:bg-card/50"
                           >
                             <input
                               type="radio"
@@ -623,13 +641,13 @@ export default function CheckoutPage() {
                     <button
                       type="button"
                       onClick={() => setCurrentStep("cart")}
-                      className="flex-1 px-6 py-3 rounded-full border border-foreground/20 text-foreground font-medium fannoh-transition hover:bg-foreground/5"
+                      className="flex-1 px-6 py-3 rounded-full border border-foreground/20 text-foreground font-medium nexamart-transition hover:bg-foreground/5"
                     >
                       Back
                     </button>
                     <button
                       type="submit"
-                      className="flex-1 px-6 py-3 rounded-full bg-primary text-primary-foreground font-medium fannoh-transition hover:bg-primary/90"
+                      className="flex-1 px-6 py-3 rounded-full bg-primary text-primary-foreground font-medium nexamart-transition hover:bg-primary/90"
                     >
                       <span className="sm:hidden">Continue</span>
                       <span className="hidden sm:inline">
@@ -668,7 +686,7 @@ export default function CheckoutPage() {
                       return (
                         <label
                           key={method.value}
-                          className="flex items-center p-4 border border-border rounded-lg cursor-pointer fannoh-transition hover:bg-card/50"
+                          className="flex items-center p-4 border border-border rounded-lg cursor-pointer nexamart-transition hover:bg-card/50"
                         >
                           <input
                             type="radio"
@@ -852,14 +870,14 @@ export default function CheckoutPage() {
                     <button
                       type="button"
                       onClick={() => setCurrentStep("shipping")}
-                      className="flex-1 px-6 py-3 rounded-full border border-foreground/20 text-foreground font-medium fannoh-transition hover:bg-foreground/5"
+                      className="flex-1 px-6 py-3 rounded-full border border-foreground/20 text-foreground font-medium nexamart-transition hover:bg-foreground/5"
                     >
                       Back
                     </button>
                     <button
                       type="submit"
                       disabled={isProcessing}
-                      className="flex-1 px-6 py-3 rounded-full bg-primary text-primary-foreground font-medium fannoh-transition hover:bg-primary/90 disabled:bg-muted disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                      className="flex-1 px-6 py-3 rounded-full bg-primary text-primary-foreground font-medium nexamart-transition hover:bg-primary/90 disabled:bg-muted disabled:cursor-not-allowed flex items-center justify-center gap-2"
                     >
                       {isProcessing ? (
                         <>
@@ -913,13 +931,13 @@ export default function CheckoutPage() {
                   <div className="flex gap-4 pt-6">
                     <Link
                       href="/shop"
-                      className="flex-1 px-6 py-3 rounded-full bg-primary text-primary-foreground font-medium fannoh-transition hover:bg-primary/90"
+                      className="flex-1 px-6 py-3 rounded-full bg-primary text-primary-foreground font-medium nexamart-transition hover:bg-primary/90"
                     >
                       Continue Shopping
                     </Link>
                     <Link
                       href="/"
-                      className="flex-1 px-6 py-3 rounded-full border border-foreground/20 text-foreground font-medium fannoh-transition hover:bg-foreground/5"
+                      className="flex-1 px-6 py-3 rounded-full border border-foreground/20 text-foreground font-medium nexamart-transition hover:bg-foreground/5"
                     >
                       Back Home
                     </Link>
@@ -931,7 +949,7 @@ export default function CheckoutPage() {
             {/* Order Summary Sidebar */}
             {currentStep !== "confirmation" && (
               <div className="lg:col-span-1">
-                <div className="bg-card rounded-2xl p-4 sm:p-6 sticky top-28 sm:top-32 fannoh-shadow">
+                <div className="bg-card rounded-2xl p-4 sm:p-6 sticky top-28 sm:top-32 nexamart-shadow">
                   <h2 className="font-semibold text-foreground mb-6">
                     Order Summary
                   </h2>

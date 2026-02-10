@@ -59,8 +59,8 @@ export function Footer() {
       <div
         className={`absolute bottom-0 left-1/2 -translate-x-1/2 pointer-events-none select-none z-0 transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
       >
-        <span className="font-serif text-[120px] sm:text-[200px] md:text-[400px] lg:text-[400px] xl:text-[400px] font-bold text-white/20 whitespace-nowrap leading-none">
-          Fannoh
+        <span className="font-serif text-[13vw] font-bold text-foreground/5 whitespace-nowrap leading-none selection:bg-transparent">
+          NexaMart
         </span>
       </div>
 
@@ -70,42 +70,42 @@ export function Footer() {
         >
           {/* Brand */}
           <div className="col-span-2 md:col-span-1 flex flex-col items-center text-center">
-            <Image
-              src="/images/logo.png"
-              alt="Fannoh Naturals"
-              width={140}
-              height={100}
-              className="h-25 w-auto object-contain mb-4"
-              priority
-            />
+            <div className="flex flex-col items-center mb-6">
+              <span className="font-serif font-bold italic text-5xl text-foreground leading-none mb-1">
+                NexaMart
+              </span>
+              <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground font-medium">
+                Marketplace
+              </span>
+            </div>
             <p className="text-sm text-muted-foreground leading-relaxed mb-6">
               Your premium destination for quality lifestyle products.
               Curated for excellence.
             </p>
             <div className="flex gap-4 justify-center">
               <a
-                href="https://www.instagram.com/fannohnaturals"
+                href="https://www.instagram.com/nexamart"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-background flex items-center justify-center text-foreground/60 hover:text-foreground hover:scale-110 fannoh-transition fannoh-shadow"
+                className="w-10 h-10 rounded-full bg-background flex items-center justify-center text-foreground/60 hover:text-foreground hover:scale-110 nexamart-transition nexamart-shadow"
                 aria-label="Instagram"
               >
                 <Instagram className="w-4 h-4" />
               </a>
               <a
-                href="https://www.facebook.com/profile.php?id=61584329039099"
+                href="https://www.facebook.com/nexamart"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-background flex items-center justify-center text-foreground/60 hover:text-foreground hover:scale-110 fannoh-transition fannoh-shadow"
+                className="w-10 h-10 rounded-full bg-background flex items-center justify-center text-foreground/60 hover:text-foreground hover:scale-110 nexamart-transition nexamart-shadow"
                 aria-label="Facebook"
               >
                 <Facebook className="w-4 h-4" />
               </a>
               <a
-                href="https://wa.me/254704532124"
+                href="https://wa.me/254700000000"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-background flex items-center justify-center text-foreground/60 hover:text-foreground hover:scale-110 fannoh-transition fannoh-shadow"
+                className="w-10 h-10 rounded-full bg-background flex items-center justify-center text-foreground/60 hover:text-foreground hover:scale-110 nexamart-transition nexamart-shadow"
                 aria-label="WhatsApp"
               >
                 <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current">
@@ -125,7 +125,7 @@ export function Footer() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-sm text-muted-foreground hover:text-foreground hover:translate-x-1 inline-block fannoh-transition"
+                    className="text-sm text-muted-foreground hover:text-foreground hover:translate-x-1 inline-block nexamart-transition"
                   >
                     {link.name}
                   </Link>
@@ -144,7 +144,7 @@ export function Footer() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-sm text-muted-foreground hover:text-foreground hover:translate-x-1 inline-block fannoh-transition"
+                    className="text-sm text-muted-foreground hover:text-foreground hover:translate-x-1 inline-block nexamart-transition"
                   >
                     {link.name}
                   </Link>
@@ -163,7 +163,7 @@ export function Footer() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-sm text-muted-foreground hover:text-foreground hover:translate-x-1 inline-block fannoh-transition"
+                    className="text-sm text-muted-foreground hover:text-foreground hover:translate-x-1 inline-block nexamart-transition"
                   >
                     {link.name}
                   </Link>
@@ -179,7 +179,7 @@ export function Footer() {
         >
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <p className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} Fannoh Naturals. All rights reserved.
+              © {new Date().getFullYear()} NexaMart Marketplace. All rights reserved.
             </p>
 
             {/* Payment Methods */}
@@ -244,13 +244,13 @@ export function Footer() {
             <div className="flex gap-6">
               <Link
                 href="/privacy"
-                className="text-sm text-muted-foreground hover:text-foreground fannoh-transition"
+                className="text-sm text-muted-foreground hover:text-foreground nexamart-transition"
               >
                 Privacy Policy
               </Link>
               <Link
                 href="/terms"
-                className="text-sm text-muted-foreground hover:text-foreground fannoh-transition"
+                className="text-sm text-muted-foreground hover:text-foreground nexamart-transition"
               >
                 Terms of Service
               </Link>
@@ -264,7 +264,7 @@ export function Footer() {
                 href="https://billyrono.netlify.app"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-foreground fannoh-transition"
+                className="hover:text-foreground nexamart-transition"
               >
                 Billy Rono
               </a>

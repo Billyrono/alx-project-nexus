@@ -1,10 +1,12 @@
+"use client";
+
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { Heart, Trash2, ShoppingBag, ChevronLeft, Loader2 } from "lucide-react";
-import { Header } from "@/components/fannoh/header";
-import { Footer } from "@/components/fannoh/footer";
+import { Header } from "@/components/nexamart/header";
+import { Footer } from "@/components/nexamart/footer";
 import { useAppSelector, useAppDispatch } from "@/store/hooks";
 import { removeFromWishlist, clearWishlist } from "@/store/slices/wishlistSlice";
 import { addToCart } from "@/store/slices/cartSlice";

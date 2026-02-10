@@ -2,28 +2,28 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { Recycle, Leaf, Flower2, Globe } from "lucide-react";
+import { Truck, ShieldCheck, HeartHandshake, Globe } from "lucide-react";
 
 const features = [
   {
-    icon: Recycle,
-    title: "Eco-Friendly Packaging",
-    description: "Recyclable and biodegradable materials",
+    icon: Truck,
+    title: "Fast Delivery",
+    description: "Reliable shipping to your doorstep",
   },
   {
-    icon: Leaf,
-    title: "100% Natural",
-    description: "No synthetic chemicals or parabens",
+    icon: ShieldCheck,
+    title: "Secure Shopping",
+    description: "Protected payments and data privacy",
   },
   {
-    icon: Flower2,
-    title: "Plant-Based",
-    description: "Botanical extracts and essential oils",
+    icon: HeartHandshake,
+    title: "Customer First",
+    description: "24/7 support for all your needs",
   },
   {
     icon: Globe,
-    title: "Ethical Sourcing",
-    description: "Fair trade certified ingredients",
+    title: "Global Brands",
+    description: "Authentic products from top manufacturers",
   },
 ];
 
@@ -119,18 +119,17 @@ export function FeatureSection() {
                 <div className="shrink-0"></div>
                 <div>
                   <h3 className="text-xl text-foreground mb-2 font-medium">
-                    100% <span className="">Plant-Based</span>
+                    Premium <span className="">Selection</span>
                   </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    Formulated exclusively with botanical ingredients and
-                    natural plant extracts.
+                    Explore our curated collection of top-tier products designed to elevate your lifestyle.
                   </p>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Top Right - 100% Natural */}
+          {/* Top Right - 100% Genuine */}
           <div
             className={`rounded-3xl p-6 md:p-8 flex flex-col justify-center md:col-span-2 relative overflow-hidden transition-all duration-700 ease-out ${isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
               }`}
@@ -139,38 +138,39 @@ export function FeatureSection() {
             {/* Background Image */}
             <Image
               src="/images/products/0ed61900-dd29-4dd2-bc2d-abc2db54c352.png"
-              alt="Natural ingredients"
+              alt="Quality products"
               fill
               className="object-cover"
               priority
             />
+            <div className="absolute inset-0 bg-black/40" />
 
             <div className="relative z-10">
               <h3 className="text-3xl md:text-4xl text-white mb-2">
-                100% Natural
+                100% Genuine
               </h3>
               <h3 className="text-2xl md:text-3xl text-white/70 mb-4">
-                100% You
+                Guaranteed Quality
               </h3>
 
               <div className="space-y-2">
                 <div className="flex items-center gap-2 text-white/90 text-sm">
-                  <Leaf className="w-4 h-4 shrink-0" />
-                  <span>Eco-Friendly Materials</span>
+                  <ShieldCheck className="w-4 h-4 shrink-0" />
+                  <span>Verified Sellers</span>
                 </div>
                 <div className="flex items-center gap-2 text-white/90 text-sm">
-                  <Flower2 className="w-4 h-4 shrink-0" />
-                  <span>Natural Elements</span>
+                  <Truck className="w-4 h-4 shrink-0" />
+                  <span>Tracked Shipping</span>
                 </div>
                 <div className="flex items-center gap-2 text-white/90 text-sm">
                   <Globe className="w-4 h-4 shrink-0" />
-                  <span>Ethically Sourced</span>
+                  <span>International Standards</span>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Bottom Right - Eco-Friendly Packaging */}
+          {/* Bottom Right - Smart Shopping */}
           <div
             className={`rounded-3xl p-6 md:p-8 flex flex-col justify-center relative overflow-hidden md:col-span-2 transition-all duration-700 ease-out ${isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
               }`}
@@ -198,14 +198,14 @@ export function FeatureSection() {
             <div className="absolute inset-0 bg-transparent" />
 
             <div className="relative z-10 flex flex-col justify-center h-full text-left items-start">
-              <div className="inline-flex items-center justify-center w-10 h-10 mb-3">
-                <Recycle className="w-8 h-8 text-black" />
+              <div className="inline-flex items-center justify-center w-10 h-10 mb-3 bg-white/80 rounded-full">
+                <HeartHandshake className="w-6 h-6 text-black" />
               </div>
-              <h3 className="font-sans text-base mb-1 text-black">
-                Eco-Friendly
+              <h3 className="font-sans text-base mb-1 text-black font-semibold">
+                Smart
               </h3>
-              <h3 className="text-2xl md:text-3xl mb-2 text-black">
-                Packaging
+              <h3 className="text-2xl md:text-3xl mb-2 text-black font-bold">
+                Shopping
               </h3>
             </div>
           </div>
@@ -217,7 +217,7 @@ export function FeatureSection() {
         >
           {/* Video */}
           <div
-            className={`relative aspect-4/5 rounded-3xl overflow-hidden fannoh-shadow transition-all duration-700 ease-out ${isVideoVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
+            className={`relative aspect-4/5 rounded-3xl overflow-hidden nexamart-shadow transition-all duration-700 ease-out ${isVideoVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
               }`}
           >
             <video
@@ -250,7 +250,7 @@ export function FeatureSection() {
                   : {}
               }
             >
-              Why Fannoh
+              Why NexaMart
             </span>
             <h2
               className={`font-serif text-4xl leading-tight text-foreground mb-6 text-balance md:text-7xl ${headerVisible ? "animate-blur-in opacity-0" : "opacity-0"}`}
@@ -260,7 +260,7 @@ export function FeatureSection() {
                   : {}
               }
             >
-              Quality that speaks.
+              Everything you need.
             </h2>
             <p
               className={`text-lg text-muted-foreground leading-relaxed mb-10 max-w-md ${headerVisible ? "animate-blur-in opacity-0" : "opacity-0"}`}
@@ -270,18 +270,18 @@ export function FeatureSection() {
                   : {}
               }
             >
-              We believe your daily routine should be a gentle ritual.
-              Every product is crafted with intention and love for you.
+              We believe shopping should be effortless.
+              NexaMart brings the world's best products directly to you, handled with care.
             </p>
 
             {/* Feature Cards */}
             <div className="grid sm:grid-cols-2 gap-4">
-              {features.map((feature) => (
+              {features.map((feature, idx) => (
                 <div
-                  key={feature.title}
-                  className="group p-5 fannoh-transition hover:scale-[1.02] rounded-md bg-card"
+                  key={idx}
+                  className="group p-5 nexamart-transition hover:scale-[1.02] rounded-md bg-card"
                 >
-                  <div className="inline-flex items-center justify-center w-10 h-10 rounded-full mb-3 group-hover:bg-primary/20 fannoh-transition bg-stone-50">
+                  <div className="inline-flex items-center justify-center w-10 h-10 rounded-full mb-3 group-hover:bg-primary/20 nexamart-transition bg-stone-50">
                     <feature.icon className="w-5 h-5 text-primary" />
                   </div>
                   <h3 className="font-medium text-foreground mb-1">

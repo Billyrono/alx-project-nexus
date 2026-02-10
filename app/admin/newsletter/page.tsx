@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { AdminHeader } from "@/components/fannoh/admin-header";
-import { AdminSidebar } from "@/components/fannoh/admin-sidebar";
+import { AdminHeader } from "@/components/nexamart/admin-header";
+import { AdminSidebar } from "@/components/nexamart/admin-sidebar";
 import {
   Mail,
   Send,
@@ -325,7 +325,7 @@ export default function NewsletterPage() {
                           fontFamily: "Georgia, serif",
                         }}
                       >
-                        Fannoh Naturals
+                        NexaMart Marketplace
                       </h1>
                       <p
                         style={{
@@ -335,7 +335,7 @@ export default function NewsletterPage() {
                           margin: 0,
                         }}
                       >
-                        PREMIUM SKINCARE & BEAUTY SOLUTIONS
+                        PREMIUM LIFESTYLE SOLUTIONS
                       </p>
                     </div>
                     {/* Email Body */}
@@ -393,11 +393,11 @@ export default function NewsletterPage() {
                       }}
                     >
                       <p>
-                        You received this because you subscribed to Fannoh
+                        You received this because you subscribed to NexaMart
                         Naturals newsletter.
                       </p>
                       <p>
-                        &copy; {new Date().getFullYear()} Fannoh Naturals. All
+                        &copy; {new Date().getFullYear()} NexaMart Marketplace. All
                         rights reserved.
                       </p>
                       <p>Nairobi, Kenya</p>

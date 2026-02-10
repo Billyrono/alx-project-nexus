@@ -81,10 +81,10 @@ export function Hero() {
             >
               <Link
                 href="/shop"
-                className="group inline-flex items-center justify-center gap-3 bg-primary text-primary-foreground px-8 py-4 rounded-full text-sm tracking-wide fannoh-transition hover:bg-primary/90 fannoh-shadow"
+                className="group inline-flex items-center justify-center gap-3 bg-primary text-primary-foreground px-8 py-4 rounded-full text-sm tracking-wide nexamart-transition hover:bg-primary/90 nexamart-shadow"
               >
                 Shop Now
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 fannoh-transition" />
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 nexamart-transition" />
               </Link>
             </div>
           </div>

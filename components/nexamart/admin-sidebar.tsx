@@ -61,7 +61,7 @@ export function AdminSidebar({ open, onClose }: AdminSidebarProps) {
 
       {/* Sidebar - Fixed on desktop, slide-in on mobile */}
       <aside
-        className={`fixed left-0 top-20 w-64 h-[calc(100vh-80px)] bg-card border-r border-border transform fannoh-transition z-40 ${
+        className={`fixed left-0 top-20 w-64 h-[calc(100vh-80px)] bg-card border-r border-border transform nexamart-transition z-40 ${
           open ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         }`}
       >
@@ -87,7 +87,7 @@ export function AdminSidebar({ open, onClose }: AdminSidebarProps) {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium fannoh-transition ${
+                  className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium nexamart-transition ${
                     isActive
                       ? "bg-primary/10 text-primary"
                       : "text-foreground/70 hover:bg-foreground/5"
@@ -112,7 +112,7 @@ export function AdminSidebar({ open, onClose }: AdminSidebarProps) {
             </p>
             <Link
               href="/"
-              className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-foreground/70 hover:bg-foreground/5 fannoh-transition"
+              className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-foreground/70 hover:bg-foreground/5 nexamart-transition"
             >
               <Store className="w-4 h-4" />
               View Store

@@ -1,8 +1,8 @@
-# Fannoh Naturals - ALX Project Nexus
+# NexaMart Marketplace - ALX Project Nexus
 
 ## Overview
 
-**Fannoh Naturals** is an e-commerce application developed as part of the ALX ProDev Frontend Engineering program. It demonstrates a modern, scalable frontend architecture using **Next.js**, **Redux Toolkit**, and **Tailwind CSS**.
+**NexaMart Marketplace** is an e-commerce application developed as part of the ALX ProDev Frontend Engineering program. It demonstrates a modern, scalable frontend architecture using **Next.js**, **Redux Toolkit**, and **Tailwind CSS**.
 
 This project has been refactored to align with ALX Project Nexus requirements, featuring:
 - **State Management**: Centralized state for Authentication and Cart using **Redux Toolkit**.

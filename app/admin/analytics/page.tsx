@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { AdminHeader } from "@/components/fannoh/admin-header";
-import { AdminSidebar } from "@/components/fannoh/admin-sidebar";
+import { AdminHeader } from "@/components/nexamart/admin-header";
+import { AdminSidebar } from "@/components/nexamart/admin-sidebar";
 import {
   TrendingUp,
   Users,

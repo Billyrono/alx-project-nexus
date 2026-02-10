@@ -44,9 +44,9 @@ export default function LoginPage() {
 
         if (loginUser.fulfilled.match(resultAction)) {
             if (rememberMe) {
-                localStorage.setItem("fannoh_remember_username", username);
+                localStorage.setItem("nexamart_remember_username", username);
             } else {
-                localStorage.removeItem("fannoh_remember_username");
+                localStorage.removeItem("nexamart_remember_username");
             }
             router.push("/shop");
         }
@@ -80,13 +80,14 @@ export default function LoginPage() {
                 <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/30 to-black/10" />
                 <div className="absolute bottom-0 left-0 right-0 p-12">
                     <Link href="/" className="mb-6 inline-block">
-                        <Image
-                            src="/images/logo.png"
-                            alt="Fannoh Naturals"
-                            width={160}
-                            height={163}
-                            className="h-12 w-auto object-contain brightness-0 invert"
-                        />
+                        <div className="flex flex-col items-start text-white">
+                            <span className="font-serif font-bold italic text-5xl leading-none">
+                                NexaMart
+                            </span>
+                            <span className="text-xs uppercase tracking-[0.3em] font-medium opacity-90">
+                                Marketplace
+                            </span>
+                        </div>
                     </Link>
                     <h2 className="font-serif text-3xl text-white mb-3">
                         Your Shopping Experience Deserves the Best
@@ -101,14 +102,13 @@ export default function LoginPage() {
             <div className="w-full lg:w-1/2 flex items-center justify-center bg-background px-4 py-6 sm:px-6 sm:py-12">
                 <div className="w-full max-w-md">
                     {/* Mobile Logo */}
-                    <Link href="/" className="flex justify-center mb-5 sm:mb-8 lg:hidden">
-                        <Image
-                            src="/images/logo.png"
-                            alt="Fannoh Naturals"
-                            width={160}
-                            height={163}
-                            className="h-10 sm:h-14 w-auto object-contain"
-                        />
+                    <Link href="/" className="flex flex-col items-center mb-5 sm:mb-8 lg:hidden text-foreground">
+                        <span className="font-serif font-bold italic text-4xl sm:text-5xl leading-none">
+                            NexaMart
+                        </span>
+                        <span className="text-[0.6rem] sm:text-xs uppercase tracking-[0.3em] font-medium text-muted-foreground">
+                            Marketplace
+                        </span>
                     </Link>
 
                     <div className="mb-8 hidden lg:block">
@@ -195,7 +195,7 @@ export default function LoginPage() {
                                     value={username}
                                     onChange={(e) => setUsername(e.target.value)}
                                     required
-                                    placeholder="e.g. emilys"
+                                    placeholder="e.g. billyr"
                                     className="w-full pl-11 sm:pl-12 pr-4 py-2.5 sm:py-3 rounded-xl border border-border bg-background text-foreground placeholder:text-muted-foreground text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-primary/50"
                                 />
                             </div>
@@ -281,7 +281,7 @@ export default function LoginPage() {
                     </p>
 
                     <div className="mt-6 text-center text-xs text-muted-foreground bg-muted/50 p-3 rounded-lg">
-                        Demo Credentials: <strong>emilys</strong> / <strong>emilyspass</strong>
+                        Demo Credentials: <strong>billyr</strong> / <strong>billydev</strong> (Logins as Billy Rono)
                     </div>
 
                     <div className="mt-4 text-center lg:hidden">

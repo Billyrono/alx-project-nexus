@@ -42,7 +42,7 @@ export async function sendOrderConfirmation({
 
   try {
     const { data, error } = await resend.emails.send({
-      from: 'Fannoh Naturals <onboarding@resend.dev>',
+      from: 'NexaMart Marketplace <onboarding@resend.dev>',
       to: [to],
       subject: `Order Confirmed - ${orderReference}`,
       html: `
@@ -55,7 +55,7 @@ export async function sendOrderConfirmation({
         <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
           
           <div style="text-align: center; margin-bottom: 30px;">
-            <h1 style="font-size: 28px; color: #1a1a1a; margin-bottom: 5px;">Fannoh Naturals</h1>
+            <h1 style="font-size: 28px; color: #1a1a1a; margin-bottom: 5px;">NexaMart Marketplace</h1>
             <p style="color: #B8860B; font-size: 12px; letter-spacing: 2px; margin: 0;">PREMIUM SKINCARE & BEAUTY SOLUTIONS</p>
           </div>
 
@@ -93,8 +93,8 @@ ${itemsList}
           </div>
 
           <div style="text-align: center; color: #999; font-size: 12px; margin-top: 30px;">
-            <p>Questions? Reply to this email or contact us at hello@fannoh.com</p>
-            <p>© ${new Date().getFullYear()} Fannoh Naturals. All rights reserved.</p>
+            <p>Questions? Reply to this email or contact us at hello@nexamart.com</p>
+            <p>© ${new Date().getFullYear()} NexaMart Marketplace. All rights reserved.</p>
             <p>Nairobi, Kenya</p>
           </div>
 
@@ -179,8 +179,8 @@ ${itemsList}
       //           <p>You'll receive a shipping notification with tracking information once your order is dispatched.</p>
 
       //           <div class="footer">
-      //             <p>&copy; 2024 Fannoh Naturals. All rights reserved.</p>
-      //             <p>Questions? Contact us at support@fannohnaturals.com</p>
+      //             <p>&copy; 2024 NexaMart Marketplace. All rights reserved.</p>
+      //             <p>Questions? Contact us at support@nexamart.com</p>
       //           </div>
       //         </div>
       //       </body>
@@ -213,7 +213,7 @@ export async function sendShippingNotification({
 }: SendShippingNotificationParams) {
   try {
     const { data, error } = await resend.emails.send({
-      from: 'Fannoh Naturals <onboarding@resend.dev>',
+      from: 'NexaMart Marketplace <onboarding@resend.dev>',
       to: [to],
       subject: `Your Order Has Shipped! - ${orderReference}`,
       html: `
@@ -226,7 +226,7 @@ export async function sendShippingNotification({
         <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
           
           <div style="text-align: center; margin-bottom: 30px;">
-            <h1 style="font-size: 28px; color: #1a1a1a; margin-bottom: 5px;">Fannoh Naturals</h1>
+            <h1 style="font-size: 28px; color: #1a1a1a; margin-bottom: 5px;">NexaMart Marketplace</h1>
             <p style="color: #B8860B; font-size: 12px; letter-spacing: 2px; margin: 0;">PREMIUM SKINCARE & BEAUTY SOLUTIONS</p>
           </div>
 
@@ -250,8 +250,8 @@ export async function sendShippingNotification({
           </div>
 
           <div style="text-align: center; color: #999; font-size: 12px; margin-top: 30px;">
-            <p>Questions? Reply to this email or contact us at hello@fannoh.com</p>
-            <p>© ${new Date().getFullYear()} Fannoh Naturals. All rights reserved.</p>
+            <p>Questions? Reply to this email or contact us at hello@nexamart.com</p>
+            <p>© ${new Date().getFullYear()} NexaMart Marketplace. All rights reserved.</p>
           </div>
 
         </body>
@@ -285,7 +285,7 @@ export async function sendShippingNotification({
       //         <p><a href="${data.trackingUrl}" class="tracking-link">Track Your Order</a></p>
       //       </div>
 
-      //       <p>Thank you for shopping with Fannoh Naturals!</p>
+      //       <p>Thank you for shopping with NexaMart Marketplace!</p>
       //     </div>
       //   </body>
       // </html>
@@ -319,7 +319,7 @@ export async function sendDeliveryConfirmation({
 }: SendDeliveryConfirmationParams) {
   try {
     const { data, error } = await resend.emails.send({
-      from: 'Fannoh Naturals <onboarding@resend.dev>',
+      from: 'NexaMart Marketplace <onboarding@resend.dev>',
       to: [to],
       subject: `Your Order Has Been Delivered! - ${orderReference}`,
       html: `
@@ -332,7 +332,7 @@ export async function sendDeliveryConfirmation({
         <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
           
           <div style="text-align: center; margin-bottom: 30px;">
-            <h1 style="font-size: 28px; color: #1a1a1a; margin-bottom: 5px;">Fannoh Naturals</h1>
+            <h1 style="font-size: 28px; color: #1a1a1a; margin-bottom: 5px;">NexaMart Marketplace</h1>
             <p style="color: #B8860B; font-size: 12px; letter-spacing: 2px; margin: 0;">PREMIUM SKINCARE & BEAUTY SOLUTIONS</p>
           </div>
 
@@ -358,12 +358,12 @@ export async function sendDeliveryConfirmation({
 
           <div style="text-align: center; margin-bottom: 20px;">
             <p>Love your products? Leave us a review!</p>
-            <a href="https://fannohnaturals.com/shop" style="display: inline-block; background: #B8860B; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600;">Shop Again</a>
+            <a href="https://nexamart.com/shop" style="display: inline-block; background: #B8860B; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600;">Shop Again</a>
           </div>
 
           <div style="text-align: center; color: #999; font-size: 12px; margin-top: 30px;">
-            <p>Questions? Reply to this email or contact us at hello@fannohnaturals.com</p>
-            <p>${new Date().getFullYear()} Fannoh Naturals. All rights reserved.</p>
+            <p>Questions? Reply to this email or contact us at hello@nexamart.com</p>
+            <p>${new Date().getFullYear()} NexaMart Marketplace. All rights reserved.</p>
           </div>
 
         </body>
@@ -411,7 +411,7 @@ export async function sendNewsletter({
 
     try {
       const { data, error } = await resend.emails.send({
-        from: 'Fannoh Naturals <onboarding@resend.dev>',
+        from: 'NexaMart Marketplace <onboarding@resend.dev>',
         to: batch,
         subject,
         html: `
@@ -426,7 +426,7 @@ export async function sendNewsletter({
             <div style="background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06);">
               
               <div style="background: linear-gradient(135deg, #1a1a1a 0%, #333 100%); padding: 30px; text-align: center;">
-                <h1 style="font-size: 28px; color: #fff; margin-bottom: 5px; font-family: Georgia, serif;">Fannoh Naturals</h1>
+                <h1 style="font-size: 28px; color: #fff; margin-bottom: 5px; font-family: Georgia, serif;">NexaMart Marketplace</h1>
                 <p style="color: #B8860B; font-size: 12px; letter-spacing: 2px; margin: 0;">PREMIUM SKINCARE &amp; BEAUTY SOLUTIONS</p>
               </div>
 
@@ -446,8 +446,8 @@ export async function sendNewsletter({
 
               <div style="background: #fafafa; padding: 20px 30px; border-top: 1px solid #eee;">
                 <div style="text-align: center; color: #999; font-size: 12px;">
-                  <p>You received this because you subscribed to Fannoh Naturals newsletter.</p>
-                  <p>&copy; ${new Date().getFullYear()} Fannoh Naturals. All rights reserved.</p>
+                  <p>You received this because you subscribed to NexaMart Marketplace newsletter.</p>
+                  <p>&copy; ${new Date().getFullYear()} NexaMart Marketplace. All rights reserved.</p>
                   <p>Nairobi, Kenya</p>
                 </div>
               </div>

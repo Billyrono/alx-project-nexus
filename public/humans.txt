@@ -4,8 +4,8 @@ Site: https://billyrono.netlify.app
 Location: Kenya
 
 /* SITE */
-Name: Fannoh Naturals
-URL: https://fannohnaturals.com
+Name: NexaMart Marketplace
+URL: https://nexamart.com
 Last update: 2026/02/06
 Language: English
 Standards: HTML5, CSS3, JavaScript

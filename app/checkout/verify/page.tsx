@@ -11,9 +11,10 @@ import {
   ShoppingBag,
   Package,
 } from "lucide-react";
-import { Header } from "@/components/fannoh/header";
-import { Footer } from "@/components/fannoh/footer";
-import { useCart } from "@/components/fannoh/cart-context";
+import { Header } from "@/components/nexamart/header";
+import { Footer } from "@/components/nexamart/footer";
+import { useAppDispatch } from "@/store/hooks";
+import { clearCart } from "@/store/slices/cartSlice";
 
 interface PaymentResult {
   success: boolean;
@@ -62,7 +63,7 @@ export default function VerifyPaymentPage() {
 function VerifyPaymentContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const { clearCart } = useCart();
+  const dispatch = useAppDispatch();
   const [result, setResult] = useState<PaymentResult | null>(null);
   const [loading, setLoading] = useState(true);
   const hasVerified = useRef(false);
@@ -95,7 +96,7 @@ function VerifyPaymentContent() {
 
         if (data.success) {
           // Clear cart on successful payment
-          clearCart();
+          dispatch(clearCart());
         }
 
         setResult(data);
@@ -112,7 +113,7 @@ function VerifyPaymentContent() {
     }
 
     verifyPayment();
-  }, [paymentReference]);
+  }, [paymentReference, dispatch]);
 
   if (loading) {
     return (
@@ -186,12 +187,12 @@ function VerifyPaymentContent() {
                     <span className="text-foreground">
                       {result.paidAt
                         ? new Date(result.paidAt).toLocaleDateString("en-KE", {
-                            year: "numeric",
-                            month: "long",
-                            day: "numeric",
-                            hour: "2-digit",
-                            minute: "2-digit",
-                          })
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })
                         : "Just now"}
                     </span>
                   </div>

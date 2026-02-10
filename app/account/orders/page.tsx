@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
@@ -16,30 +16,9 @@ import {
   ShoppingBag,
   ChevronRight,
 } from "lucide-react";
-import { Header } from "@/components/fannoh/header";
-import { Footer } from "@/components/fannoh/footer";
+import { Header } from "@/components/nexamart/header";
+import { Footer } from "@/components/nexamart/footer";
 import { useAppSelector } from "@/store/hooks";
-
-interface OrderItem {
-  id: string;
-  product_id: string;
-  product_name: string;
-  product_price: number;
-  quantity: number;
-  subtotal: number;
-}
-
-interface Order {
-  id: string;
-  order_number: string;
-  status: string;
-  payment_status: string;
-  total_amount: number;
-  created_at: string;
-  shipping_method?: string;
-  tracking_number?: string;
-  order_items?: OrderItem[];
-}
 
 const statusConfig: Record<
   string,
@@ -78,12 +57,15 @@ const statusConfig: Record<
 };
 
 export default function OrdersPage() {
-  const user = useAppSelector((state) => state.auth.user);
-  const loading = useAppSelector((state) => state.auth.isLoading);
+  const { user, loading } = useAppSelector((state) => state.auth);
+  const allOrders = useAppSelector((state) => state.orders.orders);
   const router = useRouter();
-  const [orders, setOrders] = useState<Order[]>([]);
-  const [ordersLoading, setOrdersLoading] = useState(true);
   const [expandedOrder, setExpandedOrder] = useState<string | null>(null);
+
+  // Filter orders for the current user
+  const userOrders = allOrders.filter(order =>
+    user && order.userId === String(user.id)
+  );
 
   useEffect(() => {
     if (!loading && !user) {
@@ -91,51 +73,7 @@ export default function OrdersPage() {
     }
   }, [user, loading, router]);
 
-  const loadOrders = useCallback(async () => {
-    if (!user) return;
-    try {
-      // Mock orders
-      setTimeout(() => {
-        setOrders([
-          {
-            id: "ORD-001",
-            order_number: "ORD-001",
-            status: "delivered",
-            payment_status: "paid",
-            total_amount: 2500,
-            created_at: "2024-02-15T10:00:00Z",
-            tracking_number: "TRK123",
-            order_items: [
-              { id: "1", product_id: "1", product_name: "Essence Mascara Lash Princess", product_price: 9.99, quantity: 1, subtotal: 9.99 }
-            ]
-          },
-          {
-            id: "ORD-002",
-            order_number: "ORD-002",
-            status: "processing",
-            payment_status: "paid",
-            total_amount: 4500,
-            created_at: "2024-02-16T11:30:00Z",
-            order_items: [
-              { id: "2", product_id: "2", product_name: "Eyeshadow Palette with Mirror", product_price: 19.99, quantity: 2, subtotal: 39.98 }
-            ]
-          }
-        ]);
-        setOrdersLoading(false);
-      }, 1000);
-    } catch (err) {
-      console.error("Error loading orders:", err);
-      setOrdersLoading(false);
-    }
-  }, [user]);
-
-  useEffect(() => {
-    if (user) {
-      loadOrders();
-    }
-  }, [user, loadOrders]);
-
-  if (loading || ordersLoading) {
+  if (loading) {
     return (
       <main className="min-h-screen">
         <Header />
@@ -180,7 +118,7 @@ export default function OrdersPage() {
           </div>
 
           {/* Empty state */}
-          {orders.length === 0 ? (
+          {userOrders.length === 0 ? (
             <div className="text-center py-16">
               <Package className="w-16 h-16 mx-auto text-muted-foreground/30 mb-4" />
               <h2 className="text-xl font-semibold text-foreground mb-2">
@@ -199,7 +137,7 @@ export default function OrdersPage() {
             </div>
           ) : (
             <div className="space-y-4">
-              {orders.map((order) => {
+              {userOrders.map((order) => {
                 const status =
                   statusConfig[order.status] || statusConfig.pending;
                 const isExpanded = expandedOrder === order.id;
@@ -219,7 +157,7 @@ export default function OrdersPage() {
                       <div className="flex-1 min-w-0">
                         <div className="flex flex-wrap items-center gap-2 mb-2">
                           <span className="font-semibold text-foreground">
-                            #{order.order_number}
+                            #{order.id}
                           </span>
                           <span
                             className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium ${status.color}`}
@@ -230,7 +168,7 @@ export default function OrdersPage() {
                         </div>
                         <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted-foreground">
                           <span>
-                            {new Date(order.created_at).toLocaleDateString(
+                            {new Date(order.date).toLocaleDateString(
                               "en-KE",
                               {
                                 year: "numeric",
@@ -240,11 +178,11 @@ export default function OrdersPage() {
                             )}
                           </span>
                           <span className="font-medium text-foreground">
-                            KES {order.total_amount.toLocaleString()}
+                            KES {order.total.toLocaleString()}
                           </span>
                           <span>
-                            {order.order_items?.length || 0}{" "}
-                            {(order.order_items?.length || 0) === 1
+                            {order.items?.length || 0}{" "}
+                            {(order.items?.length || 0) === 1
                               ? "item"
                               : "items"}
                           </span>
@@ -257,55 +195,24 @@ export default function OrdersPage() {
                     </button>
 
                     {/* Expanded items */}
-                    {isExpanded && order.order_items && (
+                    {isExpanded && order.items && (
                       <div className="border-t border-border px-4 sm:px-6 py-4 bg-muted/30">
-                        {/* Tracking */}
-                        {order.tracking_number && (
-                          <div className="mb-4 p-3 bg-primary/5 border border-primary/20 rounded-xl text-sm flex items-center justify-between flex-wrap gap-2">
-                            <div>
-                              <span className="font-medium text-foreground">
-                                Tracking:
-                              </span>{" "}
-                              <span className="text-muted-foreground">
-                                {order.tracking_number}
-                              </span>
-                            </div>
-                            <a
-                              href={`https://t.17track.net/en#nums=${encodeURIComponent(order.tracking_number)}`}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1.5 px-4 py-2 bg-primary text-primary-foreground text-xs font-semibold rounded-lg hover:bg-primary/90 transition-colors"
-                            >
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="14"
-                                height="14"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              >
-                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                                <circle cx="12" cy="10" r="3" />
-                              </svg>
-                              Track Order
-                            </a>
-                          </div>
-                        )}
+                        {/* Shipping Info */}
+                        <div className="mb-4 text-sm">
+                          <span className="font-semibold">Shipping to:</span> {order.shippingDetails.fullName}, {order.shippingDetails.city}
+                        </div>
 
                         {/* Items */}
                         <div className="space-y-3">
-                          {order.order_items.map((item) => (
+                          {order.items.map((item) => (
                             <div
                               key={item.id}
                               className="flex items-center gap-4"
                             >
                               <div className="relative w-12 h-12 rounded-lg overflow-hidden bg-background shrink-0">
                                 <Image
-                                  src={`/images/products/${item.product_id}.png`}
-                                  alt={item.product_name}
+                                  src={item.thumbnail || "/placeholder.svg"}
+                                  alt={item.title}
                                   fill
                                   className="object-cover"
                                   onError={(e) => {
@@ -316,15 +223,15 @@ export default function OrdersPage() {
                               </div>
                               <div className="flex-1 min-w-0">
                                 <p className="text-sm font-medium text-foreground truncate">
-                                  {item.product_name}
+                                  {item.title}
                                 </p>
                                 <p className="text-xs text-muted-foreground">
                                   Qty: {item.quantity} × KES{" "}
-                                  {item.product_price.toLocaleString()}
+                                  {item.price.toLocaleString()}
                                 </p>
                               </div>
                               <p className="text-sm font-medium text-foreground">
-                                KES {item.subtotal.toLocaleString()}
+                                KES {(item.price * item.quantity).toLocaleString()}
                               </p>
                             </div>
                           ))}
@@ -336,24 +243,17 @@ export default function OrdersPage() {
                             Total
                           </span>
                           <span className="font-semibold text-foreground">
-                            KES {order.total_amount.toLocaleString()}
+                            KES {order.total.toLocaleString()}
                           </span>
                         </div>
 
-                        {/* Payment status */}
+                        {/* Payment Method */}
                         <div className="mt-2 flex justify-between items-center">
                           <span className="text-sm text-muted-foreground">
-                            Payment
+                            Payment Method
                           </span>
-                          <span
-                            className={`text-sm font-medium capitalize ${order.payment_status === "paid"
-                              ? "text-green-600"
-                              : order.payment_status === "failed"
-                                ? "text-red-600"
-                                : "text-yellow-600"
-                              }`}
-                          >
-                            {order.payment_status}
+                          <span className="text-sm font-medium capitalize">
+                            {order.paymentMethod.replace('_', ' ')}
                           </span>
                         </div>
                       </div>

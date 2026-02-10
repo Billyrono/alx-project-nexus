@@ -77,7 +77,7 @@ export function Header() {
             {/* Mobile menu button */}
             <button
               type="button"
-              className="lg:hidden p-2 text-foreground/80 hover:text-foreground fannoh-transition"
+              className="lg:hidden p-2 text-foreground/80 hover:text-foreground nexamart-transition"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Toggle menu"
             >
@@ -86,32 +86,33 @@ export function Header() {
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-8">
-              <Link href="/" className="text-sm tracking-wide text-foreground/70 hover:text-foreground fannoh-transition">
+              <Link href="/" className="text-sm tracking-wide text-foreground/70 hover:text-foreground nexamart-transition">
                 Home
               </Link>
-              <Link href="/shop" className="text-sm tracking-wide text-foreground/70 hover:text-foreground fannoh-transition">
+              <Link href="/shop" className="text-sm tracking-wide text-foreground/70 hover:text-foreground nexamart-transition">
                 Shop
+              </Link>
+              <Link href="/about" className="text-sm tracking-wide text-foreground/70 hover:text-foreground nexamart-transition">
+                About
               </Link>
 
             </div>
 
             {/* Logo */}
-            <Link href="/" className="absolute left-1/2 -translate-x-1/2">
-              <Image
-                src="/images/logo.png"
-                alt="Fannoh Naturals"
-                width={160}
-                height={163}
-                className="h-12 w-auto object-contain"
-                priority
-              />
+            <Link href="/" className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center">
+              <span className="font-serif font-bold italic text-4xl text-foreground leading-none">
+                NexaMart
+              </span>
+              <span className="text-[0.65rem] uppercase tracking-[0.3em] text-muted-foreground font-medium">
+                Marketplace
+              </span>
             </Link>
 
             {/* Right Actions */}
             <div className="flex items-center gap-2 sm:gap-4">
               <button
                 type="button"
-                className="p-2 text-foreground/70 hover:text-foreground fannoh-transition"
+                className="p-2 text-foreground/70 hover:text-foreground nexamart-transition"
                 aria-label="Search"
                 onClick={() => setIsSearchOpen(true)}
               >
@@ -122,7 +123,7 @@ export function Header() {
               {!loading && (user ? (
                 <Link
                   href="/account"
-                  className="hidden sm:flex items-center gap-2 p-2 text-foreground/70 hover:text-foreground fannoh-transition"
+                  className="hidden sm:flex items-center gap-2 p-2 text-foreground/70 hover:text-foreground nexamart-transition"
                 >
                   <div className="w-7 h-7 rounded-full bg-primary/20 flex items-center justify-center">
                     <User className="w-4 h-4 text-primary" />
@@ -131,7 +132,7 @@ export function Header() {
               ) : (
                 <Link
                   href="/login"
-                  className="hidden sm:flex items-center gap-2 px-3 py-1.5 text-sm text-foreground/70 hover:text-foreground fannoh-transition"
+                  className="hidden sm:flex items-center gap-2 px-3 py-1.5 text-sm text-foreground/70 hover:text-foreground nexamart-transition"
                 >
                   <LogIn className="w-4 h-4" />
                   <span>Login</span>
@@ -141,7 +142,7 @@ export function Header() {
               <button
                 type="button"
                 onClick={() => dispatch(toggleCart(true))}
-                className="relative p-2 text-foreground/70 hover:text-foreground fannoh-transition"
+                className="relative p-2 text-foreground/70 hover:text-foreground nexamart-transition"
                 aria-label="Cart"
               >
                 <ShoppingBag className="w-5 h-5" />
@@ -158,18 +159,18 @@ export function Header() {
 
           {/* Mobile Navigation */}
           <div
-            className={`lg:hidden overflow-hidden fannoh-transition ${isMenuOpen ? "max-h-64 pb-6" : "max-h-0"
+            className={`lg:hidden overflow-hidden nexamart-transition ${isMenuOpen ? "max-h-64 pb-6" : "max-h-0"
               }`}
           >
             <div className="flex flex-col gap-4 pt-4 border-t border-border/50">
-              <Link href="/" className="text-sm tracking-wide text-foreground/70 hover:text-foreground fannoh-transition">
+              <Link href="/" className="text-sm tracking-wide text-foreground/70 hover:text-foreground nexamart-transition">
                 Home
               </Link>
-              <Link href="/shop" className="text-sm tracking-wide text-foreground/70 hover:text-foreground fannoh-transition">
+              <Link href="/shop" className="text-sm tracking-wide text-foreground/70 hover:text-foreground nexamart-transition">
                 Shop
               </Link>
 
-              <Link href={user ? "/account" : "/login"} className="text-sm tracking-wide text-foreground/70 hover:text-foreground fannoh-transition">
+              <Link href={user ? "/account" : "/login"} className="text-sm tracking-wide text-foreground/70 hover:text-foreground nexamart-transition">
                 {user ? "Account" : "Login"}
               </Link>
             </div>
@@ -198,7 +199,7 @@ export function Header() {
               />
               <button
                 type="submit"
-                className="absolute right-4 top-1/2 -translate-y-1/2 p-2 text-primary hover:text-primary/80 fannoh-transition"
+                className="absolute right-4 top-1/2 -translate-y-1/2 p-2 text-primary hover:text-primary/80 nexamart-transition"
               >
                 <Search className="w-5 h-5" />
               </button>

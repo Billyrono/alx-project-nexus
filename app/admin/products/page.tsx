@@ -13,43 +13,38 @@ import {
   X,
   AlertTriangle,
 } from "lucide-react";
-import { AdminHeader } from "@/components/fannoh/admin-header";
-import { AdminSidebar } from "@/components/fannoh/admin-sidebar";
+import { AdminHeader } from "@/components/nexamart/admin-header";
+import { AdminSidebar } from "@/components/nexamart/admin-sidebar";
 
-
-interface Product {
-  id: string;
-  name: string;
-  image: string;
-  routine_step: string;
-  price: number;
-  quantity_in_stock: number;
-  in_stock: boolean;
-  rating: number;
-  review_count: number;
-}
+import { api, Product } from "@/services/api";
 
 export default function ProductsPage() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
-  const [deleting, setDeleting] = useState<string | null>(null);
+  const [deleting, setDeleting] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [deleteModal, setDeleteModal] = useState<Product | null>(null);
 
   const fetchProducts = async () => {
     setLoading(true);
     setError(null);
-
-    // Mock data fetch
-    setTimeout(() => {
+    try {
+      // Fetch products from API for dynamic count
+      const data = await api.getProducts(); // Fetch products
+      setProducts(data.products);
+    } catch (err) {
+      console.error("Failed to fetch products:", err);
+      setError("Failed to load products. Please try again.");
+      // Fallback to mock if API fails
       setProducts([
-        { id: "1", name: "Essence Mascara Lash Princess", price: 9.99, quantity_in_stock: 5, routine_step: "beauty", image: "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png", in_stock: true, rating: 4.5, review_count: 10 },
-        { id: "2", name: "Eyeshadow Palette with Mirror", price: 19.99, quantity_in_stock: 44, routine_step: "beauty", image: "https://cdn.dummyjson.com/products/images/beauty/Eyeshadow%20Palette%20with%20Mirror/thumbnail.png", in_stock: true, rating: 4.2, review_count: 25 },
+        { id: 1, title: "Essence Mascara Lash Princess", price: 9.99, stock: 5, category: "beauty", thumbnail: "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png", rating: 4.5, review_count: 10 } as any,
+        // Add more mock items if needed or just leave empty to show error
       ]);
+    } finally {
       setLoading(false);
-    }, 1000);
+    }
   };
 
   useEffect(() => {
@@ -70,15 +65,15 @@ export default function ProductsPage() {
 
   const filteredProducts = products.filter(
     (product) =>
-      product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      product.routine_step.toLowerCase().includes(searchTerm.toLowerCase()),
+      product.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      product.category.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
   const totalValue = products.reduce(
-    (sum, p) => sum + p.price * p.quantity_in_stock,
+    (sum, p) => sum + p.price * p.stock,
     0,
   );
-  const totalStock = products.reduce((sum, p) => sum + p.quantity_in_stock, 0);
+  const totalStock = products.reduce((sum, p) => sum + p.stock, 0);
 
   return (
     <div className="min-h-screen bg-background">
@@ -102,7 +97,7 @@ export default function ProductsPage() {
               <div className="flex items-center gap-3">
                 <button
                   onClick={fetchProducts}
-                  className="flex items-center gap-2 px-4 py-2 rounded-lg border border-border hover:bg-foreground/5 fannoh-transition text-sm"
+                  className="flex items-center gap-2 px-4 py-2 rounded-lg border border-border hover:bg-foreground/5 nexamart-transition text-sm"
                 >
                   <RefreshCw
                     className={`w-4 h-4 ${loading ? "animate-spin" : ""}`}
@@ -111,7 +106,7 @@ export default function ProductsPage() {
                 </button>
                 <Link
                   href="/admin/products/new"
-                  className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 fannoh-transition font-medium text-sm"
+                  className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 nexamart-transition font-medium text-sm"
                 >
                   <Plus className="w-4 h-4" />
                   <span className="hidden sm:inline">Add Product</span>
@@ -128,7 +123,7 @@ export default function ProductsPage() {
 
             {/* Stats */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
-              <div className="bg-card rounded-2xl p-6 fannoh-shadow">
+              <div className="bg-card rounded-2xl p-6 nexamart-shadow">
                 <p className="text-sm text-muted-foreground mb-2">
                   Total Products
                 </p>
@@ -136,7 +131,7 @@ export default function ProductsPage() {
                   {products.length}
                 </p>
               </div>
-              <div className="bg-card rounded-2xl p-6 fannoh-shadow">
+              <div className="bg-card rounded-2xl p-6 nexamart-shadow">
                 <p className="text-sm text-muted-foreground mb-2">
                   Total Stock
                 </p>
@@ -144,7 +139,7 @@ export default function ProductsPage() {
                   {totalStock}
                 </p>
               </div>
-              <div className="bg-card rounded-2xl p-6 fannoh-shadow">
+              <div className="bg-card rounded-2xl p-6 nexamart-shadow">
                 <p className="text-sm text-muted-foreground mb-2">
                   Inventory Value
                 </p>
@@ -169,7 +164,7 @@ export default function ProductsPage() {
             </div>
 
             {/* Products Table */}
-            <div className="bg-card rounded-2xl fannoh-shadow overflow-hidden">
+            <div className="bg-card rounded-2xl nexamart-shadow overflow-hidden">
               {loading ? (
                 <div className="p-12 text-center">
                   <Loader2 className="w-8 h-8 animate-spin text-primary mx-auto mb-4" />
@@ -211,27 +206,27 @@ export default function ProductsPage() {
                       {filteredProducts.map((product) => (
                         <tr
                           key={product.id}
-                          className="border-b border-border/50 hover:bg-foreground/5 fannoh-transition"
+                          className="border-b border-border/50 hover:bg-foreground/5 nexamart-transition"
                         >
                           <td className="px-4 py-4">
                             <div className="flex items-center gap-3">
                               <div className="relative w-12 h-12 rounded-lg overflow-hidden shrink-0 bg-muted">
                                 <Image
-                                  src={product.image || "/placeholder.svg"}
-                                  alt={product.name}
+                                  src={product.thumbnail || "/placeholder.svg"}
+                                  alt={product.title}
                                   fill
                                   className="object-cover"
                                   priority
                                 />
                               </div>
-                              <p className="font-semibold text-foreground text-sm">
-                                {product.name}
+                              <p className="font-semibold text-foreground text-sm line-clamp-2 max-w-[200px]">
+                                {product.title}
                               </p>
                             </div>
                           </td>
                           <td className="px-4 py-4">
                             <span className="text-sm text-foreground/70 capitalize">
-                              {product.routine_step}
+                              {product.category}
                             </span>
                           </td>
                           <td className="px-4 py-4">
@@ -241,14 +236,14 @@ export default function ProductsPage() {
                           </td>
                           <td className="px-4 py-4">
                             <span
-                              className={`inline-block px-2 py-1 rounded-full text-xs font-semibold ${product.quantity_in_stock > 20
+                              className={`inline-block px-2 py-1 rounded-full text-xs font-semibold ${product.stock > 20
                                 ? "bg-green-100 text-green-800"
-                                : product.quantity_in_stock > 5
+                                : product.stock > 5
                                   ? "bg-yellow-100 text-yellow-800"
                                   : "bg-red-100 text-red-800"
                                 }`}
                             >
-                              {product.quantity_in_stock}
+                              {product.stock}
                             </span>
                           </td>
                           <td className="px-4 py-4 hidden lg:table-cell">
@@ -259,19 +254,19 @@ export default function ProductsPage() {
                           </td>
                           <td className="px-4 py-4 hidden md:table-cell">
                             <span
-                              className={`inline-block px-2 py-1 rounded-full text-xs font-semibold ${product.in_stock
+                              className={`inline-block px-2 py-1 rounded-full text-xs font-semibold ${product.stock > 0
                                 ? "bg-green-100 text-green-800"
                                 : "bg-red-100 text-red-800"
                                 }`}
                             >
-                              {product.in_stock ? "In Stock" : "Out"}
+                              {product.stock > 0 ? "In Stock" : "Out"}
                             </span>
                           </td>
                           <td className="px-4 py-4">
                             <div className="flex items-center gap-1">
                               <Link
                                 href={`/admin/products/${product.id}`}
-                                className="p-2 hover:bg-foreground/10 rounded-lg fannoh-transition"
+                                className="p-2 hover:bg-foreground/10 rounded-lg nexamart-transition"
                                 title="Edit"
                               >
                                 <Edit className="w-4 h-4 text-foreground/50" />
@@ -279,7 +274,7 @@ export default function ProductsPage() {
                               <button
                                 onClick={() => setDeleteModal(product)}
                                 disabled={deleting === product.id}
-                                className="p-2 hover:bg-red-50 rounded-lg fannoh-transition disabled:opacity-50"
+                                className="p-2 hover:bg-red-50 rounded-lg nexamart-transition disabled:opacity-50"
                                 title="Delete"
                               >
                                 {deleting === product.id ? (
@@ -304,7 +299,7 @@ export default function ProductsPage() {
       {/* Delete Confirmation Modal */}
       {deleteModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-card rounded-2xl p-6 max-w-md w-full fannoh-shadow">
+          <div className="bg-card rounded-2xl p-6 max-w-md w-full nexamart-shadow">
             <div className="flex items-center gap-4 mb-4">
               <div className="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center">
                 <AlertTriangle className="w-6 h-6 text-red-600" />
@@ -321,7 +316,7 @@ export default function ProductsPage() {
 
             <p className="text-foreground mb-6">
               Are you sure you want to delete{" "}
-              <strong>{deleteModal.name}</strong>? This will permanently remove
+              <strong>{deleteModal.title}</strong>? This will permanently remove
               the product from your catalog.
             </p>
 
@@ -329,14 +324,14 @@ export default function ProductsPage() {
               <button
                 onClick={() => setDeleteModal(null)}
                 disabled={deleting === deleteModal.id}
-                className="px-4 py-2 rounded-lg border border-border hover:bg-foreground/5 fannoh-transition font-medium"
+                className="px-4 py-2 rounded-lg border border-border hover:bg-foreground/5 nexamart-transition font-medium"
               >
                 Cancel
               </button>
               <button
                 onClick={confirmDelete}
                 disabled={deleting === deleteModal.id}
-                className="px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 fannoh-transition font-medium flex items-center gap-2 disabled:opacity-50"
+                className="px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 nexamart-transition font-medium flex items-center gap-2 disabled:opacity-50"
               >
                 {deleting === deleteModal.id ? (
                   <>

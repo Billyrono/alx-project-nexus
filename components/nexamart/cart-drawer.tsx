@@ -107,7 +107,7 @@ export function CartDrawer() {
                           onClick={() =>
                             dispatch(updateQuantity({ id: item.id, quantity: item.quantity - 1 }))
                           }
-                          className="p-1.5 hover:bg-muted fannoh-transition rounded-l-full"
+                          className="p-1.5 hover:bg-muted nexamart-transition rounded-l-full"
                           aria-label="Decrease quantity"
                         >
                           <Minus className="w-3 h-3" />
@@ -120,7 +120,7 @@ export function CartDrawer() {
                           onClick={() =>
                             dispatch(updateQuantity({ id: item.id, quantity: item.quantity + 1 }))
                           }
-                          className="p-1.5 hover:bg-muted fannoh-transition rounded-r-full"
+                          className="p-1.5 hover:bg-muted nexamart-transition rounded-r-full"
                           aria-label="Increase quantity"
                         >
                           <Plus className="w-3 h-3" />
@@ -130,7 +130,7 @@ export function CartDrawer() {
                       <button
                         type="button"
                         onClick={() => dispatch(removeFromCart(item.id))}
-                        className="p-1.5 text-muted-foreground hover:text-destructive fannoh-transition"
+                        className="p-1.5 text-muted-foreground hover:text-destructive nexamart-transition"
                         aria-label="Remove item"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -169,7 +169,7 @@ export function CartDrawer() {
             <DrawerClose asChild>
               <Link
                 href="/checkout"
-                className="w-full bg-primary text-primary-foreground py-4 rounded-full font-medium hover:bg-primary/90 fannoh-transition text-center block"
+                className="w-full bg-primary text-primary-foreground py-4 rounded-full font-medium hover:bg-primary/90 nexamart-transition text-center block"
               >
                 Checkout
               </Link>
@@ -178,7 +178,7 @@ export function CartDrawer() {
             <DrawerClose asChild>
               <button
                 type="button"
-                className="w-full border border-border text-foreground py-4 rounded-full font-medium hover:bg-muted fannoh-transition"
+                className="w-full border border-border text-foreground py-4 rounded-full font-medium hover:bg-muted nexamart-transition"
               >
                 Continue Shopping
               </button>

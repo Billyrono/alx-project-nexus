@@ -82,7 +82,7 @@ export default function SignupPage() {
                 <div className="hidden lg:flex lg:w-1/2 relative bg-muted">
                     <Image
                         src="/images/products/serum.jpg"
-                        alt="Fannoh Naturals skincare"
+                        alt="NexaMart Marketplace skincare"
                         fill
                         className="object-cover"
                         priority
@@ -90,16 +90,17 @@ export default function SignupPage() {
                     <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/30 to-black/10" />
                     <div className="absolute bottom-0 left-0 right-0 p-12">
                         <Link href="/" className="mb-6 inline-block">
-                            <Image
-                                src="/images/logo.png"
-                                alt="Fannoh Naturals"
-                                width={160}
-                                height={163}
-                                className="h-12 w-auto object-contain brightness-0 invert"
-                            />
+                            <div className="flex flex-col items-start text-white">
+                                <span className="font-playball text-5xl leading-none">
+                                    NexaMart
+                                </span>
+                                <span className="text-xs uppercase tracking-[0.3em] font-medium opacity-90">
+                                    Marketplace
+                                </span>
+                            </div>
                         </Link>
                         <h2 className="font-serif text-3xl text-white mb-3">
-                            Welcome to Fannoh Naturals
+                            Welcome to NexaMart Marketplace
                         </h2>
                         <p className="text-white/80 text-sm max-w-md">
                             You&apos;re one step away from premium African botanical skincare.
@@ -112,15 +113,14 @@ export default function SignupPage() {
                     <div className="w-full max-w-md text-center">
                         <Link
                             href="/"
-                            className="flex justify-center mb-5 sm:mb-8 lg:hidden"
+                            className="flex flex-col items-center mb-5 sm:mb-8 lg:hidden text-foreground"
                         >
-                            <Image
-                                src="/images/logo.png"
-                                alt="Fannoh Naturals"
-                                width={160}
-                                height={163}
-                                className="h-10 sm:h-14 w-auto object-contain"
-                            />
+                            <span className="font-serif font-bold italic text-4xl sm:text-5xl leading-none">
+                                NexaMart
+                            </span>
+                            <span className="text-[0.6rem] sm:text-xs uppercase tracking-[0.3em] font-medium text-muted-foreground">
+                                Marketplace
+                            </span>
                         </Link>
                         <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4 sm:mb-6">
                             <CheckCircle className="w-7 h-7 sm:w-8 sm:h-8 text-primary" />
@@ -149,7 +149,7 @@ export default function SignupPage() {
             <div className="hidden lg:flex lg:w-1/2 relative bg-muted">
                 <Image
                     src="/images/products/serum.jpg"
-                    alt="Fannoh Naturals skincare"
+                    alt="NexaMart Marketplace skincare"
                     fill
                     className="object-cover"
                     priority
@@ -157,13 +157,14 @@ export default function SignupPage() {
                 <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/30 to-black/10" />
                 <div className="absolute bottom-0 left-0 right-0 p-12">
                     <Link href="/" className="mb-6 inline-block">
-                        <Image
-                            src="/images/logo.png"
-                            alt="Fannoh Naturals"
-                            width={160}
-                            height={163}
-                            className="h-12 w-auto object-contain brightness-0 invert"
-                        />
+                        <div className="flex flex-col items-start text-white">
+                            <span className="font-serif font-bold italic text-5xl leading-none">
+                                NexaMart
+                            </span>
+                            <span className="text-xs uppercase tracking-[0.3em] font-medium opacity-90">
+                                Marketplace
+                            </span>
+                        </div>
                     </Link>
                     <h2 className="font-serif text-3xl text-white mb-3">
                         Join Our Skincare Community
@@ -179,14 +180,13 @@ export default function SignupPage() {
             <div className="w-full lg:w-1/2 flex items-center justify-center bg-background px-4 py-6 sm:px-6 sm:py-12">
                 <div className="w-full max-w-md">
                     {/* Mobile Logo */}
-                    <Link href="/" className="flex justify-center mb-4 sm:mb-5 lg:hidden">
-                        <Image
-                            src="/images/logo.png"
-                            alt="Fannoh Naturals"
-                            width={160}
-                            height={163}
-                            className="h-10 sm:h-12 w-auto object-contain"
-                        />
+                    <Link href="/" className="flex flex-col items-center mb-4 sm:mb-5 lg:hidden text-foreground">
+                        <span className="font-serif font-bold italic text-4xl sm:text-5xl leading-none">
+                            NexaMart
+                        </span>
+                        <span className="text-[0.6rem] sm:text-xs uppercase tracking-[0.3em] font-medium text-muted-foreground">
+                            Marketplace
+                        </span>
                     </Link>
 
                     <div className="mb-4 hidden lg:block">
@@ -194,7 +194,7 @@ export default function SignupPage() {
                             Create Account
                         </h2>
                         <p className="text-muted-foreground text-sm">
-                            Join Fannoh Naturals for exclusive offers
+                            Join NexaMart Marketplace for exclusive offers
                         </p>
                     </div>
                     <div className="mb-3 sm:mb-4 lg:hidden text-center">
@@ -202,7 +202,7 @@ export default function SignupPage() {
                             Create Account
                         </h2>
                         <p className="text-muted-foreground text-xs sm:text-sm">
-                            Join Fannoh Naturals for exclusive offers
+                            Join NexaMart Marketplace for exclusive offers
                         </p>
                     </div>
 
@@ -376,7 +376,7 @@ export default function SignupPage() {
                                 className="mt-0.5 w-4 h-4"
                             />
                             <span className="text-xs text-muted-foreground leading-relaxed">
-                                By creating an account, I agree to Fannoh Naturals&apos;{" "}
+                                By creating an account, I agree to NexaMart Marketplace&apos;{" "}
                                 <Link
                                     href="/terms"
                                     className="text-primary hover:underline"

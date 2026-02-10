@@ -13,18 +13,18 @@ import {
   Palette,
   CheckCircle,
 } from "lucide-react";
-import { AdminHeader } from "@/components/fannoh/admin-header";
-import { AdminSidebar } from "@/components/fannoh/admin-sidebar";
+import { AdminHeader } from "@/components/nexamart/admin-header";
+import { AdminSidebar } from "@/components/nexamart/admin-sidebar";
 
 // Settings storage key
-const SETTINGS_KEY = "fannoh_admin_settings";
+const SETTINGS_KEY = "nexamart_admin_settings";
 
 // Default settings
 const defaultStoreSettings = {
-  storeName: "Fannoh Naturals",
-  tagline: "Pure African Botanicals for Radiant Skin",
-  email: "hello@fannohnaturals.com",
-  phone: "+254 704 532 124",
+  storeName: "NexaMart Marketplace",
+  tagline: "Premium Lifestyle Solutions",
+  email: "hello@nexamart.com",
+  phone: "0700000000",
   address: "Nairobi, Kenya",
   currency: "KES",
   timezone: "Africa/Nairobi",
@@ -185,11 +185,10 @@ export default function SettingsPage() {
                     <button
                       key={tab.id}
                       onClick={() => setActiveTab(tab.id)}
-                      className={`flex items-center gap-1.5 sm:gap-2 py-3 sm:py-4 border-b-2 transition-colors text-xs sm:text-sm whitespace-nowrap ${
-                        activeTab === tab.id
-                          ? "border-primary text-foreground"
-                          : "border-transparent text-muted-foreground hover:text-foreground"
-                      }`}
+                      className={`flex items-center gap-1.5 sm:gap-2 py-3 sm:py-4 border-b-2 transition-colors text-xs sm:text-sm whitespace-nowrap ${activeTab === tab.id
+                        ? "border-primary text-foreground"
+                        : "border-transparent text-muted-foreground hover:text-foreground"
+                        }`}
                     >
                       <Icon className="w-4 h-4" />
                       {tab.label}
@@ -383,7 +382,7 @@ export default function SettingsPage() {
                           label=""
                           description=""
                           checked={true}
-                          onChange={() => {}}
+                          onChange={() => { }}
                         />
                       </div>
                       <div className="flex items-center justify-between p-4 border border-border rounded-lg md:col-span-2">
@@ -399,7 +398,7 @@ export default function SettingsPage() {
                           label=""
                           description=""
                           checked={true}
-                          onChange={() => {}}
+                          onChange={() => { }}
                         />
                       </div>
                     </div>
@@ -437,7 +436,7 @@ export default function SettingsPage() {
                         <input
                           type="number"
                           value={150}
-                          onChange={() => {}}
+                          onChange={() => { }}
                           className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary/50"
                         />
                       </div>
@@ -448,7 +447,7 @@ export default function SettingsPage() {
                         <input
                           type="number"
                           value={250}
-                          onChange={() => {}}
+                          onChange={() => { }}
                           className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary/50"
                         />
                       </div>
@@ -459,7 +458,7 @@ export default function SettingsPage() {
                         <input
                           type="number"
                           value={350}
-                          onChange={() => {}}
+                          onChange={() => { }}
                           className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary/50"
                         />
                       </div>
@@ -470,7 +469,7 @@ export default function SettingsPage() {
                         <input
                           type="number"
                           value={500}
-                          onChange={() => {}}
+                          onChange={() => { }}
                           className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary/50"
                         />
                       </div>
@@ -621,50 +620,42 @@ export default function SettingsPage() {
                       Payment Methods
                     </h2>
                     <div className="space-y-4">
-                      <ToggleSetting
-                        label="Paystack"
-                        description="Accept card payments via Paystack"
-                        checked={paymentSettings.paystackEnabled}
-                        onChange={(checked) =>
-                          setPaymentSettings({
-                            ...paymentSettings,
-                            paystackEnabled: checked,
-                          })
-                        }
-                      />
-                      <ToggleSetting
-                        label="Test Mode"
-                        description="Use Paystack test keys (no real transactions)"
-                        checked={paymentSettings.testMode}
-                        onChange={(checked) =>
-                          setPaymentSettings({
-                            ...paymentSettings,
-                            testMode: checked,
-                          })
-                        }
-                      />
-                      <ToggleSetting
-                        label="M-Pesa (Sandbox)"
-                        description="Accept M-Pesa mobile payments (sandbox mode)"
-                        checked={paymentSettings.mpesaEnabled}
-                        onChange={(checked) =>
-                          setPaymentSettings({
-                            ...paymentSettings,
-                            mpesaEnabled: checked,
-                          })
-                        }
-                      />
-                      <ToggleSetting
-                        label="Cash on Delivery"
-                        description="Allow customers to pay on delivery"
-                        checked={paymentSettings.cashOnDelivery}
-                        onChange={(checked) =>
-                          setPaymentSettings({
-                            ...paymentSettings,
-                            cashOnDelivery: checked,
-                          })
-                        }
-                      />
+                      <div className="space-y-4">
+                        <ToggleSetting
+                          label="Paystack (Active)"
+                          description="Accept card and mobile money payments via Paystack"
+                          checked={paymentSettings.paystackEnabled}
+                          onChange={(checked) =>
+                            setPaymentSettings({
+                              ...paymentSettings,
+                              paystackEnabled: checked,
+                            })
+                          }
+                        />
+                        <ToggleSetting
+                          label="M-Pesa (Active)"
+                          description="Accept M-Pesa mobile payments directly"
+                          checked={true}
+                          onChange={() => { }}
+                        />
+                        <ToggleSetting
+                          label="Bank Transfer"
+                          description="Enable direct bank transfers for large orders"
+                          checked={true}
+                          onChange={() => { }}
+                        />
+                        <ToggleSetting
+                          label="Cash on Delivery"
+                          description="Allow customers to pay on delivery (Nairobi Only)"
+                          checked={paymentSettings.cashOnDelivery}
+                          onChange={(checked) =>
+                            setPaymentSettings({
+                              ...paymentSettings,
+                              cashOnDelivery: checked,
+                            })
+                          }
+                        />
+                      </div>
                     </div>
                   </div>
 
@@ -801,14 +792,12 @@ function ToggleSetting({
         type="button"
         onClick={() => !disabled && onChange(!checked)}
         disabled={disabled}
-        className={`relative w-12 h-6 rounded-full transition-colors ${
-          checked ? "bg-primary" : "bg-muted"
-        }`}
+        className={`relative w-12 h-6 rounded-full transition-colors ${checked ? "bg-primary" : "bg-muted"
+          }`}
       >
         <span
-          className={`absolute top-1 left-1 w-4 h-4 bg-white rounded-full transition-transform ${
-            checked ? "translate-x-6" : "translate-x-0"
-          }`}
+          className={`absolute top-1 left-1 w-4 h-4 bg-white rounded-full transition-transform ${checked ? "translate-x-6" : "translate-x-0"
+            }`}
         />
       </button>
     </div>

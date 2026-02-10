@@ -3,7 +3,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Fannoh Naturals — Natural Skincare Theme */
+/* NexaMart Marketplace — Modern E-commerce Theme */
 :root {
   /* Brand Colors: Sand, Cream, Warm Beige, Olive Green, Soft Taupe, Charcoal */
   --background: #f7f4ef;
@@ -89,6 +89,7 @@
   --font-sans: "DM Sans", "DM Sans Fallback", sans-serif;
   --font-serif: "Playfair Display", "Playfair Display Fallback", serif;
   --font-mono: "Geist Mono", "Geist Mono Fallback", monospace;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -143,7 +144,7 @@
 }
 
 /* Custom soft shadow utility */
-.fannoh-shadow {
+.nexamart-shadow {
   box-shadow:
     rgba(14, 63, 126, 0.04) 0px 0px 0px 1px,
     rgba(42, 51, 69, 0.04) 0px 1px 1px -0.5px,
@@ -154,7 +155,7 @@
 }
 
 /* Smooth transitions */
-.fannoh-transition {
+.nexamart-transition {
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 

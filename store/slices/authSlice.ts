@@ -31,7 +31,13 @@ export const loginUser = createAsyncThunk(
     'auth/login',
     async (credentials: { username: string; password: string }, { rejectWithValue }) => {
         try {
-            const response = await axios.post('https://dummyjson.com/auth/login', credentials, {
+            // Intercept Billy's demo credentials and use a valid DummyJSON user
+            let apiCredentials = credentials;
+            if (credentials.username === 'billyr' && credentials.password === 'billydev') {
+                apiCredentials = { username: 'emilys', password: 'emilyspass' };
+            }
+
+            const response = await axios.post('https://dummyjson.com/auth/login', apiCredentials, {
                 headers: { 'Content-Type': 'application/json' },
             });
             return response.data;
@@ -74,10 +80,14 @@ const authSlice = createSlice({
             .addCase(loginUser.fulfilled, (state, action) => {
                 state.loading = false;
                 state.isAuthenticated = true;
-                state.user = action.payload;
+
+                // Override with Kenyan name as requested
+                const user = { ...action.payload, firstName: 'Billy', lastName: 'Rono', username: 'billyr', email: 'billy@nexamart.com' };
+
+                state.user = user;
                 state.token = action.payload.token;
                 localStorage.setItem('token', action.payload.token);
-                localStorage.setItem('user', JSON.stringify(action.payload));
+                localStorage.setItem('user', JSON.stringify(user));
             })
             .addCase(loginUser.rejected, (state, action) => {
                 state.loading = false;

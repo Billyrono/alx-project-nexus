@@ -18,7 +18,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
-import { useAuth } from "@/components/fannoh/auth-context";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { logout } from "@/store/slices/authSlice";
 
 interface AdminNotification {
   id: string;
@@ -40,7 +41,8 @@ export function AdminHeader({ onMenuClick }: AdminHeaderProps) {
   const [notifications, setNotifications] = useState<AdminNotification[]>([]);
   const [unreadCount, setUnreadCount] = useState(0);
   const [loadingNotifications, setLoadingNotifications] = useState(false);
-  const { user, signOut } = useAuth();
+  const { user } = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
   const pathname = usePathname();
 
   // Fetch notifications
@@ -86,7 +88,7 @@ export function AdminHeader({ onMenuClick }: AdminHeaderProps) {
   const breadcrumbs = getBreadcrumbs();
 
   const handleLogout = async () => {
-    await signOut();
+    dispatch(logout());
     window.location.href = "/";
   };
 
@@ -120,27 +122,27 @@ export function AdminHeader({ onMenuClick }: AdminHeaderProps) {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 h-20 bg-card border-b border-border flex flex-col justify-center px-4 sm:px-6 lg:px-8 z-50 fannoh-shadow">
+    <header className="fixed top-0 left-0 right-0 h-20 bg-card border-b border-border flex flex-col justify-center px-4 sm:px-6 lg:px-8 z-50 nexamart-shadow">
       <div className="flex items-center justify-between w-full">
         {/* Left side - Menu & Logo */}
         <div className="flex items-center gap-4">
           <button
             onClick={onMenuClick}
-            className="lg:hidden p-2 hover:bg-foreground/10 rounded-lg fannoh-transition"
+            className="lg:hidden p-2 hover:bg-foreground/10 rounded-lg nexamart-transition"
           >
             <Menu className="w-6 h-6 text-foreground" />
           </button>
 
           <div className="hidden lg:flex items-center gap-3">
             <Link href="/admin" className="flex items-center gap-3">
-              <Image
-                src="/images/logo.png"
-                alt="Fannoh Naturals"
-                width={100}
-                height={50}
-                className="h-10 w-auto object-contain"
-                priority
-              />
+              <div className="flex flex-col">
+                <span className="font-serif font-bold italic text-2xl text-foreground leading-none">
+                  NexaMart
+                </span>
+                <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-medium">
+                  Marketplace
+                </span>
+              </div>
               <div className="border-l border-border pl-3">
                 <p className="text-xs text-muted-foreground">Admin Panel</p>
               </div>
@@ -152,7 +154,7 @@ export function AdminHeader({ onMenuClick }: AdminHeaderProps) {
         <nav className="hidden md:flex items-center gap-1 text-sm">
           <Link
             href="/admin"
-            className="text-muted-foreground hover:text-foreground fannoh-transition"
+            className="text-muted-foreground hover:text-foreground nexamart-transition"
           >
             <Home className="w-4 h-4" />
           </Link>
@@ -166,7 +168,7 @@ export function AdminHeader({ onMenuClick }: AdminHeaderProps) {
               ) : (
                 <Link
                   href={crumb.href}
-                  className="text-muted-foreground hover:text-foreground fannoh-transition"
+                  className="text-muted-foreground hover:text-foreground nexamart-transition"
                 >
                   {crumb.label}
                 </Link>
@@ -184,7 +186,7 @@ export function AdminHeader({ onMenuClick }: AdminHeaderProps) {
                 setShowNotifications(!showNotifications);
                 setShowProfile(false);
               }}
-              className="relative p-2 hover:bg-foreground/10 rounded-lg fannoh-transition"
+              className="relative p-2 hover:bg-foreground/10 rounded-lg nexamart-transition"
             >
               <Bell className="w-5 h-5 text-foreground" />
               {unreadCount > 0 && (
@@ -201,7 +203,7 @@ export function AdminHeader({ onMenuClick }: AdminHeaderProps) {
                   className="fixed inset-0 z-40"
                   onClick={() => setShowNotifications(false)}
                 />
-                <div className="absolute right-0 mt-2 w-[calc(100vw-2rem)] sm:w-80 max-w-80 bg-card rounded-lg fannoh-shadow border border-border overflow-hidden z-50">
+                <div className="absolute right-0 mt-2 w-[calc(100vw-2rem)] sm:w-80 max-w-80 bg-card rounded-lg nexamart-shadow border border-border overflow-hidden z-50">
                   <div className="p-3 border-b border-border flex items-center justify-between">
                     <h3 className="font-semibold text-foreground">
                       Notifications
@@ -231,7 +233,7 @@ export function AdminHeader({ onMenuClick }: AdminHeaderProps) {
                           key={notification.id}
                           href={notification.link || "#"}
                           onClick={() => setShowNotifications(false)}
-                          className="block p-3 hover:bg-foreground/5 border-b border-border/50 last:border-0 fannoh-transition"
+                          className="block p-3 hover:bg-foreground/5 border-b border-border/50 last:border-0 nexamart-transition"
                         >
                           <div className="flex gap-3">
                             <div className="mt-0.5">
@@ -275,15 +277,13 @@ export function AdminHeader({ onMenuClick }: AdminHeaderProps) {
                 setShowProfile(!showProfile);
                 setShowNotifications(false);
               }}
-              className="flex items-center gap-2 p-2 hover:bg-foreground/10 rounded-lg fannoh-transition"
+              className="flex items-center gap-2 p-2 hover:bg-foreground/10 rounded-lg nexamart-transition"
             >
               <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
                 <User className="w-4 h-4 text-primary" />
               </div>
               <span className="hidden sm:block text-sm font-medium text-foreground max-w-30 truncate">
-                {user?.user_metadata?.full_name ||
-                  user?.email?.split("@")[0] ||
-                  "Admin"}
+                {user ? `${user.firstName} ${user.lastName}` : "Admin"}
               </span>
             </button>
 
@@ -294,18 +294,18 @@ export function AdminHeader({ onMenuClick }: AdminHeaderProps) {
                   className="fixed inset-0 z-40"
                   onClick={() => setShowProfile(false)}
                 />
-                <div className="absolute right-0 mt-2 w-56 bg-card rounded-lg fannoh-shadow border border-border overflow-hidden z-50">
+                <div className="absolute right-0 mt-2 w-56 bg-card rounded-lg nexamart-shadow border border-border overflow-hidden z-50">
                   <div className="p-4 border-b border-border">
                     <p className="text-sm font-semibold text-foreground truncate">
-                      {user?.user_metadata?.full_name || "Admin User"}
+                      {user ? `${user.firstName} ${user.lastName}` : "Admin User"}
                     </p>
                     <p className="text-xs text-muted-foreground truncate">
-                      {user?.email || "admin@fannohnaturals.com"}
+                      {user?.email || "admin@nexamart.com"}
                     </p>
                   </div>
                   <Link
                     href="/account"
-                    className="w-full px-4 py-2 text-sm text-foreground hover:bg-foreground/10 fannoh-transition flex items-center gap-2"
+                    className="w-full px-4 py-2 text-sm text-foreground hover:bg-foreground/10 nexamart-transition flex items-center gap-2"
                     onClick={() => setShowProfile(false)}
                   >
                     <User className="w-4 h-4" />
@@ -313,14 +313,14 @@ export function AdminHeader({ onMenuClick }: AdminHeaderProps) {
                   </Link>
                   <Link
                     href="/"
-                    className="block w-full px-4 py-2 text-sm text-foreground hover:bg-foreground/10 fannoh-transition text-left"
+                    className="block w-full px-4 py-2 text-sm text-foreground hover:bg-foreground/10 nexamart-transition text-left"
                     onClick={() => setShowProfile(false)}
                   >
                     View Store
                   </Link>
                   <button
                     onClick={handleLogout}
-                    className="w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50 fannoh-transition flex items-center gap-2 border-t border-border"
+                    className="w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50 nexamart-transition flex items-center gap-2 border-t border-border"
                   >
                     <LogOut className="w-4 h-4" />
                     Logout

@@ -11,9 +11,9 @@ import { api, Product } from "@/services/api";
 // Category tabs for filtering (simplified for now as DummyJSON categories might differ)
 const categoryTabs = [
   { value: "all", label: "All" },
-  { value: "beauty", label: "Beauty" },
-  { value: "fragrances", label: "Fragrances" },
-  { value: "skin-care", label: "Skin Care" },
+  { value: "home-decoration", label: "Home" },
+  { value: "furniture", label: "Furniture" },
+  { value: "womens-bags", label: "Accessories" },
 ];
 
 export function ProductGrid() {
@@ -45,7 +45,7 @@ export function ProductGrid() {
 
   // Filter products by category and limit to 4 (simulated client-side filtering for now)
   const filteredProducts = products
-    .filter((p) => activeCategory === "all" || p.category === activeCategory || (activeCategory === 'skin-care' && (p.category === 'beauty' || p.category === 'skin-care')))
+    .filter((p) => activeCategory === "all" || p.category === activeCategory)
     .slice(0, 8);
 
   useEffect(() => {
@@ -106,7 +106,7 @@ export function ProductGrid() {
 
         {/* Category Tabs */}
         <div className="flex justify-start sm:justify-center mb-12 overflow-x-auto px-4 -mx-4 sm:px-2 sm:-mx-2 scrollbar-hide pb-2">
-          <div className="inline-flex items-center bg-background rounded-full p-1 sm:p-1.5 fannoh-shadow">
+          <div className="inline-flex items-center bg-background rounded-full p-1 sm:p-1.5 nexamart-shadow">
             {categoryTabs.map((tab) => (
               <button
                 key={tab.value}
@@ -149,7 +149,7 @@ export function ProductGrid() {
                   }`}
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
-                <div className="bg-background rounded-3xl overflow-hidden fannoh-shadow hover:shadow-lg transition-shadow duration-300 h-full flex flex-col">
+                <div className="bg-background rounded-3xl overflow-hidden nexamart-shadow hover:shadow-lg transition-shadow duration-300 h-full flex flex-col">
                   {/* Product Image */}
                   <div className="relative aspect-square overflow-hidden bg-muted">
                     <Image
@@ -173,7 +173,7 @@ export function ProductGrid() {
                     <button
                       onClick={(e) => handleAddToCart(e, product)}
                       disabled={product.stock <= 0}
-                      className="absolute bottom-4 right-4 bg-background/90 backdrop-blur-sm text-foreground p-3 rounded-full opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 disabled:opacity-50 fannoh-shadow"
+                      className="absolute bottom-4 right-4 bg-background/90 backdrop-blur-sm text-foreground p-3 rounded-full opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 disabled:opacity-50 nexamart-shadow"
                       aria-label="Add to cart"
                     >
                       <ShoppingBag className="w-5 h-5" />

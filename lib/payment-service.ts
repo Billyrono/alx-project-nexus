@@ -1,4 +1,4 @@
-// Fannoh Naturals Payment Service
+// NexaMart Marketplace Payment Service
 // Supports M-Pesa (Daraja API), Paystack, and Bank Transfer
 
 export type PaymentMethod = 'mpesa' | 'card' | 'bank-transfer'
@@ -142,7 +142,7 @@ export async function processMpesaPayment(
       PhoneNumber: phone,
       CallBackURL: MPESA_CONFIG.callbackUrl,
       AccountReference: details.orderId.slice(0, 12), // Max 12 chars
-      TransactionDesc: `Fannoh Naturals Order`
+      TransactionDesc: `NexaMart Marketplace Order`
     }
 
     const response = await fetch(
@@ -247,10 +247,10 @@ export async function initiateTransferPayment(
 ): Promise<PaymentResponse> {
   const transferRef = `FAN-${details.orderId.slice(0, 8)}-${Date.now().toString(36).toUpperCase()}`
 
-  // Bank details for Fannoh Naturals
+  // Bank details for NexaMart Marketplace
   const bankDetails = {
     bankName: 'Kenya Commercial Bank (KCB)',
-    accountName: 'Fannoh Naturals Ltd',
+    accountName: 'NexaMart Marketplace Ltd',
     accountNumber: process.env.BANK_ACCOUNT_NUMBER || 'XXXXXXXXXX',
     branch: 'Nairobi',
     reference: transferRef

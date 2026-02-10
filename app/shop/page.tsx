@@ -11,8 +11,8 @@ import {
   Loader2,
   Heart,
 } from "lucide-react";
-import { Header } from "@/components/fannoh/header";
-import { Footer } from "@/components/fannoh/footer";
+import { Header } from "@/components/nexamart/header";
+import { Footer } from "@/components/nexamart/footer";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { addToCart } from "@/store/slices/cartSlice";
 import { api, Product, Category } from "@/services/api";
@@ -163,7 +163,7 @@ export default function ShopPage() {
           <div className="flex gap-8">
             {/* Sidebar Filters - Desktop */}
             <div className="hidden lg:block w-64 shrink-0">
-              <div className="bg-card rounded-3xl p-6 sticky top-32 fannoh-shadow max-h-[calc(100vh-10rem)] overflow-y-auto scrollbar-hide">
+              <div className="bg-card rounded-3xl p-6 sticky top-32 nexamart-shadow max-h-[calc(100vh-10rem)] overflow-y-auto scrollbar-hide">
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="font-serif text-xl text-foreground">
                     Filters
@@ -172,7 +172,7 @@ export default function ShopPage() {
                     <button
                       type="button"
                       onClick={clearFilters}
-                      className="text-xs text-primary hover:text-primary/80 fannoh-transition"
+                      className="text-xs text-primary hover:text-primary/80 nexamart-transition"
                     >
                       Clear All
                     </button>
@@ -219,7 +219,7 @@ export default function ShopPage() {
                 <button
                   type="button"
                   onClick={() => setShowFilters(!showFilters)}
-                  className="lg:hidden inline-flex items-center gap-2 text-sm text-foreground px-4 py-2 rounded-full bg-card fannoh-shadow"
+                  className="lg:hidden inline-flex items-center gap-2 text-sm text-foreground px-4 py-2 rounded-full bg-card nexamart-shadow"
                 >
                   <SlidersHorizontal className="w-4 h-4" />
                   Filters
@@ -291,7 +291,7 @@ export default function ShopPage() {
                     <button
                       type="button"
                       onClick={() => setShowFilters(false)}
-                      className="w-full mt-8 bg-primary text-primary-foreground py-3 rounded-full font-medium fannoh-transition hover:bg-primary/90"
+                      className="w-full mt-8 bg-primary text-primary-foreground py-3 rounded-full font-medium nexamart-transition hover:bg-primary/90"
                     >
                       Apply Filters
                     </button>
@@ -307,6 +307,16 @@ export default function ShopPage() {
                 {loading ? (
                   <div className="col-span-full flex justify-center py-20">
                     <Loader2 className="w-8 h-8 animate-spin text-primary" />
+                  </div>
+                ) : error ? (
+                  <div className="col-span-full text-center py-20">
+                    <p className="text-red-500 text-lg mb-4">{error}</p>
+                    <button
+                      onClick={() => window.location.reload()}
+                      className="px-6 py-2 bg-primary text-primary-foreground rounded-full hover:bg-primary/90 transition-colors"
+                    >
+                      Retry
+                    </button>
                   </div>
                 ) : (
                   paginatedProducts.map((product, index) => (
@@ -331,7 +341,7 @@ export default function ShopPage() {
                       window.scrollTo({ top: 200, behavior: "smooth" });
                     }}
                     disabled={currentPage === 1}
-                    className="px-4 py-2 rounded-full border border-border text-sm font-medium text-foreground disabled:opacity-50 disabled:cursor-not-allowed hover:bg-card fannoh-transition"
+                    className="px-4 py-2 rounded-full border border-border text-sm font-medium text-foreground disabled:opacity-50 disabled:cursor-not-allowed hover:bg-card nexamart-transition"
                   >
                     Previous
                   </button>
@@ -346,7 +356,7 @@ export default function ShopPage() {
                             setCurrentPage(page);
                             window.scrollTo({ top: 200, behavior: "smooth" });
                           }}
-                          className={`w-10 h-10 rounded-full text-sm font-medium fannoh-transition ${currentPage === page
+                          className={`w-10 h-10 rounded-full text-sm font-medium nexamart-transition ${currentPage === page
                             ? "bg-primary text-primary-foreground"
                             : "border border-border text-foreground hover:bg-card"
                             }`}
@@ -364,7 +374,7 @@ export default function ShopPage() {
                       window.scrollTo({ top: 200, behavior: "smooth" });
                     }}
                     disabled={currentPage === totalPages}
-                    className="px-4 py-2 rounded-full border border-border text-sm font-medium text-foreground disabled:opacity-50 disabled:cursor-not-allowed hover:bg-card fannoh-transition"
+                    className="px-4 py-2 rounded-full border border-border text-sm font-medium text-foreground disabled:opacity-50 disabled:cursor-not-allowed hover:bg-card nexamart-transition"
                   >
                     Next
                   </button>
@@ -420,11 +430,11 @@ function FilterSection({
       <button
         type="button"
         onClick={onToggle}
-        className="flex items-center justify-between w-full py-3 px-0 hover:text-primary fannoh-transition"
+        className="flex items-center justify-between w-full py-3 px-0 hover:text-primary nexamart-transition"
       >
         <h3 className="font-medium text-foreground text-sm">{title}</h3>
         <ChevronDown
-          className={`w-4 h-4 text-foreground/60 fannoh-transition ${expanded ? "rotate-180" : ""
+          className={`w-4 h-4 text-foreground/60 nexamart-transition ${expanded ? "rotate-180" : ""
             }`}
         />
       </button>
@@ -455,7 +465,7 @@ function ProductCard({
       <div className="group h-full">
         <Link
           href={`/product/${product.id}`}
-          className="bg-card rounded-3xl overflow-hidden fannoh-shadow fannoh-transition group-hover:scale-[1.02] h-full flex flex-col"
+          className="bg-card rounded-3xl overflow-hidden nexamart-shadow nexamart-transition group-hover:scale-[1.02] h-full flex flex-col"
         >
           {/* Image */}
           <div className="relative aspect-square bg-muted overflow-hidden">
@@ -469,7 +479,7 @@ function ProductCard({
               alt={product.title}
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              className={`object-cover fannoh-transition group-hover:scale-105 transition-opacity duration-500 ${imageLoaded ? "opacity-100" : "opacity-0"
+              className={`object-cover nexamart-transition group-hover:scale-105 transition-opacity duration-500 ${imageLoaded ? "opacity-100" : "opacity-0"
                 }`}
               onLoad={() => setImageLoaded(true)}
               onError={() => setImageLoaded(true)}
@@ -491,7 +501,7 @@ function ProductCard({
                 e.stopPropagation();
                 onAddToCart();
               }}
-              className="absolute bottom-4 right-4 w-12 h-12 rounded-full bg-background/90 backdrop-blur-sm flex items-center justify-center opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 fannoh-transition fannoh-shadow"
+              className="absolute bottom-4 right-4 w-12 h-12 rounded-full bg-background/90 backdrop-blur-sm flex items-center justify-center opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 nexamart-transition nexamart-shadow"
               aria-label="Add to cart"
             >
               <ShoppingBag className="w-5 h-5 text-foreground" />

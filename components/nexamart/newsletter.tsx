@@ -71,7 +71,7 @@ export function Newsletter() {
             <div className="inline-flex items-center gap-3 bg-primary-foreground/10 backdrop-blur-sm rounded-full px-8 py-4">
               <Check className="w-5 h-5 text-primary-foreground" />
               <span className="text-primary-foreground">
-                Welcome to the Fannoh family!
+                Welcome to the NexaMart family!
               </span>
             </div>
           ) : (
@@ -87,17 +87,17 @@ export function Newsletter() {
                   setError("");
                 }}
                 placeholder="Enter your email"
-                className="flex-1 bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/20 rounded-full px-6 py-4 text-primary-foreground placeholder:text-primary-foreground/50 focus:outline-none focus:border-primary-foreground/40 fannoh-transition"
+                className="flex-1 bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/20 rounded-full px-6 py-4 text-primary-foreground placeholder:text-primary-foreground/50 focus:outline-none focus:border-primary-foreground/40 nexamart-transition"
                 required
                 disabled={isLoading}
               />
               <button
                 type="submit"
                 disabled={isLoading}
-                className="group inline-flex items-center justify-center gap-2 bg-primary-foreground text-primary px-8 py-4 rounded-full text-sm tracking-wide fannoh-transition hover:bg-primary-foreground/90 disabled:opacity-50"
+                className="group inline-flex items-center justify-center gap-2 bg-primary-foreground text-primary px-8 py-4 rounded-full text-sm tracking-wide nexamart-transition hover:bg-primary-foreground/90 disabled:opacity-50"
               >
                 {isLoading ? "Subscribing..." : "Subscribe"}
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 fannoh-transition" />
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 nexamart-transition" />
               </button>
             </form>
           )}

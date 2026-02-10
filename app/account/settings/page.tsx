@@ -21,8 +21,8 @@ import {
   EyeOff,
   LogOut,
 } from "lucide-react";
-import { Header } from "@/components/fannoh/header";
-import { Footer } from "@/components/fannoh/footer";
+import { Header } from "@/components/nexamart/header";
+import { Footer } from "@/components/nexamart/footer";
 import { useAppSelector, useAppDispatch } from "@/store/hooks";
 import { logout } from "@/store/slices/authSlice";
 
@@ -474,7 +474,7 @@ export default function SettingsPage() {
                     type="tel"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    placeholder="+254 700 000 000"
+                    placeholder="0700000000"
                     className="w-full px-4 py-3 rounded-xl bg-background border border-border text-foreground focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors text-sm"
                   />
                 </div>
@@ -818,7 +818,7 @@ export default function SettingsPage() {
                 {!newsletterSubscribed && (
                   <p className="text-xs text-muted-foreground bg-muted/50 rounded-lg p-3">
                     You are currently unsubscribed. You will not receive any
-                    newsletter emails from Fannoh Naturals.
+                    newsletter emails from NexaMart Marketplace.
                   </p>
                 )}
               </div>

@@ -12,7 +12,7 @@ interface WhatsAppButtonProps {
 }
 
 export function WhatsAppButton({
-  defaultMessage = "Hi! I'm interested in Fannoh Naturals products. Can you help me?",
+  defaultMessage = "Hi! I'm interested in NexaMart Marketplace products. Can you help me?",
 }: WhatsAppButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
@@ -69,7 +69,7 @@ export function WhatsAppButton({
                   <MessageCircle className="w-5 h-5" />
                 </div>
                 <div>
-                  <p className="font-semibold">Fannoh Naturals</p>
+                  <p className="font-semibold">NexaMart Marketplace</p>
                   <p className="text-xs text-green-100">
                     Typically replies within an hour
                   </p>

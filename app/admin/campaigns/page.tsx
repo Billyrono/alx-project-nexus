@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { AdminHeader } from "@/components/fannoh/admin-header";
-import { AdminSidebar } from "@/components/fannoh/admin-sidebar";
+import { AdminHeader } from "@/components/nexamart/admin-header";
+import { AdminSidebar } from "@/components/nexamart/admin-sidebar";
 import {
   Link2,
   Copy,
@@ -92,7 +92,7 @@ const PLATFORM_PRESETS = [
 
 export default function CampaignLinksPage() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [baseUrl, setBaseUrl] = useState("https://fannoh-naturals.vercel.app");
+  const [baseUrl, setBaseUrl] = useState("https://nexamart-marketplace.vercel.app");
   const [customSource, setCustomSource] = useState("");
   const [customMedium, setCustomMedium] = useState("");
   const [customCampaign, setCampaignName] = useState("");
