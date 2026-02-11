@@ -13,19 +13,17 @@ import {
   Check,
   AlertCircle,
   Shield,
-  ArrowRight,
   Beaker,
-  AlertTriangle,
-  Info,
   Loader2,
-  Heart,
   Truck,
+  X,
 } from "lucide-react";
 import { Header } from "@/components/nexamart/header";
 import { Footer } from "@/components/nexamart/footer";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { addToCart } from "@/store/slices/cartSlice";
 import { api, Product } from "@/services/api";
+import { motion, AnimatePresence } from "framer-motion";
 
 type AccordionSection =
   | "benefits"
@@ -52,6 +50,8 @@ export default function ProductPage() {
   const [openAccordion, setOpenAccordion] = useState<AccordionSection | null>("benefits");
   const [isAdded, setIsAdded] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
+
   // Fetch product
   useEffect(() => {
     const fetchProduct = async () => {
@@ -67,6 +67,7 @@ export default function ProductPage() {
     };
     if (productId) fetchProduct();
   }, [productId]);
+
   // Sync quantity with cart
   const cartItem = product ? items.find(item => item.id === product.id) : null;
   const isInCart = !!cartItem;
@@ -126,10 +127,11 @@ export default function ProductPage() {
       },
       {
         key: "reviews",
-        title: `Reviews (${product?.rating || 0})`, // DummyJSON doesn't give review count directly in product details sometimes, using rating as proxy or just static
+        title: `Reviews (${product?.rating || 0})`,
         icon: <Star className="w-4 h-4" />,
       },
     ];
+
   // Show loading state
   if (loading) {
     return (
@@ -142,6 +144,7 @@ export default function ProductPage() {
       </main>
     );
   }
+
   // Show error state
   if (error || !product) {
     return (
@@ -183,23 +186,38 @@ export default function ProductPage() {
 
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 mb-20">
             {/* Product Image */}
-            <div className="relative aspect-square rounded-3xl overflow-hidden bg-card nexamart-shadow">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="relative aspect-square rounded-3xl overflow-hidden bg-card nexamart-shadow"
+            >
+              <div
+                className={`absolute inset-0 bg-linear-to-br from-muted via-muted/50 to-muted animate-pulse transition-opacity duration-500 ${imageLoaded ? "opacity-0" : "opacity-100"
+                  }`}
+              />
               <Image
                 src={product.thumbnail || "/placeholder.svg"}
                 alt={product.title}
                 fill
-                className="object-cover"
+                className={`object-cover transition-opacity duration-500 ${imageLoaded ? "opacity-100" : "opacity-0"}`}
                 priority
+                onLoad={() => setImageLoaded(true)}
               />
               {product.discountPercentage > 0 && (
                 <span className="absolute top-6 left-6 px-4 py-2 rounded-full text-sm font-medium bg-destructive/10 text-destructive">
                   -{Math.round(product.discountPercentage)}%
                 </span>
               )}
-            </div>
+            </motion.div>
 
             {/* Product Info */}
-            <div className="flex flex-col">
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="flex flex-col"
+            >
               {/* Header */}
               <div className="mb-8">
                 <span className="text-sm tracking-[0.3em] uppercase text-primary mb-2 block">
@@ -335,7 +353,7 @@ export default function ProductPage() {
                   </p>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
 
           {/* Details */}
@@ -364,54 +382,61 @@ export default function ProductPage() {
                         }`}
                     />
                   </button>
-                  <div
-                    className={`overflow-hidden nexamart-transition ${openAccordion === item.key ? "max-h-96" : "max-h-0"
-                      }`}
-                  >
-                    <div className="px-6 py-5 bg-card/30 border-t border-border/50">
-                      {item.key === "benefits" && (
-                        <div className="space-y-2 text-sm text-foreground/80">
-                          <p><strong>Warranty:</strong> {product.warrantyInformation || "Standard warranty applies."}</p>
-                          <p><strong>Return Policy:</strong> {product.returnPolicy || "30-day return policy."}</p>
-                          <p><strong>Availability:</strong> {product.availabilityStatus || "In Stock"}</p>
-                        </div>
-                      )}
-                      {item.key === "howToUse" && (
-                        <div className="text-sm text-foreground/80">
-                          <p>{product.shippingInformation || "Standard shipping applies."}</p>
-                        </div>
-                      )}
-                      {item.key === "ingredients" && (
-                        <div className="space-y-2 text-sm text-foreground/80">
-                          <p><strong>SKU:</strong> {product.sku || "N/A"}</p>
-                          <p><strong>Weight:</strong> {product.weight ? `${product.weight}g` : "N/A"}</p>
-                          <p><strong>Dimensions:</strong> {product.dimensions ? `${product.dimensions.width} x ${product.dimensions.height} x ${product.dimensions.depth} cm` : "N/A"}</p>
-                        </div>
-                      )}
-                      {item.key === "reviews" && (
-                        <div className="space-y-4">
-                          {product.reviews && product.reviews.length > 0 ? (
-                            product.reviews.map((review, idx) => (
-                              <div key={idx} className="border-b border-border/50 pb-4 last:border-0 last:pb-0">
-                                <div className="flex items-center gap-2 mb-1">
-                                  <div className="flex">
-                                    {[...Array(5)].map((_, i) => (
-                                      <Star key={i} className={`w-3 h-3 ${i < review.rating ? "fill-primary text-primary" : "text-muted-foreground"}`} />
-                                    ))}
+                  <AnimatePresence>
+                    {openAccordion === item.key && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="overflow-hidden"
+                      >
+                        <div className="px-6 py-5 bg-card/30 border-t border-border/50">
+                          {item.key === "benefits" && (
+                            <div className="space-y-2 text-sm text-foreground/80">
+                              <p><strong>Warranty:</strong> {product.warrantyInformation || "Standard warranty applies."}</p>
+                              <p><strong>Return Policy:</strong> {product.returnPolicy || "30-day return policy."}</p>
+                              <p><strong>Availability:</strong> {product.availabilityStatus || "In Stock"}</p>
+                            </div>
+                          )}
+                          {item.key === "howToUse" && (
+                            <div className="text-sm text-foreground/80">
+                              <p>{product.shippingInformation || "Standard shipping applies."}</p>
+                            </div>
+                          )}
+                          {item.key === "ingredients" && (
+                            <div className="space-y-2 text-sm text-foreground/80">
+                              <p><strong>SKU:</strong> {product.sku || "N/A"}</p>
+                              <p><strong>Weight:</strong> {product.weight ? `${product.weight}g` : "N/A"}</p>
+                              <p><strong>Dimensions:</strong> {product.dimensions ? `${product.dimensions.width} x ${product.dimensions.height} x ${product.dimensions.depth} cm` : "N/A"}</p>
+                            </div>
+                          )}
+                          {item.key === "reviews" && (
+                            <div className="space-y-4">
+                              {product.reviews && product.reviews.length > 0 ? (
+                                product.reviews.map((review, idx) => (
+                                  <div key={idx} className="border-b border-border/50 pb-4 last:border-0 last:pb-0">
+                                    <div className="flex items-center gap-2 mb-1">
+                                      <div className="flex">
+                                        {[...Array(5)].map((_, i) => (
+                                          <Star key={i} className={`w-3 h-3 ${i < review.rating ? "fill-primary text-primary" : "text-muted-foreground"}`} />
+                                        ))}
+                                      </div>
+                                      <span className="font-medium text-foreground text-sm">{review.reviewerName}</span>
+                                    </div>
+                                    <p className="text-sm text-muted-foreground">{review.comment}</p>
+                                    <p className="text-xs text-muted-foreground mt-1">{new Date(review.date).toLocaleDateString()}</p>
                                   </div>
-                                  <span className="font-medium text-foreground text-sm">{review.reviewerName}</span>
-                                </div>
-                                <p className="text-sm text-muted-foreground">{review.comment}</p>
-                                <p className="text-xs text-muted-foreground mt-1">{new Date(review.date).toLocaleDateString()}</p>
-                              </div>
-                            ))
-                          ) : (
-                            <p className="text-sm text-muted-foreground">No reviews yet.</p>
+                                ))
+                              ) : (
+                                <p className="text-sm text-muted-foreground">No reviews yet.</p>
+                              )}
+                            </div>
                           )}
                         </div>
-                      )}
-                    </div>
-                  </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               ))}
             </div>
@@ -420,41 +445,47 @@ export default function ProductPage() {
       </div>
 
       {/* Login Modal */}
-      {showLoginModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/80 backdrop-blur-sm">
-          <div className="bg-card w-full max-w-md rounded-2xl border border-border shadow-2xl p-8 relative animate-in fade-in zoom-in duration-200">
-            <button
-              onClick={() => setShowLoginModal(false)}
-              className="absolute top-4 right-4 text-muted-foreground hover:text-foreground"
+      <AnimatePresence>
+        {showLoginModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/80 backdrop-blur-sm">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="bg-card w-full max-w-md rounded-2xl border border-border shadow-2xl p-8 relative"
             >
-              <div className="w-6 h-6 flex items-center justify-center rounded-full border border-border hover:bg-background nexamart-transition">
-                x
-              </div>
-            </button>
-            <div className="text-center mb-6">
-              <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Shield className="w-6 h-6 text-primary" />
-              </div>
-              <h3 className="font-serif text-2xl text-foreground mb-2">
-                Please Log In
-              </h3>
-              <p className="text-muted-foreground">
-                You need to be logged in to add items to your cart.
-              </p>
-            </div>
-            <div className="space-y-3">
-              <Link
-                href={`/login?redirect=/product/${product?.id}`}
-                className="w-full inline-flex items-center justify-center bg-primary text-primary-foreground px-6 py-3 rounded-xl font-medium nexamart-transition hover:bg-primary/90"
+              <button
+                onClick={() => setShowLoginModal(false)}
+                className="absolute top-4 right-4 text-muted-foreground hover:text-foreground"
               >
-                Log In
-              </Link>
-            </div>
+                <div className="w-6 h-6 flex items-center justify-center rounded-full border border-border hover:bg-background nexamart-transition">
+                  <X className="w-4 h-4" />
+                </div>
+              </button>
+              <div className="text-center mb-6">
+                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Shield className="w-6 h-6 text-primary" />
+                </div>
+                <h3 className="font-serif text-2xl text-foreground mb-2">
+                  Please Log In
+                </h3>
+                <p className="text-muted-foreground">
+                  You need to be logged in to add items to your cart.
+                </p>
+              </div>
+              <div className="space-y-3">
+                <Link
+                  href={`/login?redirect=/product/${product?.id}`}
+                  className="w-full inline-flex items-center justify-center bg-primary text-primary-foreground px-6 py-3 rounded-xl font-medium nexamart-transition hover:bg-primary/90"
+                >
+                  Log In
+                </Link>
+              </div>
+            </motion.div>
           </div>
-        </div>
-      )}
+        )}
+      </AnimatePresence>
       <Footer />
     </main>
   );
 }
-
