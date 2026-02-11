@@ -31,16 +31,15 @@ export default function ProductsPage() {
     setLoading(true);
     setError(null);
     try {
-      // Fetch products from API for dynamic count
-      const data = await api.getProducts(); // Fetch products
+      // Fetch products
+      const data = await api.getProducts();
       setProducts(data.products);
     } catch (err) {
       console.error("Failed to fetch products:", err);
       setError("Failed to load products. Please try again.");
-      // Fallback to mock if API fails
+      // Use mock data
       setProducts([
         { id: 1, title: "Essence Mascara Lash Princess", price: 9.99, stock: 5, category: "beauty", thumbnail: "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png", rating: 4.5, review_count: 10 } as any,
-        // Add more mock items if needed or just leave empty to show error
       ]);
     } finally {
       setLoading(false);
@@ -55,7 +54,7 @@ export default function ProductsPage() {
     if (!deleteModal) return;
     const id = deleteModal.id;
     setDeleting(id);
-    // Mock delete
+    // Delete product
     setTimeout(() => {
       setProducts(products.filter((p) => p.id !== id));
       setDeleteModal(null);

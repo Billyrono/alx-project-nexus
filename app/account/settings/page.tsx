@@ -35,7 +35,7 @@ type SettingsTab =
 
 export default function SettingsPage() {
   const user = useAppSelector((state) => state.auth.user);
-  const loading = useAppSelector((state) => state.auth.isLoading);
+  const loading = useAppSelector((state) => state.auth.loading);
   const dispatch = useAppDispatch();
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -84,16 +84,12 @@ export default function SettingsPage() {
     }
   }, [user, loading, router]);
 
-
-  // Load all profile data
   useEffect(() => {
     if (!user) return;
 
     const loadProfile = async () => {
-      // Initialize form with user data from Redux
       setFullName(user.firstName + " " + user.lastName);
-      setPhone(user.phone || "");
-      // Mock other data loading or load from localStorage if we implemented that
+      setPhone("");
       const savedSettings = localStorage.getItem(`user_settings_${user.id}`);
       if (savedSettings) {
         const parsed = JSON.parse(savedSettings);
@@ -126,11 +122,9 @@ export default function SettingsPage() {
     setUploadingAvatar(true);
     setMessage(null);
 
-    // Mock upload
     setTimeout(() => {
       const mockUrl = "https://via.placeholder.com/150";
       setAvatarUrl(mockUrl);
-      // Save to local storage mock
       saveToLocalStorage({ avatarUrl: mockUrl });
       setMessage({ type: "success", text: "Profile picture updated!" });
       setUploadingAvatar(false);
@@ -165,7 +159,6 @@ export default function SettingsPage() {
 
     // Mock save
     setTimeout(() => {
-      // In a real app we would dispatch an updateProfile action here
       saveToLocalStorage({ full_name: fullName, phone, skinType, dateOfBirth });
       setMessage({ type: "success", text: "Profile updated successfully!" });
       setSaving(false);
@@ -175,11 +168,9 @@ export default function SettingsPage() {
   const handleSaveAddress = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!user) return;
-
     setSaving(true);
     setMessage(null);
 
-    // Mock save
     setTimeout(() => {
       saveToLocalStorage({ streetAddress, city, stateProvince, postalCode, country });
       setMessage({ type: "success", text: "Address saved successfully!" });
@@ -223,8 +214,6 @@ export default function SettingsPage() {
 
     setSaving(true);
     setMessage(null);
-
-    // Mock save
     setTimeout(() => {
       saveToLocalStorage({ emailNotifications, orderUpdates, promotionalEmails, newsletterSubscribed });
       setMessage({
@@ -283,7 +272,7 @@ export default function SettingsPage() {
 
   if (!user) return null;
 
-  const isGoogleUser = !!user.app_metadata?.providers?.includes("google");
+  const isGoogleUser = false; // Simplified for DummyJSON auth
 
   return (
     <main className="min-h-screen">
@@ -397,7 +386,7 @@ export default function SettingsPage() {
                         <Camera className="w-4 h-4" />
                         {avatarUrl ? "Change" : "Upload"}
                       </button>
-                      {avatarUrl && avatarUrl !== getGoogleAvatar() && (
+                      {avatarUrl && (
                         <button
                           type="button"
                           onClick={handleRemoveAvatar}
@@ -409,15 +398,6 @@ export default function SettingsPage() {
                         </button>
                       )}
                     </div>
-                    <p className="text-xs text-muted-foreground mt-2">
-                      JPG, PNG, or WebP. Max 2MB.
-                      {false && user.image &&
-                        !avatarUrl?.includes("supabase") && (
-                          <span className="block mt-1 text-primary/70">
-                            Using your Google profile picture
-                          </span>
-                        )}
-                    </p>
                     <input
                       ref={fileInputRef}
                       type="file"
@@ -938,27 +918,17 @@ export default function SettingsPage() {
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between py-2 border-b border-border/50 gap-1">
                     <span className="text-muted-foreground">Member Since</span>
                     <span className="text-foreground font-medium">
-                      {user.created_at
-                        ? new Date(user.created_at).toLocaleDateString(
-                          "en-KE",
-                          {
-                            year: "numeric",
-                            month: "long",
-                            day: "numeric",
-                          },
-                        )
-                        : "—"}
+                      {new Date().getFullYear()}
                     </span>
                   </div>
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between py-2 gap-1">
                     <span className="text-muted-foreground">Account ID</span>
                     <span className="text-foreground font-mono text-xs">
-                      {user.id.slice(0, 8)}...{user.id.slice(-4)}
+                      {user.id}
                     </span>
                   </div>
                 </div>
               </div>
-
               {/* Connected Accounts */}
               <div className="bg-card border border-border rounded-2xl p-4 sm:p-6">
                 <h2 className="font-semibold text-foreground mb-4">
@@ -1009,7 +979,6 @@ export default function SettingsPage() {
                   </span>
                 </div>
               </div>
-
               {/* Sign Out */}
               <div className="bg-card border border-border rounded-2xl p-4 sm:p-6">
                 <h2 className="font-semibold text-foreground mb-2">Sign Out</h2>
@@ -1024,7 +993,6 @@ export default function SettingsPage() {
                   Sign Out
                 </button>
               </div>
-
               {/* Danger Zone */}
               <div className="bg-card border border-destructive/30 rounded-2xl p-4 sm:p-6">
                 <h2 className="font-semibold text-destructive mb-2">
@@ -1046,7 +1014,6 @@ export default function SettingsPage() {
           )}
         </div>
       </div>
-
       <Footer />
     </main>
   );

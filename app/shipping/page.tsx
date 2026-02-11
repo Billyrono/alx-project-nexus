@@ -12,12 +12,10 @@ export default function ShippingPage() {
                         <p>
                             At NexaMart, we strive to deliver your orders efficiently and safely.
                         </p>
-
                         <h3 className="text-foreground mt-8 mb-4 text-xl font-medium">Delivery Areas</h3>
                         <p>
                             We currently ship to all 47 counties within Kenya. Standard delivery is handled by our trusted logistics partners.
                         </p>
-
                         <h3 className="text-foreground mt-8 mb-4 text-xl font-medium">Shipping Rates</h3>
                         <ul className="list-disc pl-6 space-y-2">
                             <li><strong>Nairobi Standard:</strong> KES 200</li>
@@ -27,7 +25,6 @@ export default function ShippingPage() {
                         <p className="mt-4">
                             <em>Free shipping applies to all orders over KES 5,000.</em>
                         </p>
-
                         <h3 className="text-foreground mt-8 mb-4 text-xl font-medium">Delivery Times</h3>
                         <p>
                             Orders are processed within 24 hours. Delivery timelines are as follows:

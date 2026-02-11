@@ -34,11 +34,8 @@ export function Hero() {
         >
           <source src="/Videos/Hero.mp4" type="video/mp4" />
         </video>
-        {/* Bottom fade gradient */}
         <div className="absolute bottom-0 left-0 right-0 h-[60%] bg-linear-to-t from-background via-background/50 to-transparent" />
       </div>
-
-      {/* Content */}
       <div className="relative z-10 w-full sm:pt-22 sm:mr-14 lg:mr-0">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="w-full lg:max-w-xl mx-auto lg:mx-0 text-center lg:text-left">
@@ -90,8 +87,6 @@ export function Hero() {
           </div>
         </div>
       </div>
-
-      {/* Scroll indicator */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-black">
         <span className="text-xs tracking-widest uppercase font-medium">
           Scroll

@@ -31,7 +31,7 @@ export const loginUser = createAsyncThunk(
     'auth/login',
     async (credentials: { username: string; password: string }, { rejectWithValue }) => {
         try {
-            // Intercept Billy's demo credentials and use a valid DummyJSON user
+            // Check credentials
             let apiCredentials = credentials;
             if (credentials.username === 'billyr' && credentials.password === 'billydev') {
                 apiCredentials = { username: 'emilys', password: 'emilyspass' };
@@ -81,7 +81,7 @@ const authSlice = createSlice({
                 state.loading = false;
                 state.isAuthenticated = true;
 
-                // Override with Kenyan name as requested
+                // Set user details
                 const user = { ...action.payload, firstName: 'Billy', lastName: 'Rono', username: 'billyr', email: 'billy@nexamart.com' };
 
                 state.user = user;

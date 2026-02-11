@@ -6,7 +6,6 @@ import { useAppSelector } from "@/store/hooks"
 import { Loader2, ShieldX } from "lucide-react"
 import Link from "next/link"
 
-// Get admin emails from environment variable
 const getAdminEmails = (): string[] => {
     const emails = process.env.NEXT_PUBLIC_ADMIN_EMAILS || ""
     return emails.split(",").map(email => email.trim().toLowerCase()).filter(Boolean)
@@ -24,11 +23,9 @@ export default function AdminLayout({
     useEffect(() => {
         if (!loading) {
             if (!user) {
-                // Not logged in - redirect to login
                 setAuthState("not-logged-in")
                 router.push("/login?redirect=/admin")
             } else {
-                // Fallback hardcoded check + env var check
                 const adminEmails = [...getAdminEmails(), "emily.johnson@x.dummyjson.com", "emilys@dummyjson.com"];
                 const userEmail = user.email?.toLowerCase() || ""
 
@@ -41,7 +38,6 @@ export default function AdminLayout({
         }
     }, [user, loading, router])
 
-    // Show loading while checking auth
     if (authState === "loading" || authState === "not-logged-in") {
         return (
             <div className="min-h-screen bg-background flex items-center justify-center">
@@ -52,8 +48,6 @@ export default function AdminLayout({
             </div>
         )
     }
-
-    // Show access denied for non-admins
     if (authState === "unauthorized") {
         return (
             <div className="min-h-screen bg-background flex items-center justify-center">

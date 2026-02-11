@@ -89,7 +89,6 @@ export default function CustomersPage() {
                 Refresh
               </button>
             </div>
-
             {/* Stats */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
               <div className="bg-card rounded-2xl p-6 nexamart-shadow">

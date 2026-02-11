@@ -14,7 +14,6 @@ export default function ContactPage() {
               Have a question or feedback? We'd love to hear from you.
             </p>
           </div>
-
           <div className="grid md:grid-cols-2 gap-12 lg:gap-24">
             {/* Contact Info */}
             <div>
@@ -52,7 +51,6 @@ export default function ContactPage() {
                 </div>
               </div>
             </div>
-
             {/* Contact Form */}
             <div className="bg-card p-8 rounded-3xl border border-border">
               <form className="space-y-4">

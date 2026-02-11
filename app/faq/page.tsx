@@ -17,7 +17,6 @@ export default function FAQPage() {
                     <p className="text-muted-foreground text-center mb-12">
                         Find answers to common questions about shopping at NexaMart.
                     </p>
-
                     <Accordion type="single" collapsible className="w-full space-y-4">
                         <AccordionItem value="item-1" className="bg-card px-6 rounded-2xl border border-border">
                             <AccordionTrigger className="text-foreground hover:no-underline hover:text-primary">How long does shipping take?</AccordionTrigger>

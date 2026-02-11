@@ -122,7 +122,6 @@ export default function CampaignLinksPage() {
       <AdminSidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       <div className="lg:pl-64">
         <AdminHeader onMenuClick={() => setSidebarOpen(true)} />
-
         <main className="pt-20 px-4 sm:px-6 lg:px-8 pb-12 max-w-5xl mx-auto">
           {/* Header */}
           <div className="mb-8">
@@ -134,8 +133,6 @@ export default function CampaignLinksPage() {
               customers
             </p>
           </div>
-
-          {/* Base URL Setting */}
           <div className="bg-card border border-border rounded-xl p-6 mb-8">
             <label className="block text-sm font-medium text-foreground mb-2">
               Your Website URL
@@ -200,7 +197,7 @@ export default function CampaignLinksPage() {
             </div>
           </div>
 
-          {/* Custom Link Builder */}
+          {/* Custom Links */}
           <div className="bg-card border border-border rounded-xl p-6 mb-8">
             <h2 className="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
               <QrCode className="w-5 h-5 text-primary" />
@@ -290,8 +287,6 @@ export default function CampaignLinksPage() {
               </div>
             )}
           </div>
-
-          {/* How It Works */}
           <div className="bg-primary/5 border border-primary/10 rounded-xl p-4 sm:p-6">
             <h3 className="font-semibold text-foreground mb-3">How It Works</h3>
             <ol className="list-decimal list-inside space-y-2 text-foreground/70 text-sm">

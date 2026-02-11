@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { MessageCircle, X } from "lucide-react";
 
-// WhatsApp Business number (without +)
 const WHATSAPP_NUMBER = "254704532124";
 
 interface WhatsAppButtonProps {
@@ -19,7 +18,6 @@ export function WhatsAppButton({
   const [customMessage, setCustomMessage] = useState(defaultMessage);
   const pathname = usePathname();
 
-  // Hide on admin, auth, and account pages
   const isAdminPage = pathname?.startsWith("/admin");
   const isAccountPage = pathname?.startsWith("/account");
   const isAuthPage =
@@ -28,13 +26,11 @@ export function WhatsAppButton({
     pathname === "/forgot-password" ||
     pathname === "/reset-password";
 
-  // Show button after scrolling a bit
   useEffect(() => {
     const handleScroll = () => {
       setIsVisible(window.scrollY > 200);
     };
 
-    // Show after 3 seconds regardless of scroll
     const timer = setTimeout(() => setIsVisible(true), 3000);
 
     window.addEventListener("scroll", handleScroll);
@@ -44,7 +40,6 @@ export function WhatsAppButton({
     };
   }, []);
 
-  // Don't show on admin, auth, or account pages
   if (isAdminPage || isAuthPage || isAccountPage) return null;
 
   const openWhatsApp = () => {
@@ -58,10 +53,8 @@ export function WhatsAppButton({
 
   return (
     <div className="fixed bottom-6 right-6 z-50">
-      {/* Chat popup */}
       {isOpen && (
         <div className="absolute bottom-16 right-0 w-80 bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden animate-in slide-in-from-bottom-4 fade-in duration-300">
-          {/* Header */}
           <div className="bg-green-500 p-4 text-white">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
@@ -83,8 +76,6 @@ export function WhatsAppButton({
               </button>
             </div>
           </div>
-
-          {/* Body */}
           <div className="p-4">
             <div className="bg-gray-100 rounded-lg p-3 mb-4">
               <p className="text-sm text-gray-700">
@@ -110,13 +101,10 @@ export function WhatsAppButton({
           </div>
         </div>
       )}
-
-      {/* Floating button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`w-14 h-14 bg-green-500 rounded-full shadow-lg flex items-center justify-center text-white hover:bg-green-600 transition-all hover:scale-110 ${
-          isOpen ? "rotate-0" : "animate-bounce"
-        }`}
+        className={`w-14 h-14 bg-green-500 rounded-full shadow-lg flex items-center justify-center text-white hover:bg-green-600 transition-all hover:scale-110 ${isOpen ? "rotate-0" : "animate-bounce"
+          }`}
         style={{ animationDuration: "2s" }}
       >
         {isOpen ? (
@@ -127,8 +115,6 @@ export function WhatsAppButton({
           </svg>
         )}
       </button>
-
-      {/* Tooltip */}
       {!isOpen && (
         <div className="absolute bottom-16 right-0 bg-gray-900 text-white text-sm px-3 py-2 rounded-lg whitespace-nowrap opacity-0 hover:opacity-100 transition-opacity pointer-events-none">
           Chat with us on WhatsApp

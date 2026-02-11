@@ -91,12 +91,11 @@ export function FeatureSection() {
   return (
     <section className="py-12 sm:py-16 lg:py-24 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Bento Grid */}
+        {/* Grid */}
         <div
           ref={bentoRef}
           className="grid md:grid-cols-4 mb-20 md:grid-rows-[300px_300px] gap-6"
         >
-          {/* Left Large Block - Video with Overlay Card */}
           <div
             className={`relative rounded-3xl overflow-hidden h-80 sm:h-125 md:h-auto md:col-span-2 md:row-span-2 transition-all duration-700 ease-out ${isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
               }`}
@@ -129,7 +128,6 @@ export function FeatureSection() {
             </div>
           </div>
 
-          {/* Top Right - 100% Genuine */}
           <div
             className={`rounded-3xl p-6 md:p-8 flex flex-col justify-center md:col-span-2 relative overflow-hidden transition-all duration-700 ease-out ${isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
               }`}
@@ -169,14 +167,11 @@ export function FeatureSection() {
               </div>
             </div>
           </div>
-
-          {/* Bottom Right - Smart Shopping */}
           <div
             className={`rounded-3xl p-6 md:p-8 flex flex-col justify-center relative overflow-hidden md:col-span-2 transition-all duration-700 ease-out ${isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
               }`}
             style={{ transitionDelay: "200ms" }}
           >
-            {/* Background Video */}
             <video
               autoPlay
               muted
@@ -194,7 +189,6 @@ export function FeatureSection() {
                 type="video/mp4"
               />
             </video>
-            {/* Overlay for text readability */}
             <div className="absolute inset-0 bg-transparent" />
 
             <div className="relative z-10 flex flex-col justify-center h-full text-left items-start">
@@ -232,8 +226,6 @@ export function FeatureSection() {
               <source src="/Videos/Feature.mp4" type="video/mp4" />
             </video>
           </div>
-
-          {/* Content */}
           <div
             ref={headerRef}
             className={`transition-all duration-700 ease-out ${isVideoVisible
@@ -273,7 +265,6 @@ export function FeatureSection() {
               We believe shopping should be effortless.
               NexaMart brings the world's best products directly to you, handled with care.
             </p>
-
             {/* Feature Cards */}
             <div className="grid sm:grid-cols-2 gap-4">
               {features.map((feature, idx) => (

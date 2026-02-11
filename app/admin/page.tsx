@@ -27,14 +27,11 @@ export default function AdminDashboard() {
 
   const orders = useAppSelector((state) => state.orders.orders);
 
-  // Calculate stats from Redux
   const totalOrders = orders.length;
   const totalRevenue = orders
     .filter(o => o.status !== 'cancelled')
     .reduce((sum, o) => sum + o.total, 0);
 
-  // Mocking customer count for now since we don't have a Users slice yet, 
-  // but we can count unique emails from orders
   const uniqueCustomers = new Set(orders.map(o => o.shippingDetails.email)).size;
 
   const productsSold = orders
@@ -60,13 +57,13 @@ export default function AdminDashboard() {
   const stats: DashboardStats = {
     totalOrders,
     totalRevenue,
-    totalCustomers: uniqueCustomers || 0, // Fallback if no orders
+    totalCustomers: uniqueCustomers || 0,
     productsSold,
     ordersThisMonth,
     revenueThisMonth
   };
 
-  const recentOrders = orders.slice(0, 5); // Get first 5 (already sorted by newest in slice)
+  const recentOrders = orders.slice(0, 5);
 
   const getStatusColor = (status: string) => {
     switch (status) {

@@ -56,7 +56,7 @@ export default function OrdersPage() {
   });
 
   const totalRevenue = orders
-    .filter((o) => o.status !== "cancelled") // Assuming non-cancelled are revenue
+    .filter((o) => o.status !== "cancelled")
     .reduce((sum, o) => sum + o.total, 0);
 
   return (
@@ -253,7 +253,7 @@ export default function OrdersPage() {
                               href="#"
                               className="p-2 hover:bg-foreground/10 rounded-lg nexamart-transition inline-flex"
                               title="View Details"
-                              onClick={(e) => e.preventDefault()} // Placeholder until detail page exists
+                              onClick={(e) => e.preventDefault()}
                             >
                               <Eye className="w-4 h-4 text-foreground/50" />
                             </Link>

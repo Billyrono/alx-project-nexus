@@ -17,7 +17,6 @@ export default function PrivacyPage() {
                         <p>
                             While using Our Service, We may ask You to provide Us with certain personally identifiable information that can be used to contact or identify You. Personally identifiable information may include, but is not limited to: Email address, First name and last name, Phone number, Address, State, Province, ZIP/Postal code, City.
                         </p>
-                        {/* Simplified for demo */}
                     </div>
                 </div>
             </main>

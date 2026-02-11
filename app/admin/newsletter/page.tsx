@@ -46,7 +46,6 @@ export default function NewsletterPage() {
   }, []);
 
   const fetchSubscribers = async () => {
-    // Mock subscribers
     setTimeout(() => {
       setSubscribers([
         { email: "subscriber@example.com", subscribed_at: "2024-01-01T00:00:00Z", source: "homepage" },
@@ -73,14 +72,11 @@ export default function NewsletterPage() {
 
     setSending(true);
     setResult(null);
-
-    // Mock send
     setTimeout(() => {
       setResult({
         success: true,
         message: `Newsletter sent to ${subscriberCount} of ${subscriberCount} subscribers!`,
       });
-      // Clear form
       setSubject("");
       setHeading("");
       setBody("");
@@ -144,7 +140,6 @@ export default function NewsletterPage() {
               </div>
             </div>
           </div>
-
           {/* Tabs */}
           <div className="flex gap-1 mb-6 bg-secondary/30 rounded-xl p-1 w-fit">
             <button
@@ -168,8 +163,6 @@ export default function NewsletterPage() {
               Subscribers ({subscriberCount})
             </button>
           </div>
-
-          {/* Compose Tab */}
           {activeTab === "compose" && (
             <div className="bg-card border border-border rounded-xl p-4 sm:p-6">
               {/* Result Message */}

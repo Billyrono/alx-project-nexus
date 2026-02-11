@@ -90,7 +90,6 @@ export default function NewProductPage() {
     setError(null);
     setSaving(true);
 
-    // Generate ID from name
     const id = formData.id || formData.name.toLowerCase().replace(/\s+/g, "-");
 
     // Mock creation

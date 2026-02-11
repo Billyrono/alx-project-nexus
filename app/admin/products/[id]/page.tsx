@@ -93,7 +93,6 @@ export default function EditProductPage() {
 
   useEffect(() => {
     const fetchProduct = async () => {
-      // Mock product fetch
       setTimeout(() => {
         setFormData({
           id: productId,

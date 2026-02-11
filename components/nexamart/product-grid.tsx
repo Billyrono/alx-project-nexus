@@ -8,7 +8,6 @@ import { useAppDispatch } from "@/store/hooks";
 import { addToCart } from "@/store/slices/cartSlice";
 import { api, Product } from "@/services/api";
 
-// Category tabs for filtering (simplified for now as DummyJSON categories might differ)
 const categoryTabs = [
   { value: "all", label: "All" },
   { value: "home-decoration", label: "Home" },
@@ -26,7 +25,6 @@ export function ProductGrid() {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
-  // Fetch products from API
   useEffect(() => {
     const fetchProducts = async () => {
       setLoading(true);
@@ -43,7 +41,6 @@ export function ProductGrid() {
     fetchProducts();
   }, []);
 
-  // Filter products by category and limit to 4 (simulated client-side filtering for now)
   const filteredProducts = products
     .filter((p) => activeCategory === "all" || p.category === activeCategory)
     .slice(0, 8);
@@ -65,7 +62,6 @@ export function ProductGrid() {
     return () => observer.disconnect();
   }, []);
 
-  // Reset animation when category changes
   useEffect(() => {
     setIsVisible(false);
     const timer = setTimeout(() => setIsVisible(true), 50);
@@ -91,7 +87,6 @@ export function ProductGrid() {
       className="w-full py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-8 bg-card"
     >
       <div className="max-w-7xl mx-auto">
-        {/* Section Header */}
         <div className="mb-12 text-center">
           <span className="text-sm uppercase tracking-[0.3em] text-muted-foreground mb-4 block">
             Curated Selection
@@ -103,8 +98,6 @@ export function ProductGrid() {
             Curated with care. Each product is selected to enhance your daily lifestyle.
           </p>
         </div>
-
-        {/* Category Tabs */}
         <div className="flex justify-start sm:justify-center mb-12 overflow-x-auto px-4 -mx-4 sm:px-2 sm:-mx-2 scrollbar-hide pb-2">
           <div className="inline-flex items-center bg-background rounded-full p-1 sm:p-1.5 nexamart-shadow">
             {categoryTabs.map((tab) => (
@@ -121,22 +114,16 @@ export function ProductGrid() {
             ))}
           </div>
         </div>
-
-        {/* Loading State */}
         {loading && (
           <div className="flex justify-center items-center py-20">
             <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
           </div>
         )}
-
-        {/* Error State */}
         {error && !loading && (
           <div className="text-center py-20 text-muted-foreground">
             <p>Unable to load products. Please try again later.</p>
           </div>
         )}
-
-        {/* Products Grid */}
         {!loading && !error && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {filteredProducts.map((product, index) => (
@@ -150,7 +137,6 @@ export function ProductGrid() {
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
                 <div className="bg-background rounded-3xl overflow-hidden nexamart-shadow hover:shadow-lg transition-shadow duration-300 h-full flex flex-col">
-                  {/* Product Image */}
                   <div className="relative aspect-square overflow-hidden bg-muted">
                     <Image
                       src={product.thumbnail || "/placeholder.svg"}
@@ -159,8 +145,6 @@ export function ProductGrid() {
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                       priority={index < 4}
                     />
-
-                    {/* Badge */}
                     {product.discountPercentage > 0 && (
                       <div className="absolute top-4 left-4">
                         <span className="inline-block px-3 py-1 rounded-full text-xs font-bold bg-background/95 backdrop-blur-sm text-foreground border border-border/50 shadow-sm">
@@ -168,8 +152,6 @@ export function ProductGrid() {
                         </span>
                       </div>
                     )}
-
-                    {/* Quick Add Button */}
                     <button
                       onClick={(e) => handleAddToCart(e, product)}
                       disabled={product.stock <= 0}
@@ -178,8 +160,6 @@ export function ProductGrid() {
                     >
                       <ShoppingBag className="w-5 h-5" />
                     </button>
-
-                    {/* Stock Status */}
                     {product.stock <= 0 && (
                       <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
                         <span className="text-white font-semibold">
@@ -188,8 +168,6 @@ export function ProductGrid() {
                       </div>
                     )}
                   </div>
-
-                  {/* Product Info */}
                   <div className="p-5 flex-1 flex flex-col">
                     <h3 className="font-serif text-lg text-foreground mb-1 group-hover:text-primary transition-colors line-clamp-1">
                       {product.title}
@@ -197,8 +175,6 @@ export function ProductGrid() {
                     <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
                       {product.description}
                     </p>
-
-                    {/* Price */}
                     <div className="mt-auto flex items-baseline gap-2">
                       <span className="font-semibold text-foreground">
                         KES {product.price.toLocaleString()}
@@ -215,8 +191,6 @@ export function ProductGrid() {
             ))}
           </div>
         )}
-
-        {/* View All Products Button */}
         <div className="mt-16 text-center">
           <Link
             href="/shop"

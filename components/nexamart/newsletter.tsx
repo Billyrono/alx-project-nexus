@@ -44,8 +44,6 @@ export function Newsletter() {
 
       setIsSubscribed(true);
       setEmail("");
-
-      // Reset after 5 seconds
       setTimeout(() => setIsSubscribed(false), 5000);
     } catch (err) {
       console.error("Newsletter subscription error:", err);

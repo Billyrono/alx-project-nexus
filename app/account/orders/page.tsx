@@ -61,8 +61,6 @@ export default function OrdersPage() {
   const allOrders = useAppSelector((state) => state.orders.orders);
   const router = useRouter();
   const [expandedOrder, setExpandedOrder] = useState<string | null>(null);
-
-  // Filter orders for the current user
   const userOrders = allOrders.filter(order =>
     user && order.userId === String(user.id)
   );
@@ -101,7 +99,6 @@ export default function OrdersPage() {
             <ChevronLeft className="w-4 h-4" />
             Back to Account
           </Link>
-
           {/* Header */}
           <div className="flex items-center gap-3 mb-8">
             <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
@@ -116,7 +113,6 @@ export default function OrdersPage() {
               </p>
             </div>
           </div>
-
           {/* Empty state */}
           {userOrders.length === 0 ? (
             <div className="text-center py-16">
@@ -193,7 +189,6 @@ export default function OrdersPage() {
                           }`}
                       />
                     </button>
-
                     {/* Expanded items */}
                     {isExpanded && order.items && (
                       <div className="border-t border-border px-4 sm:px-6 py-4 bg-muted/30">
@@ -201,7 +196,6 @@ export default function OrdersPage() {
                         <div className="mb-4 text-sm">
                           <span className="font-semibold">Shipping to:</span> {order.shippingDetails.fullName}, {order.shippingDetails.city}
                         </div>
-
                         {/* Items */}
                         <div className="space-y-3">
                           {order.items.map((item) => (
@@ -236,7 +230,6 @@ export default function OrdersPage() {
                             </div>
                           ))}
                         </div>
-
                         {/* Total */}
                         <div className="mt-4 pt-3 border-t border-border flex justify-between items-center">
                           <span className="text-sm text-muted-foreground">
@@ -246,7 +239,6 @@ export default function OrdersPage() {
                             KES {order.total.toLocaleString()}
                           </span>
                         </div>
-
                         {/* Payment Method */}
                         <div className="mt-2 flex justify-between items-center">
                           <span className="text-sm text-muted-foreground">
@@ -265,7 +257,6 @@ export default function OrdersPage() {
           )}
         </div>
       </div>
-
       <Footer />
     </main>
   );

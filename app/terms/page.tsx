@@ -21,7 +21,6 @@ export default function TermsPage() {
                         <p>
                             These are the Terms and Conditions governing the use of this Service and the agreement that operates between You and the Company. These Terms and Conditions set out the rights and obligations of all users regarding the use of the Service.
                         </p>
-                        {/* Simplified for demo */}
                     </div>
                 </div>
             </main>

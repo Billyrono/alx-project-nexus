@@ -23,7 +23,6 @@ const initialState: CartState = {
     isOpen: false,
 };
 
-// Helper to load from localStorage
 const loadCartFromStorage = (): CartState => {
     if (typeof window !== 'undefined') {
         const saved = localStorage.getItem('cart');

@@ -14,14 +14,14 @@ const footerLinks = {
     { name: "Groceries", href: "/shop?category=groceries" },
   ],
   about: [
-    { name: "Our Story", href: "/about" }, // Changed from Ingredients Guide which is specific
+    { name: "Our Story", href: "/about" },
     { name: "Contact Us", href: "/contact" },
   ],
   support: [
     { name: "FAQ", href: "/faq" },
     { name: "Shipping Info", href: "/shipping" },
     { name: "Return Policy", href: "/returns" },
-    { name: "Size Guide", href: "/size-guide" }, // Changed from Patch Test Guide
+    { name: "Size Guide", href: "/size-guide" },
   ],
 };
 
@@ -55,7 +55,6 @@ export function Footer() {
       ref={footerRef}
       className="bg-card pt-20 pb-10 relative overflow-hidden"
     >
-      {/* Giant Background Text */}
       <div
         className={`absolute bottom-0 left-1/2 -translate-x-1/2 pointer-events-none select-none z-0 transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
       >

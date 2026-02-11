@@ -230,9 +230,8 @@ export default function AnalyticsPage() {
   const fetchAnalytics = async () => {
     setLoading(true);
     setError(null);
-    // Mock analytics data
     setTimeout(() => {
-      setData(defaultData); // Using default mock data structure for now, can be populated with meaningful mocks if needed
+      setData(defaultData);
       setLoading(false);
     }, 1000);
   };
@@ -240,7 +239,6 @@ export default function AnalyticsPage() {
   const fetchSalesAnalytics = async () => {
     setSalesLoading(true);
     setSalesError(null);
-    // Mock sales data
     setTimeout(() => {
       setSalesData(defaultSalesData);
       setSalesLoading(false);
@@ -252,17 +250,14 @@ export default function AnalyticsPage() {
     fetchSalesAnalytics();
   }, [dateRange]);
 
-  // Find peak hour
   const peakHour = data.hourlyTraffic.indexOf(Math.max(...data.hourlyTraffic));
   const maxTraffic = Math.max(...data.hourlyTraffic, 1);
 
   return (
     <div className="min-h-screen bg-background">
       <AdminSidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-
       <div className="lg:pl-64">
         <AdminHeader onMenuClick={() => setSidebarOpen(true)} />
-
         <main className="pt-20 px-4 sm:px-6 lg:px-8 pb-12">
           {/* Header */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 sm:mb-8 gap-4">
@@ -274,7 +269,6 @@ export default function AnalyticsPage() {
                 Track website performance, sales, and product interactions
               </p>
             </div>
-
             <div className="flex items-center gap-2 sm:gap-4">
               <button
                 onClick={() => {
@@ -290,7 +284,6 @@ export default function AnalyticsPage() {
                 <span className="hidden sm:inline">Refresh</span>
                 <span className="sm:hidden">↻</span>
               </button>
-
               {/* Date Range Selector */}
               <div className="flex border border-border rounded-lg overflow-hidden">
                 {(["7d", "30d", "90d"] as const).map((range) => (
@@ -308,7 +301,6 @@ export default function AnalyticsPage() {
               </div>
             </div>
           </div>
-
           {loading && salesLoading ? (
             <div className="flex items-center justify-center h-64">
               <div className="text-center">
@@ -329,7 +321,6 @@ export default function AnalyticsPage() {
                   </p>
                 </div>
               )}
-
               {/* GA Loading State */}
               {loading && !salesLoading && (
                 <div className="bg-card border border-border rounded-xl p-8 text-center">
@@ -340,7 +331,6 @@ export default function AnalyticsPage() {
                 </div>
               )}
 
-              {/* Main Stats Grid */}
               {!loading && (
                 <>
                   <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
@@ -587,8 +577,6 @@ export default function AnalyticsPage() {
                       </ResponsiveContainer>
                     </div>
                   </div>
-
-                  {/* Two Column Layout - Pages and Sources */}
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     {/* Top Pages */}
                     <div className="bg-card border border-border rounded-xl p-6">
@@ -664,8 +652,6 @@ export default function AnalyticsPage() {
                       </div>
                     </div>
                   </div>
-
-                  {/* Geographic Data */}
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     {/* Countries */}
                     <div className="bg-card border border-border rounded-xl p-6">
@@ -732,7 +718,6 @@ export default function AnalyticsPage() {
                       </div>
                     </div>
                   </div>
-
                   {/* Technology Data */}
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     {/* Browsers */}
@@ -768,7 +753,6 @@ export default function AnalyticsPage() {
                         )}
                       </div>
                     </div>
-
                     {/* Operating Systems */}
                     <div className="bg-card border border-border rounded-xl p-6">
                       <h3 className="font-semibold text-foreground mb-4 flex items-center gap-2">

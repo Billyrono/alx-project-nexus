@@ -3,9 +3,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* NexaMart Marketplace — Modern E-commerce Theme */
 :root {
-  /* Brand Colors: Sand, Cream, Warm Beige, Olive Green, Soft Taupe, Charcoal */
   --background: #f7f4ef;
   /* Cream */
   --foreground: #2c2c2c;
@@ -143,7 +141,6 @@
   }
 }
 
-/* Custom soft shadow utility */
 .nexamart-shadow {
   box-shadow:
     rgba(14, 63, 126, 0.04) 0px 0px 0px 1px,
@@ -154,12 +151,10 @@
     rgba(14, 63, 126, 0.04) 0px 24px 24px -12px;
 }
 
-/* Smooth transitions */
 .nexamart-transition {
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Blur in animation */
 @keyframes blur-in {
   0% {
     opacity: 0;
@@ -178,7 +173,6 @@
   animation: blur-in 0.8s ease-out;
 }
 
-/* Scale fade in animation */
 @keyframes scale-fade-in {
   0% {
     opacity: 0;
@@ -195,20 +189,15 @@
   animation: scale-fade-in 0.6s ease-out;
 }
 
-/* Hide scrollbar but keep scrollability */
 .scrollbar-hide {
   -ms-overflow-style: none;
-  /* IE and Edge */
   scrollbar-width: none;
-  /* Firefox */
 }
 
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
-  /* Chrome, Safari and Opera */
 }
 
-/* Line scroll animation for hero indicator */
 @keyframes line-scroll {
   0% {
     transform: translateY(-100%);
@@ -223,7 +212,6 @@
   animation: line-scroll 1.5s ease-in-out infinite;
 }
 
-/* Custom Checkbox Styling */
 input[type="checkbox"] {
   appearance: none;
   -webkit-appearance: none;
@@ -265,7 +253,6 @@ input[type="checkbox"]:hover {
   border-color: hsl(var(--primary));
 }
 
-/* Custom Select Dropdown Styling */
 select {
   appearance: none;
   -webkit-appearance: none;
@@ -281,7 +268,6 @@ select:focus {
   outline: none;
 }
 
-/* Style the dropdown options */
 select option {
   background-color: var(--background);
   color: var(--foreground);
@@ -294,7 +280,6 @@ select option:checked {
   color: var(--primary-foreground);
 }
 
-/* Dark mode select arrow */
 .dark select {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M2.5 4.5L6 8L9.5 4.5' stroke='%23B8ADA3' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }

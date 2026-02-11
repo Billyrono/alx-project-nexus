@@ -54,7 +54,7 @@ export default function LoginPage() {
 
     const handleGoogleSignIn = async () => {
         setGoogleLoading(true);
-        // Simulate google sign in delay
+        // Simulate delay
         setTimeout(() => {
             setGoogleLoading(false);
             alert("Google Sign In is not available in this demo version.");
@@ -63,7 +63,6 @@ export default function LoginPage() {
 
     return (
         <main className="h-screen w-full overflow-hidden flex">
-            {/* Left - Image Panel (hidden on mobile) */}
             <div className="hidden lg:flex lg:w-1/2 relative bg-muted h-full">
                 <Image
                     src="/images/products/serum.jpg"
@@ -72,7 +71,7 @@ export default function LoginPage() {
                     className="object-cover"
                     priority
                     onError={(e) => {
-                        // Fallback if image fails
+                        // Image fallback
                         e.currentTarget.style.display = 'none';
                         e.currentTarget.parentElement!.style.backgroundColor = '#e5e5e5';
                     }}
@@ -97,11 +96,9 @@ export default function LoginPage() {
                     </p>
                 </div>
             </div>
-
-            {/* Right - Auth Form */}
             <div className="w-full lg:w-1/2 flex items-center justify-center bg-background px-4 py-6 sm:px-6 sm:py-12">
                 <div className="w-full max-w-md">
-                    {/* Mobile Logo */}
+                    {/* Logo */}
                     <Link href="/" className="flex flex-col items-center mb-5 sm:mb-8 lg:hidden text-foreground">
                         <span className="font-serif font-bold italic text-4xl sm:text-5xl leading-none">
                             NexaMart
@@ -110,7 +107,6 @@ export default function LoginPage() {
                             Marketplace
                         </span>
                     </Link>
-
                     <div className="mb-8 hidden lg:block">
                         <h2 className="font-serif text-3xl text-foreground mb-2">
                             Welcome Back
@@ -127,8 +123,7 @@ export default function LoginPage() {
                             Sign in to your account
                         </p>
                     </div>
-
-                    {/* Google Sign In - Top (Demo) */}
+                    {/* Google Sign In */}
                     <button
                         type="button"
                         onClick={handleGoogleSignIn}
@@ -159,7 +154,6 @@ export default function LoginPage() {
                         )}
                         {googleLoading ? "Signing in..." : "Continue with Google"}
                     </button>
-
                     {/* Divider */}
                     <div className="relative mb-4 sm:mb-6">
                         <div className="absolute inset-0 flex items-center">
@@ -171,15 +165,13 @@ export default function LoginPage() {
                             </span>
                         </div>
                     </div>
-
                     <form onSubmit={handleSubmit} className="space-y-4">
                         {error && (
                             <div className="bg-destructive/10 border border-destructive/30 text-destructive px-4 py-3 rounded-xl text-sm">
                                 {error}
                             </div>
                         )}
-
-                        {/* Username (was Email) */}
+                        {/* Username */}
                         <div>
                             <label
                                 htmlFor="username"
@@ -200,7 +192,6 @@ export default function LoginPage() {
                                 />
                             </div>
                         </div>
-
                         {/* Password */}
                         <div>
                             <div className="flex items-center justify-between mb-1.5">
@@ -241,7 +232,6 @@ export default function LoginPage() {
                                 </button>
                             </div>
                         </div>
-
                         {/* Remember Me */}
                         <label className="flex items-center gap-2.5 cursor-pointer">
                             <input
@@ -252,7 +242,6 @@ export default function LoginPage() {
                             />
                             <span className="text-sm text-muted-foreground">Remember me</span>
                         </label>
-
                         {/* Submit */}
                         <button
                             type="submit"
@@ -269,7 +258,6 @@ export default function LoginPage() {
                             )}
                         </button>
                     </form>
-
                     <p className="mt-4 sm:mt-6 text-center text-muted-foreground text-sm">
                         Don&apos;t have an account?{" "}
                         <Link
@@ -279,9 +267,8 @@ export default function LoginPage() {
                             Sign up
                         </Link>
                     </p>
-
                     <div className="mt-6 text-center text-xs text-muted-foreground bg-muted/50 p-3 rounded-lg">
-                        Demo Credentials: <strong>billyr</strong> / <strong>billydev</strong> (Logins as Billy Rono)
+                        Demo Credentials: <strong>billyr</strong> / <strong>billydev</strong>
                     </div>
 
                     <div className="mt-4 text-center lg:hidden">

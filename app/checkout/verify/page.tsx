@@ -34,8 +34,7 @@ interface PaymentResult {
   };
   error?: string;
 }
-
-// Main export with Suspense wrapper
+// Main export
 export default function VerifyPaymentPage() {
   return (
     <Suspense
@@ -58,8 +57,6 @@ export default function VerifyPaymentPage() {
     </Suspense>
   );
 }
-
-// Actual content component
 function VerifyPaymentContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -67,7 +64,6 @@ function VerifyPaymentContent() {
   const [result, setResult] = useState<PaymentResult | null>(null);
   const [loading, setLoading] = useState(true);
   const hasVerified = useRef(false);
-
   const reference = searchParams.get("reference");
   const trxref = searchParams.get("trxref");
   const paymentReference = reference || trxref;
@@ -95,10 +91,9 @@ function VerifyPaymentContent() {
         const data = await response.json();
 
         if (data.success) {
-          // Clear cart on successful payment
+          // Clear cart
           dispatch(clearCart());
         }
-
         setResult(data);
       } catch (error) {
         console.error("Verification error:", error);
@@ -138,7 +133,6 @@ function VerifyPaymentContent() {
   return (
     <main className="min-h-screen">
       <Header />
-
       <div className="pt-28 pb-20">
         <div className="max-w-2xl mx-auto px-6">
           {result?.success ? (
@@ -154,7 +148,6 @@ function VerifyPaymentContent() {
                 Thank you for your order. We've received your payment and will
                 begin processing your order right away.
               </p>
-
               {/* Order Details */}
               <div className="bg-card border border-border rounded-2xl p-6 text-left mb-8">
                 <h3 className="font-medium text-foreground mb-4 flex items-center gap-2">
@@ -198,8 +191,6 @@ function VerifyPaymentContent() {
                   </div>
                 </div>
               </div>
-
-              {/* What's Next */}
               <div className="bg-primary/5 border border-primary/20 rounded-2xl p-6 text-left mb-8">
                 <h3 className="font-medium text-foreground mb-3">
                   What happens next?
@@ -225,7 +216,6 @@ function VerifyPaymentContent() {
                   </li>
                 </ol>
               </div>
-
               {/* Actions */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
@@ -245,7 +235,7 @@ function VerifyPaymentContent() {
               </div>
             </div>
           ) : (
-            // Error/Failed State
+            // Error State
             <div className="text-center">
               <div className="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
                 <XCircle className="w-10 h-10 text-red-600" />
@@ -277,7 +267,6 @@ function VerifyPaymentContent() {
           )}
         </div>
       </div>
-
       <Footer />
     </main>
   );

@@ -21,10 +21,6 @@ const playfairDisplay = Playfair_Display({
   weight: ["400", "500", "600", "700"],
 });
 
-
-
-
-
 export const metadata: Metadata = {
   title: {
     default: "NexaMart Marketplace — Premium Shopping Experience",
@@ -75,7 +71,6 @@ export default function RootLayout({
         <ReduxProvider>
           {children}
           <WhatsAppButton />
-
         </ReduxProvider>
         <Analytics />
       </body>

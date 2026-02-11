@@ -69,7 +69,7 @@ export function AdminHeader({ onMenuClick }: AdminHeaderProps) {
     return () => clearInterval(interval);
   }, []);
 
-  // Generate breadcrumbs from pathname
+  // Breadcrumbs from pathname
   const getBreadcrumbs = () => {
     const segments = pathname.split("/").filter(Boolean);
     const breadcrumbs: { label: string; href: string }[] = [];

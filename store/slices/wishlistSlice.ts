@@ -16,7 +16,6 @@ const initialState: WishlistState = {
     items: [],
 };
 
-// Helper to load from localStorage
 const loadWishlistFromStorage = (): WishlistState => {
     if (typeof window !== 'undefined') {
         const saved = localStorage.getItem('wishlist');

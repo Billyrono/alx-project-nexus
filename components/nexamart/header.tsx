@@ -28,7 +28,6 @@ export function Header() {
   const { totalQuantity } = useAppSelector((state) => state.cart);
   const { user, loading } = useAppSelector((state) => state.auth);
 
-  // Track scroll position
   useEffect(() => {
     const handleScroll = () => {
       const heroHeight = window.innerHeight - 100;
@@ -39,14 +38,12 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Focus search input
   useEffect(() => {
     if (isSearchOpen && searchInputRef.current) {
       searchInputRef.current.focus();
     }
   }, [isSearchOpen]);
 
-  // Handle Search
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
@@ -74,7 +71,6 @@ export function Header() {
           }
         >
           <div className="flex items-center justify-between h-17">
-            {/* Mobile menu button */}
             <button
               type="button"
               className="lg:hidden p-2 text-foreground/80 hover:text-foreground nexamart-transition"
@@ -83,8 +79,6 @@ export function Header() {
             >
               {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
-
-            {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-8">
               <Link href="/" className="text-sm tracking-wide text-foreground/70 hover:text-foreground nexamart-transition">
                 Home
@@ -107,8 +101,6 @@ export function Header() {
                 Marketplace
               </span>
             </Link>
-
-            {/* Right Actions */}
             <div className="flex items-center gap-2 sm:gap-4">
               <button
                 type="button"
@@ -118,8 +110,6 @@ export function Header() {
               >
                 <Search className="w-5 h-5" />
               </button>
-
-              {/* Auth Button */}
               {!loading && (user ? (
                 <Link
                   href="/account"
@@ -156,8 +146,6 @@ export function Header() {
           </div>
 
           <CartDrawer />
-
-          {/* Mobile Navigation */}
           <div
             className={`lg:hidden overflow-hidden nexamart-transition ${isMenuOpen ? "max-h-64 pb-6" : "max-h-0"
               }`}
@@ -177,8 +165,6 @@ export function Header() {
           </div>
         </nav>
       </header>
-
-      {/* Search Overlay */}
       {isSearchOpen && (
         <div
           className="fixed inset-0 z-60 bg-black/60 backdrop-blur-sm"

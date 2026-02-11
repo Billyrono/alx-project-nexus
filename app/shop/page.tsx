@@ -21,26 +21,20 @@ export default function ShopPage() {
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.auth);
   const { items } = useAppSelector((state) => state.cart);
-
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [categories, setCategories] = useState<Category[]>([]);
-
-  // Filters
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [showFilters, setShowFilters] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [expandedFilters, setExpandedFilters] = useState<Record<string, boolean>>({
     category: true,
   });
-
   const [sortOrder, setSortOrder] = useState<"featured" | "price-asc" | "price-desc">("featured");
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 12;
   const gridRef = useRef<HTMLDivElement>(null);
-
-  // Fetch products and categories
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -60,14 +54,12 @@ export default function ShopPage() {
     fetchData();
   }, []);
 
-  // Filter products
   const filteredProducts = products.filter((product) => {
     if (selectedCategories.length > 0 && !selectedCategories.includes(product.category)) {
       return false;
     }
     return true;
   });
-
   const toggleCategory = (category: string) => {
     setSelectedCategories((prev) =>
       prev.includes(category)
@@ -79,29 +71,19 @@ export default function ShopPage() {
   const clearFilters = () => {
     setSelectedCategories([]);
   };
-
-
-
   const hasActiveFilters = selectedCategories.length > 0;
-
-  // Sorting logic
   const sortedProducts = [...filteredProducts].sort((a, b) => {
     if (sortOrder === "price-asc") return a.price - b.price;
     if (sortOrder === "price-desc") return b.price - a.price;
     return 0;
   });
-
-  // Pagination logic
   const totalPages = Math.ceil(sortedProducts.length / productsPerPage);
   const startIndex = (currentPage - 1) * productsPerPage;
   const endIndex = startIndex + productsPerPage;
   const paginatedProducts = sortedProducts.slice(startIndex, endIndex);
-
-  // Reset to page 1 when filters change
   useEffect(() => {
     setCurrentPage(1);
   }, [selectedCategories]);
-
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -122,8 +104,6 @@ export default function ShopPage() {
       }
     };
   }, []);
-
-  // Reset animation when filters change
   useEffect(() => {
     setIsVisible(false);
     const timer = setTimeout(() => setIsVisible(true), 50);
@@ -211,8 +191,6 @@ export default function ShopPage() {
                 </FilterSection>
               </div>
             </div>
-
-            {/* Main Content */}
             <div className="flex-1">
               {/* Filter Bar & Mobile Filters */}
               <div className="mb-10 flex items-center justify-between">

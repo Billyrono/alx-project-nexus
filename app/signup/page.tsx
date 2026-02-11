@@ -52,12 +52,8 @@ export default function SignupPage() {
             setLoading(false);
             return;
         }
-
-        // Mock API call to DummyJSON /users/add for demo purposes
-        // Note: DummyJSON doesn't actually persist users, so we just simulate success
         try {
-            await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate network request
-            // On success -> Show confirmation
+            await new Promise(resolve => setTimeout(resolve, 1500));
             setShowConfirmation(true);
         } catch (err) {
             setError("Failed to create account. Please try again.");
@@ -78,7 +74,6 @@ export default function SignupPage() {
     if (showConfirmation) {
         return (
             <main className="min-h-screen flex">
-                {/* Left - Image Panel (hidden on mobile) */}
                 <div className="hidden lg:flex lg:w-1/2 relative bg-muted">
                     <Image
                         src="/images/products/serum.jpg"
@@ -107,8 +102,6 @@ export default function SignupPage() {
                         </p>
                     </div>
                 </div>
-
-                {/* Right - Confirmation */}
                 <div className="w-full lg:w-1/2 flex items-center justify-center bg-background px-4 py-6 sm:px-6 sm:py-12">
                     <div className="w-full max-w-md text-center">
                         <Link
@@ -145,7 +138,6 @@ export default function SignupPage() {
 
     return (
         <main className="min-h-screen flex">
-            {/* Left - Image Panel (hidden on mobile) */}
             <div className="hidden lg:flex lg:w-1/2 relative bg-muted">
                 <Image
                     src="/images/products/serum.jpg"
@@ -175,11 +167,8 @@ export default function SignupPage() {
                     </p>
                 </div>
             </div>
-
-            {/* Right - Auth Form */}
             <div className="w-full lg:w-1/2 flex items-center justify-center bg-background px-4 py-6 sm:px-6 sm:py-12">
                 <div className="w-full max-w-md">
-                    {/* Mobile Logo */}
                     <Link href="/" className="flex flex-col items-center mb-4 sm:mb-5 lg:hidden text-foreground">
                         <span className="font-serif font-bold italic text-4xl sm:text-5xl leading-none">
                             NexaMart
@@ -205,8 +194,6 @@ export default function SignupPage() {
                             Join NexaMart Marketplace for exclusive offers
                         </p>
                     </div>
-
-                    {/* Google Sign Up - Top */}
                     <button
                         type="button"
                         onClick={handleGoogleSignIn}
@@ -237,8 +224,6 @@ export default function SignupPage() {
                         )}
                         {googleLoading ? "Signing up..." : "Continue with Google"}
                     </button>
-
-                    {/* Divider */}
                     <div className="relative mb-3 sm:mb-4">
                         <div className="absolute inset-0 flex items-center">
                             <div className="w-full border-t border-border"></div>
@@ -256,8 +241,6 @@ export default function SignupPage() {
                                 {error}
                             </div>
                         )}
-
-                        {/* Full Name + Email - side by side on sm+ */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             <div>
                                 <label
@@ -300,8 +283,6 @@ export default function SignupPage() {
                                 </div>
                             </div>
                         </div>
-
-                        {/* Password + Confirm - side by side on sm+ */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             <div>
                                 <label
@@ -366,8 +347,6 @@ export default function SignupPage() {
                                 </div>
                             </div>
                         </div>
-
-                        {/* Terms */}
                         <label className="flex items-start gap-2.5 cursor-pointer">
                             <input
                                 type="checkbox"
@@ -394,8 +373,6 @@ export default function SignupPage() {
                                 personal data as described therein.
                             </span>
                         </label>
-
-                        {/* Submit */}
                         <button
                             type="submit"
                             disabled={loading || !acceptTerms}

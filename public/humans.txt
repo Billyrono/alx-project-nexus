@@ -15,6 +15,4 @@ Framework: Next.js 15
 Styling: Tailwind CSS
 UI Components: shadcn/ui
 Hosting: Vercel
-Database: Supabase
-Payments: Paystack
 Analytics: Google Analytics, Vercel Analytics

@@ -40,12 +40,10 @@ export default function ProductPage() {
   const params = useParams();
   const productId = params.id as string;
   const router = useRouter();
-
   // Redux
   const dispatch = useAppDispatch();
   const { items } = useAppSelector((state) => state.cart);
   const { user } = useAppSelector((state) => state.auth);
-
   // Local State
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
@@ -54,7 +52,6 @@ export default function ProductPage() {
   const [openAccordion, setOpenAccordion] = useState<AccordionSection | null>("benefits");
   const [isAdded, setIsAdded] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
-
   // Fetch product
   useEffect(() => {
     const fetchProduct = async () => {
@@ -70,7 +67,6 @@ export default function ProductPage() {
     };
     if (productId) fetchProduct();
   }, [productId]);
-
   // Sync quantity with cart
   const cartItem = product ? items.find(item => item.id === product.id) : null;
   const isInCart = !!cartItem;
@@ -134,7 +130,6 @@ export default function ProductPage() {
         icon: <Star className="w-4 h-4" />,
       },
     ];
-
   // Show loading state
   if (loading) {
     return (
@@ -147,7 +142,6 @@ export default function ProductPage() {
       </main>
     );
   }
-
   // Show error state
   if (error || !product) {
     return (
@@ -177,10 +171,8 @@ export default function ProductPage() {
   return (
     <main className="min-h-screen">
       <Header />
-
       <div className="pt-28 pb-20">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          {/* Back Link */}
           <Link
             href="/shop"
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground nexamart-transition mb-8"
@@ -346,7 +338,7 @@ export default function ProductPage() {
             </div>
           </div>
 
-          {/* Expandable Details */}
+          {/* Details */}
           <div className="border-t border-border/50 pt-10">
             <h2 className="font-serif text-3xl text-foreground mb-8">
               Product Details
@@ -461,7 +453,6 @@ export default function ProductPage() {
           </div>
         </div>
       )}
-
       <Footer />
     </main>
   );

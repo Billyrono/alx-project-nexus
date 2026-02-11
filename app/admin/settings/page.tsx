@@ -16,10 +16,8 @@ import {
 import { AdminHeader } from "@/components/nexamart/admin-header";
 import { AdminSidebar } from "@/components/nexamart/admin-sidebar";
 
-// Settings storage key
 const SETTINGS_KEY = "nexamart_admin_settings";
 
-// Default settings
 const defaultStoreSettings = {
   storeName: "NexaMart Marketplace",
   tagline: "Premium Lifestyle Solutions",
@@ -114,7 +112,6 @@ export default function SettingsPage() {
   const handleSave = async () => {
     setIsSaving(true);
 
-    // Save to localStorage
     try {
       const allSettings = {
         store: storeSettings,
@@ -126,7 +123,6 @@ export default function SettingsPage() {
       };
       localStorage.setItem(SETTINGS_KEY, JSON.stringify(allSettings));
 
-      // Simulate a brief delay for UX
       await new Promise((resolve) => setTimeout(resolve, 500));
 
       setSaved(true);

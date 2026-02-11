@@ -26,7 +26,7 @@ export interface Order {
     total: number;
     shippingDetails: ShippingDetails;
     paymentMethod: string;
-    userId?: string; // For linking to auth user if present
+    userId?: string;
 }
 
 interface OrdersState {
@@ -37,7 +37,6 @@ const initialState: OrdersState = {
     orders: [],
 };
 
-// Helper to load from localStorage
 const loadOrdersFromStorage = (): OrdersState => {
     if (typeof window !== 'undefined') {
         const saved = localStorage.getItem('orders');
