@@ -8,7 +8,11 @@ This project was developed in fulfillment of the **ALX ProDev Frontend Engineeri
 
 **Author:** Billy Rono  
 **Program:** ALX ProDev Frontend Engineering  
+<<<<<<< HEAD
 **Module:** Project Nexus  
+=======
+**Module:** Project Nexus
+>>>>>>> 0b44355946a35cf353c21f71178715f0bf619453
 
 ## Live Demo
 
@@ -134,3 +138,7 @@ Contributions are welcome! Please follow these steps:
 3.  Commit your changes (`git commit -m 'Add some AmazingFeature'`).
 4.  Push to the branch (`git push origin feature/AmazingFeature`).
 5.  Open a Pull Request.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0b44355946a35cf353c21f71178715f0bf619453
