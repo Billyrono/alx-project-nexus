@@ -23,7 +23,7 @@ export default function ReturnsPage() {
                         <h3 className="text-foreground mt-8 mb-4 text-xl font-medium">Non-returnable items</h3>
                         <ul className="list-disc pl-6 space-y-2">
                             <li>Perishable goods (e.g., food, flowers)</li>
-                            <li>Personal care items (e.g., skincare, makeup that has been opened)</li>
+                            <li>Personal care items (e.g., opened hygiene or beauty products)</li>
                             <li>Gift cards</li>
                         </ul>
                         <h3 className="text-foreground mt-8 mb-4 text-xl font-medium">Refunds</h3>

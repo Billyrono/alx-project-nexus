@@ -86,7 +86,7 @@ export default function AccountPage() {
     {
       icon: ShoppingBag,
       label: "Browse Shop",
-      description: "Explore our latest skincare products",
+      description: "Explore our latest products and deals",
       href: "/shop",
     },
   ];

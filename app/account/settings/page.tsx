@@ -773,7 +773,7 @@ export default function SettingsPage() {
                 </div>
                 <p className="text-sm text-muted-foreground -mt-2">
                   Manage your newsletter subscription. This controls whether you
-                  receive our email newsletters with skincare tips, product
+                  receive our email newsletters with product tips, deals, and
                   updates, and promotions.
                 </p>
 
@@ -783,7 +783,7 @@ export default function SettingsPage() {
                       Subscribe to Newsletter
                     </p>
                     <p className="text-xs text-muted-foreground mt-0.5">
-                      Receive skincare tips, ingredient spotlights, new product
+                      Receive product tips, exclusive deals, new arrivals, and
                       announcements, and special offers
                     </p>
                   </div>

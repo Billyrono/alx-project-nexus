@@ -77,7 +77,7 @@ export default function SignupPage() {
                 <div className="hidden lg:flex lg:w-1/2 relative bg-muted">
                     <Image
                         src="/images/products/serum.jpg"
-                        alt="NexaMart Marketplace skincare"
+                        alt="NexaMart Marketplace products"
                         fill
                         className="object-cover"
                         priority
@@ -98,7 +98,7 @@ export default function SignupPage() {
                             Welcome to NexaMart Marketplace
                         </h2>
                         <p className="text-white/80 text-sm max-w-md">
-                            You&apos;re one step away from premium African botanical skincare.
+                            You&apos;re one step away from premium quality products.
                         </p>
                     </div>
                 </div>
@@ -141,7 +141,7 @@ export default function SignupPage() {
             <div className="hidden lg:flex lg:w-1/2 relative bg-muted">
                 <Image
                     src="/images/products/serum.jpg"
-                    alt="NexaMart Marketplace skincare"
+                    alt="NexaMart Marketplace products"
                     fill
                     className="object-cover"
                     priority
@@ -159,11 +159,11 @@ export default function SignupPage() {
                         </div>
                     </Link>
                     <h2 className="font-serif text-3xl text-white mb-3">
-                        Join Our Skincare Community
+                        Join Our NexaMart Community
                     </h2>
                     <p className="text-white/80 text-sm max-w-md">
                         Get access to exclusive offers, early launches, and personalized
-                        skincare recommendations.
+                        product recommendations.
                     </p>
                 </div>
             </div>
