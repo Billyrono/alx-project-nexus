@@ -170,10 +170,10 @@ export function Header() {
 
             {/* Logo */}
             <Link href="/" className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center">
-              <span className="font-serif font-bold italic text-4xl text-foreground leading-none">
+              <span className="font-serif font-bold italic text-2xl sm:text-4xl text-foreground leading-none">
                 NexaMart
               </span>
-              <span className="text-[0.65rem] uppercase tracking-[0.3em] text-muted-foreground font-medium">
+              <span className="text-[0.5rem] sm:text-[0.65rem] uppercase tracking-[0.2em] sm:tracking-[0.3em] text-muted-foreground font-medium">
                 Marketplace
               </span>
             </Link>

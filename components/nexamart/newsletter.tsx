@@ -55,9 +55,9 @@ export function Newsletter() {
 
   return (
     <section className="py-12 sm:py-16 lg:py-24 bg-primary">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="font-serif text-3xl sm:text-4xl leading-tight text-primary-foreground mb-4 text-balance md:text-7xl">
+          <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl leading-tight text-primary-foreground mb-4 text-balance lg:text-7xl">
             Join the community
           </h2>
           <p className="text-lg text-primary-foreground/80 mb-10">

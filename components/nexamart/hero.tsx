@@ -45,7 +45,7 @@ export function Hero() {
             >
               Premium Lifestyle Solutions
             </span>
-            <h2 className="font-serif text-3xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.1] mb-2 text-balance text-black">
+            <h2 className="font-serif text-2xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.1] mb-2 text-balance text-black">
               <span
                 className="block animate-blur-in opacity-0 font-semibold"
                 style={{
@@ -56,7 +56,7 @@ export function Hero() {
                 Style as unique
               </span>
               <span
-                className="block animate-blur-in opacity-0 font-semibold text-4xl sm:text-5xl md:text-7xl xl:text-9xl"
+                className="block animate-blur-in opacity-0 font-semibold text-3xl sm:text-5xl md:text-7xl xl:text-9xl"
                 style={{
                   animationDelay: "0.6s",
                   animationFillMode: "forwards",

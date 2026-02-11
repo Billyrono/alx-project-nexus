@@ -118,14 +118,14 @@ export default function ShopPage() {
       <div className="pt-28 pb-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
-          <div className="text-center mb-12">
+          <div className="text-center mb-8 sm:mb-12">
             <span className="text-sm tracking-[0.3em] uppercase text-primary mb-4 block">
               {searchTerm ? "Search Results" : "Our Collection"}
             </span>
-            <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-foreground mb-4 text-balance">
+            <h1 className="font-serif text-2xl sm:text-3xl md:text-5xl lg:text-6xl text-foreground mb-3 sm:mb-4 text-balance">
               {searchTerm ? `Results for "${searchTerm}"` : "Find Your Perfect Match"}
             </h1>
-            <p className="text-lg text-muted-foreground max-w-md mx-auto">
+            <p className="text-sm sm:text-lg text-muted-foreground max-w-md mx-auto">
               {searchTerm
                 ? `${filteredProducts.length} product${filteredProducts.length !== 1 ? "s" : ""} found`
                 : "Explore our curated collection of products."}
@@ -140,7 +140,7 @@ export default function ShopPage() {
             )}
           </div>
 
-          <div className="flex gap-8">
+          <div className="flex gap-4 sm:gap-8">
             {/* Sidebar Filters - Desktop */}
             <div className="hidden lg:block w-64 shrink-0">
               <div className="bg-card rounded-3xl p-6 sticky top-32 nexamart-shadow max-h-[calc(100vh-10rem)] overflow-y-auto scrollbar-hide">
@@ -193,7 +193,7 @@ export default function ShopPage() {
             </div>
             <div className="flex-1">
               {/* Filter Bar & Mobile Filters */}
-              <div className="mb-10 flex items-center justify-between">
+              <div className="mb-6 sm:mb-10 flex items-center justify-between gap-2">
                 <button
                   type="button"
                   onClick={() => setShowFilters(!showFilters)}

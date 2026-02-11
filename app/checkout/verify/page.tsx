@@ -134,7 +134,7 @@ function VerifyPaymentContent() {
     <main className="min-h-screen">
       <Header />
       <div className="pt-28 pb-20">
-        <div className="max-w-2xl mx-auto px-6">
+        <div className="max-w-2xl mx-auto px-4 sm:px-6">
           {result?.success ? (
             // Success State
             <div className="text-center">

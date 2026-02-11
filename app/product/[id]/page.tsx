@@ -151,7 +151,7 @@ export default function ProductPage() {
       <main className="min-h-screen">
         <Header />
         <div className="pt-28 pb-20">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <AlertCircle className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
             <h1 className="text-2xl font-bold mb-2">Product Not Found</h1>
             <p className="text-muted-foreground mb-6">
@@ -175,7 +175,7 @@ export default function ProductPage() {
     <main className="min-h-screen">
       <Header />
       <div className="pt-28 pb-20">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link
             href="/shop"
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground nexamart-transition mb-8"
