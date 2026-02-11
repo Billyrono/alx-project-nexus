@@ -20,7 +20,7 @@ export default function LoginPage() {
     const router = useRouter();
 
     useEffect(() => {
-        const saved = localStorage.getItem("fannoh_remember_username");
+        const saved = localStorage.getItem("nexamart_remember_username");
         if (saved) {
             setUsername(saved);
             setRememberMe(true);

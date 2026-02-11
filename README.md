@@ -2,45 +2,53 @@
 
 **NexaMart Marketplace** is a modern, full-featured e-commerce platform built with **Next.js 14**, **Redux Toolkit**, and **Tailwind CSS**. Designed as a premium lifestyle and home essentials store, it demonstrates a scalable frontend architecture, responsive design, and integration with external APIs for a seamless shopping experience.
 
-![NexaMart Banner](/nexamart-banner.png) *<!-- Placeholder for project banner -->*
+![NexaMart Banner](/nexamart-banner.png) 
 
-## 🚀 Live Demo
+## Project Context
+
+This project was developed in fulfillment of the **ALX ProDev Frontend Engineering** program requirements. It serves as the capstone project for the **Project Nexus** module, demonstrating proficiency in modern frontend development practices including component-based architecture, state management, API integration, responsive design, and deployment to production.
+
+**Author:** Billy Rono  
+**Program:** ALX ProDev Frontend Engineering  
+**Module:** Project Nexus  
+
+## Live Demo
 
 [View Live Demo](https://nexamart-marketplace.vercel.app)
 
-## ✨ Features
+## Features
 
-### 🛍️ Product Catalog
+### Product Catalog
 - **Dynamic Product Listing**: Fetches products from [DummyJSON](https://dummyjson.com/docs/products) API.
 - **Advanced Filtering**: Filter products by category, price range, and rating.
 - **Sorting**: Sort products by price (low to high, high to low).
 - **Search**: Real-time product search functionality.
 - **Product Details**: Comprehensive product pages with image galleries, detailed descriptions, specifications, and reviews.
 
-### 🛒 Shopping Cart & Checkout
+### Shopping Cart & Checkout
 - **State Management**: Robust cart management using **Redux Toolkit**.
 - **Persistent Cart**: Cart items persist across sessions using `localStorage`.
 - **Seamless Checkout**: Multi-step checkout process (Shipping, Payment, Review).
 - **Order Management**: Client-side order history tracking.
 
-### 👤 User Account
+### User Account
 - **Authentication**: Simulated login and registration using DummyJSON Auth.
 - **User Dashboard**: personalized dashboard showing recent orders and account details.
 - **Wishlist**: Save favorite items for later.
 - **Settings**: Update profile information and preferences.
 
-### ⚡ Performance & UX
+### Performance & UX
 - **Page Transitions**: Smooth, animated page transitions using **Framer Motion**.
 - **Loading States**: Custom animated logo loader and skeleton screens for optimal perceived performance.
 - **Responsive Design**: Mobile-first approach ensuring a perfect experience on all devices.
 - **SEO Optimized**: proper metadata, OpenGraph tags, and semantic HTML structure.
 
-### 🛠️ Admin Dashboard (Demo)
+### Admin Dashboard (Demo)
 - **Analytics**: Overview of sales, orders, and customer growth.
 - **Product Management**: Interface to add/edit products (simulated).
 - **Order Management**: View and manage customer orders.
 
-## 🏗️ Tech Stack
+## Tech Stack
 
 - **Framework**: [Next.js 14 (App Router)](https://nextjs.org/)
 - **Language**: [TypeScript](https://www.typescriptlang.org/)
@@ -51,7 +59,7 @@
 - **Data Fetching**: Native `fetch` with Next.js caching.
 - **API**: [DummyJSON](https://dummyjson.com/)
 
-## 📂 Project Structure
+## Project Structure
 
 ```bash
 alx-project-nexus/
@@ -75,7 +83,7 @@ alx-project-nexus/
 └── public/               # Static assets
 ```
 
-## 🚀 Getting Started
+## Getting Started
 
 Follow these instructions to set up the project locally.
 
@@ -105,7 +113,7 @@ Follow these instructions to set up the project locally.
 4.  **Open your browser**
     Navigate to `http://localhost:3000` to see the application running.
 
-## 🧪 Build & Deployment
+## Build & Deployment
 
 To create a production build:
 
@@ -119,7 +127,7 @@ To start the production server:
 npm start
 ```
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please follow these steps:
 
@@ -128,13 +136,3 @@ Contributions are welcome! Please follow these steps:
 3.  Commit your changes (`git commit -m 'Add some AmazingFeature'`).
 4.  Push to the branch (`git push origin feature/AmazingFeature`).
 5.  Open a Pull Request.
-
-## 📄 License
-
-This project is open-source and available under the [MIT License](LICENSE).
-
-## 👏 Acknowledgements
-
-- **ALX Africa**: For the comprehensive ProDev Frontend Engineering curriculum.
-- **DummyJSON**: For the excellent placeholder API.
-- **Vercel**: For seamless hosting and deployment.
