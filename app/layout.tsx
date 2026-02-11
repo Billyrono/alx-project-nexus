@@ -5,6 +5,7 @@ import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import { ReduxProvider } from "@/store/ReduxProvider";
 import { WhatsAppButton } from "@/components/nexamart/whatsapp-button";
+import PageTransition from "@/components/PageTransition";
 import "./globals.css";
 
 const GA_MEASUREMENT_ID = "G-NVBZ1T2S4V";
@@ -23,11 +24,29 @@ const playfairDisplay = Playfair_Display({
 
 export const metadata: Metadata = {
   title: {
-    default: "NexaMart Marketplace — Premium Shopping Experience",
+    default: "NexaMart Marketplace | Premium Lifestyle & Home Essentials",
     template: "%s | NexaMart Marketplace",
   },
   description:
-    "Discover a curated collection of premium products for your lifestyle. Shop the best in beauty, home, and more.",
+    "Discover NexaMart Marketplace – Kenya's premier destination for quality home essentials, lifestyle products, and more. Shop with confidence for curated items delivered to your doorstep.",
+  keywords: ["NexaMart", "Marketplace", "Kenya", "Online Shopping", "Home Essentials", "Lifestyle", "Premium Products"],
+  authors: [{ name: "NexaMart Team" }],
+  creator: "NexaMart",
+  publisher: "NexaMart Marketplace",
+  openGraph: {
+    type: "website",
+    locale: "en_KE",
+    url: "https://nexamart-marketplace.vercel.app",
+    title: "NexaMart Marketplace | Premium Lifestyle & Home Essentials",
+    description: "Discover NexaMart Marketplace – Kenya's premier destination for quality home essentials, lifestyle products, and more.",
+    siteName: "NexaMart Marketplace",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "NexaMart Marketplace | Premium Lifestyle & Home Essentials",
+    description: "Discover NexaMart Marketplace – Kenya's premier destination for quality home essentials, lifestyle products, and more.",
+    creator: "@nexamart",
+  },
   applicationName: "NexaMart Marketplace",
   metadataBase: new URL("https://nexamart-marketplace.vercel.app"),
 };
@@ -69,7 +88,9 @@ export default function RootLayout({
         className={`${dmSans.variable} ${playfairDisplay.variable} font-sans antialiased`}
       >
         <ReduxProvider>
-          {children}
+          <PageTransition>
+            {children}
+          </PageTransition>
           <WhatsAppButton />
         </ReduxProvider>
         <Analytics />
