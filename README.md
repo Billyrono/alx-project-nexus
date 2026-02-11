@@ -2,8 +2,6 @@
 
 **NexaMart Marketplace** is a modern, full-featured e-commerce platform built with **Next.js 14**, **Redux Toolkit**, and **Tailwind CSS**. Designed as a premium lifestyle and home essentials store, it demonstrates a scalable frontend architecture, responsive design, and integration with external APIs for a seamless shopping experience.
 
-![NexaMart Banner](/nexamart-banner.png) *<!-- Placeholder for project banner -->*
-
 ## Project Context
 
 This project was developed in fulfillment of the **ALX ProDev Frontend Engineering** program requirements. It serves as the capstone project for the **Project Nexus** module, demonstrating proficiency in modern frontend development practices including component-based architecture, state management, API integration, responsive design, and deployment to production.
