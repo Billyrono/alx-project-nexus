@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -9,16 +10,18 @@ import {
   X,
   ChevronDown,
   Loader2,
-  Heart,
 } from "lucide-react";
 import { Header } from "@/components/nexamart/header";
 import { Footer } from "@/components/nexamart/footer";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { addToCart } from "@/store/slices/cartSlice";
 import { api, Product, Category } from "@/services/api";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function ShopPage() {
   const dispatch = useAppDispatch();
+  const searchParams = useSearchParams();
+  const searchTerm = searchParams.get("search") || "";
   const { user } = useAppSelector((state) => state.auth);
   const { items } = useAppSelector((state) => state.cart);
   const [products, setProducts] = useState<Product[]>([]);
@@ -27,14 +30,13 @@ export default function ShopPage() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [showFilters, setShowFilters] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
   const [expandedFilters, setExpandedFilters] = useState<Record<string, boolean>>({
     category: true,
   });
   const [sortOrder, setSortOrder] = useState<"featured" | "price-asc" | "price-desc">("featured");
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 12;
-  const gridRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -58,8 +60,17 @@ export default function ShopPage() {
     if (selectedCategories.length > 0 && !selectedCategories.includes(product.category)) {
       return false;
     }
+    if (searchTerm) {
+      const q = searchTerm.toLowerCase();
+      return (
+        product.title.toLowerCase().includes(q) ||
+        product.description.toLowerCase().includes(q) ||
+        product.category.toLowerCase().includes(q)
+      );
+    }
     return true;
   });
+
   const toggleCategory = (category: string) => {
     setSelectedCategories((prev) =>
       prev.includes(category)
@@ -71,43 +82,22 @@ export default function ShopPage() {
   const clearFilters = () => {
     setSelectedCategories([]);
   };
+
   const hasActiveFilters = selectedCategories.length > 0;
+
   const sortedProducts = [...filteredProducts].sort((a, b) => {
     if (sortOrder === "price-asc") return a.price - b.price;
     if (sortOrder === "price-desc") return b.price - a.price;
     return 0;
   });
+
   const totalPages = Math.ceil(sortedProducts.length / productsPerPage);
   const startIndex = (currentPage - 1) * productsPerPage;
   const endIndex = startIndex + productsPerPage;
   const paginatedProducts = sortedProducts.slice(startIndex, endIndex);
+
   useEffect(() => {
     setCurrentPage(1);
-  }, [selectedCategories]);
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 },
-    );
-
-    if (gridRef.current) {
-      observer.observe(gridRef.current);
-    }
-
-    return () => {
-      if (gridRef.current) {
-        observer.unobserve(gridRef.current);
-      }
-    };
-  }, []);
-  useEffect(() => {
-    setIsVisible(false);
-    const timer = setTimeout(() => setIsVisible(true), 50);
-    return () => clearTimeout(timer);
   }, [selectedCategories]);
 
   const handleAddToCart = (product: Product) => {
@@ -130,14 +120,24 @@ export default function ShopPage() {
           {/* Header */}
           <div className="text-center mb-12">
             <span className="text-sm tracking-[0.3em] uppercase text-primary mb-4 block">
-              Our Collection
+              {searchTerm ? "Search Results" : "Our Collection"}
             </span>
             <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-foreground mb-4 text-balance">
-              Find Your Perfect Match
+              {searchTerm ? `Results for "${searchTerm}"` : "Find Your Perfect Match"}
             </h1>
             <p className="text-lg text-muted-foreground max-w-md mx-auto">
-              Explore our curated collection of products.
+              {searchTerm
+                ? `${filteredProducts.length} product${filteredProducts.length !== 1 ? "s" : ""} found`
+                : "Explore our curated collection of products."}
             </p>
+            {searchTerm && (
+              <a
+                href="/shop"
+                className="inline-block mt-3 text-sm text-primary hover:text-primary/80 nexamart-transition font-medium"
+              >
+                ← Clear search & view all products
+              </a>
+            )}
           </div>
 
           <div className="flex gap-8">
@@ -180,7 +180,7 @@ export default function ShopPage() {
                           type="checkbox"
                           checked={selectedCategories.includes(category.slug)}
                           onChange={() => toggleCategory(category.slug)}
-                          className="w-4 h-4"
+                          className="w-4 h-4 rounded border-border text-primary focus:ring-primary"
                         />
                         <span className="text-sm text-foreground/80">
                           {category.name}
@@ -224,90 +224,128 @@ export default function ShopPage() {
               </div>
 
               {/* Mobile Filters */}
-              {showFilters && (
-                <div className="lg:hidden fixed inset-0 z-50 bg-background overflow-y-auto">
-                  <div className="p-6 pb-20">
-                    <div className="flex items-center justify-between mb-8">
-                      <h2 className="font-serif text-2xl text-foreground">
-                        Filters
-                      </h2>
+              <AnimatePresence>
+                {showFilters && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="lg:hidden fixed inset-0 z-50 bg-background overflow-y-auto"
+                  >
+                    <div className="p-6 pb-20">
+                      <div className="flex items-center justify-between mb-8">
+                        <h2 className="font-serif text-2xl text-foreground">
+                          Filters
+                        </h2>
+                        <button
+                          type="button"
+                          onClick={() => setShowFilters(false)}
+                          className="p-2 text-foreground/70 hover:text-foreground"
+                        >
+                          <X className="w-5 h-5" />
+                        </button>
+                      </div>
+
+                      {/* Category Filter */}
+                      <FilterSection
+                        title="Category"
+                        expanded={true}
+                        onToggle={() => { }}
+                      >
+                        <div className="space-y-3">
+                          {categories.map((category) => (
+                            <label
+                              key={category.slug}
+                              className="flex items-center gap-3 cursor-pointer capitalize"
+                            >
+                              <input
+                                type="checkbox"
+                                checked={selectedCategories.includes(category.slug)}
+                                onChange={() => toggleCategory(category.slug)}
+                                className="w-4 h-4 rounded border-border text-primary focus:ring-primary"
+                              />
+                              <span className="text-sm text-foreground/80">
+                                {category.name}
+                              </span>
+                            </label>
+                          ))}
+                        </div>
+                      </FilterSection>
+
                       <button
                         type="button"
                         onClick={() => setShowFilters(false)}
-                        className="p-2 text-foreground/70 hover:text-foreground"
+                        className="w-full mt-8 bg-primary text-primary-foreground py-3 rounded-full font-medium nexamart-transition hover:bg-primary/90"
                       >
-                        <X className="w-5 h-5" />
+                        Apply Filters
                       </button>
                     </div>
-
-                    {/* Category Filter */}
-                    <FilterSection
-                      title="Category"
-                      expanded={true}
-                      onToggle={() => { }}
-                    >
-                      <div className="space-y-3">
-                        {categories.map((category) => (
-                          <label
-                            key={category.slug}
-                            className="flex items-center gap-3 cursor-pointer capitalize"
-                          >
-                            <input
-                              type="checkbox"
-                              checked={selectedCategories.includes(category.slug)}
-                              onChange={() => toggleCategory(category.slug)}
-                              className="w-4 h-4"
-                            />
-                            <span className="text-sm text-foreground/80">
-                              {category.name}
-                            </span>
-                          </label>
-                        ))}
-                      </div>
-                    </FilterSection>
-
-                    <button
-                      type="button"
-                      onClick={() => setShowFilters(false)}
-                      className="w-full mt-8 bg-primary text-primary-foreground py-3 rounded-full font-medium nexamart-transition hover:bg-primary/90"
-                    >
-                      Apply Filters
-                    </button>
-                  </div>
-                </div>
-              )}
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
               {/* Product Grid */}
-              <div
-                ref={gridRef}
+              <motion.div
+                layout
                 className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
               >
-                {loading ? (
-                  <div className="col-span-full flex justify-center py-20">
-                    <Loader2 className="w-8 h-8 animate-spin text-primary" />
-                  </div>
-                ) : error ? (
-                  <div className="col-span-full text-center py-20">
-                    <p className="text-red-500 text-lg mb-4">{error}</p>
-                    <button
-                      onClick={() => window.location.reload()}
-                      className="px-6 py-2 bg-primary text-primary-foreground rounded-full hover:bg-primary/90 transition-colors"
+                <AnimatePresence mode="popLayout">
+                  {loading ? (
+                    <motion.div
+                      key="loader"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="col-span-full flex justify-center py-20"
                     >
-                      Retry
-                    </button>
-                  </div>
-                ) : (
-                  paginatedProducts.map((product, index) => (
-                    <ProductCard
-                      key={product.id}
-                      product={product}
-                      index={index}
-                      isVisible={isVisible}
-                      onAddToCart={() => handleAddToCart(product)}
-                    />
-                  ))
-                )}
-              </div>
+                      <Loader2 className="w-8 h-8 animate-spin text-primary" />
+                    </motion.div>
+                  ) : error ? (
+                    <motion.div
+                      key="error"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="col-span-full text-center py-20"
+                    >
+                      <p className="text-red-500 text-lg mb-4">{error}</p>
+                      <button
+                        onClick={() => window.location.reload()}
+                        className="px-6 py-2 bg-primary text-primary-foreground rounded-full hover:bg-primary/90 transition-colors"
+                      >
+                        Retry
+                      </button>
+                    </motion.div>
+                  ) : filteredProducts.length === 0 ? (
+                    <motion.div
+                      key="empty"
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.9 }}
+                      className="col-span-full text-center py-20"
+                    >
+                      <p className="text-muted-foreground text-lg mb-4">
+                        No products match your filters.
+                      </p>
+                      <button
+                        type="button"
+                        onClick={clearFilters}
+                        className="text-primary hover:text-primary/80 font-medium"
+                      >
+                        Clear filters to see all products
+                      </button>
+                    </motion.div>
+                  ) : (
+                    paginatedProducts.map((product) => (
+                      <ProductCard
+                        key={product.id}
+                        product={product}
+                        onAddToCart={() => handleAddToCart(product)}
+                      />
+                    ))
+                  )}
+                </AnimatePresence>
+              </motion.div>
 
               {/* Pagination */}
               {!loading && totalPages > 1 && (
@@ -367,21 +405,6 @@ export default function ShopPage() {
                   {filteredProducts.length} products
                 </div>
               )}
-
-              {!loading && filteredProducts.length === 0 && (
-                <div className="text-center py-20">
-                  <p className="text-muted-foreground text-lg mb-4">
-                    No products match your filters.
-                  </p>
-                  <button
-                    type="button"
-                    onClick={clearFilters}
-                    className="text-primary hover:text-primary/80 font-medium"
-                  >
-                    Clear filters to see all products
-                  </button>
-                </div>
-              )}
             </div>
           </div>
         </div>
@@ -416,29 +439,40 @@ function FilterSection({
             }`}
         />
       </button>
-      {expanded && <div className="pt-4">{children}</div>}
+      <AnimatePresence>
+        {expanded && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="overflow-hidden"
+          >
+            <div className="pt-4">{children}</div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
 
 function ProductCard({
   product,
-  index,
-  isVisible,
   onAddToCart,
 }: {
   product: Product;
-  index: number;
-  isVisible: boolean;
   onAddToCart: () => void;
 }) {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   return (
-    <div
-      className={`transition-all duration-700 ease-out ${isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
-        }`}
-      style={{ transitionDelay: `${index * 80}ms` }}
+    <motion.div
+      layout
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.9 }}
+      transition={{ duration: 0.3 }}
+      className="h-full"
     >
       <div className="group h-full">
         <Link
@@ -461,7 +495,7 @@ function ProductCard({
                 }`}
               onLoad={() => setImageLoaded(true)}
               onError={() => setImageLoaded(true)}
-              priority={index < 4}
+              priority={false}
             />
 
             {/* Badge */}
@@ -524,13 +558,13 @@ function ProductCard({
                   </span>
                 )}
               </div>
-              <span className="text-xs text-muted-foreground capitalize">
+              <span className="text-sm text-muted-foreground capitalize bg-background/50 px-2 py-0.5 rounded-md">
                 {product.category}
               </span>
             </div>
           </div>
         </Link>
       </div>
-    </div>
+    </motion.div>
   );
 }
