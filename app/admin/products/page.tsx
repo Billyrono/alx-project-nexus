@@ -121,28 +121,28 @@ export default function ProductsPage() {
             )}
 
             {/* Stats */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
-              <div className="bg-card rounded-2xl p-6 nexamart-shadow">
-                <p className="text-sm text-muted-foreground mb-2">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-6 mb-6 sm:mb-8">
+              <div className="bg-card rounded-2xl p-4 sm:p-6 nexamart-shadow">
+                <p className="text-xs sm:text-sm text-muted-foreground mb-1 sm:mb-2">
                   Total Products
                 </p>
-                <p className="text-3xl font-bold text-foreground">
+                <p className="text-2xl sm:text-3xl font-bold text-foreground">
                   {products.length}
                 </p>
               </div>
-              <div className="bg-card rounded-2xl p-6 nexamart-shadow">
-                <p className="text-sm text-muted-foreground mb-2">
+              <div className="bg-card rounded-2xl p-4 sm:p-6 nexamart-shadow">
+                <p className="text-xs sm:text-sm text-muted-foreground mb-1 sm:mb-2">
                   Total Stock
                 </p>
-                <p className="text-3xl font-bold text-foreground">
+                <p className="text-2xl sm:text-3xl font-bold text-foreground">
                   {totalStock}
                 </p>
               </div>
-              <div className="bg-card rounded-2xl p-6 nexamart-shadow">
-                <p className="text-sm text-muted-foreground mb-2">
+              <div className="bg-card rounded-2xl p-4 sm:p-6 nexamart-shadow col-span-2 sm:col-span-1">
+                <p className="text-xs sm:text-sm text-muted-foreground mb-1 sm:mb-2">
                   Inventory Value
                 </p>
-                <p className="text-3xl font-bold text-foreground">
+                <p className="text-2xl sm:text-3xl font-bold text-foreground">
                   KES {totalValue.toLocaleString()}
                 </p>
               </div>
@@ -174,29 +174,29 @@ export default function ProductsPage() {
                   <p className="text-muted-foreground">No products found</p>
                 </div>
               ) : (
-                <div>
+                <div className="overflow-x-auto">
                   <table className="w-full">
                     <thead>
                       <tr className="border-b border-border/50 bg-foreground/5">
-                        <th className="px-4 py-4 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                        <th className="px-3 sm:px-4 py-3 sm:py-4 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                           Product
                         </th>
-                        <th className="px-4 py-4 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                        <th className="px-3 sm:px-4 py-3 sm:py-4 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider hidden sm:table-cell">
                           Category
                         </th>
-                        <th className="px-4 py-4 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                        <th className="px-3 sm:px-4 py-3 sm:py-4 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                           Price
                         </th>
-                        <th className="px-4 py-4 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                        <th className="px-3 sm:px-4 py-3 sm:py-4 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider hidden sm:table-cell">
                           Stock
                         </th>
-                        <th className="px-4 py-4 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider hidden lg:table-cell">
+                        <th className="px-3 sm:px-4 py-3 sm:py-4 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider hidden lg:table-cell">
                           Rating
                         </th>
-                        <th className="px-4 py-4 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider hidden md:table-cell">
+                        <th className="px-3 sm:px-4 py-3 sm:py-4 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider hidden md:table-cell">
                           Status
                         </th>
-                        <th className="px-4 py-4 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                        <th className="px-3 sm:px-4 py-3 sm:py-4 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                           Actions
                         </th>
                       </tr>
@@ -207,9 +207,9 @@ export default function ProductsPage() {
                           key={product.id}
                           className="border-b border-border/50 hover:bg-foreground/5 nexamart-transition"
                         >
-                          <td className="px-4 py-4">
-                            <div className="flex items-center gap-3">
-                              <div className="relative w-12 h-12 rounded-lg overflow-hidden shrink-0 bg-muted">
+                          <td className="px-3 sm:px-4 py-3 sm:py-4">
+                            <div className="flex items-center gap-2 sm:gap-3">
+                              <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-lg overflow-hidden shrink-0 bg-muted">
                                 <Image
                                   src={product.thumbnail || "/placeholder.svg"}
                                   alt={product.title}
@@ -218,22 +218,27 @@ export default function ProductsPage() {
                                   priority
                                 />
                               </div>
-                              <p className="font-semibold text-foreground text-sm line-clamp-2 max-w-[200px]">
-                                {product.title}
-                              </p>
+                              <div>
+                                <p className="font-semibold text-foreground text-xs sm:text-sm line-clamp-2 max-w-[120px] sm:max-w-[200px]">
+                                  {product.title}
+                                </p>
+                                <p className="text-xs text-muted-foreground capitalize sm:hidden">
+                                  {product.category}
+                                </p>
+                              </div>
                             </div>
                           </td>
-                          <td className="px-4 py-4">
+                          <td className="px-3 sm:px-4 py-3 sm:py-4 hidden sm:table-cell">
                             <span className="text-sm text-foreground/70 capitalize">
                               {product.category}
                             </span>
                           </td>
-                          <td className="px-4 py-4">
-                            <p className="font-semibold text-foreground text-sm">
+                          <td className="px-3 sm:px-4 py-3 sm:py-4">
+                            <p className="font-semibold text-foreground text-xs sm:text-sm">
                               KES {product.price.toLocaleString()}
                             </p>
                           </td>
-                          <td className="px-4 py-4">
+                          <td className="px-3 sm:px-4 py-3 sm:py-4 hidden sm:table-cell">
                             <span
                               className={`inline-block px-2 py-1 rounded-full text-xs font-semibold ${product.stock > 20
                                 ? "bg-green-100 text-green-800"
@@ -245,13 +250,13 @@ export default function ProductsPage() {
                               {product.stock}
                             </span>
                           </td>
-                          <td className="px-4 py-4 hidden lg:table-cell">
+                          <td className="px-3 sm:px-4 py-3 sm:py-4 hidden lg:table-cell">
                             <p className="text-sm text-foreground">
                               <span className="text-amber-400">★</span>{" "}
                               {product.rating?.toFixed(1) || "5.0"}
                             </p>
                           </td>
-                          <td className="px-4 py-4 hidden md:table-cell">
+                          <td className="px-3 sm:px-4 py-3 sm:py-4 hidden md:table-cell">
                             <span
                               className={`inline-block px-2 py-1 rounded-full text-xs font-semibold ${product.stock > 0
                                 ? "bg-green-100 text-green-800"
@@ -261,7 +266,7 @@ export default function ProductsPage() {
                               {product.stock > 0 ? "In Stock" : "Out"}
                             </span>
                           </td>
-                          <td className="px-4 py-4">
+                          <td className="px-3 sm:px-4 py-3 sm:py-4">
                             <div className="flex items-center gap-1">
                               <Link
                                 href={`/admin/products/${product.id}`}

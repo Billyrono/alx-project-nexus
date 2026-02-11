@@ -125,7 +125,7 @@ export function ProductGrid() {
           </div>
         )}
         {!loading && !error && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
             {filteredProducts.map((product, index) => (
               <Link
                 key={product.id}
@@ -168,19 +168,19 @@ export function ProductGrid() {
                       </div>
                     )}
                   </div>
-                  <div className="p-5 flex-1 flex flex-col">
-                    <h3 className="font-serif text-lg text-foreground mb-1 group-hover:text-primary transition-colors line-clamp-1">
+                  <div className="p-3 sm:p-5 flex-1 flex flex-col">
+                    <h3 className="font-serif text-sm sm:text-lg text-foreground mb-1 group-hover:text-primary transition-colors line-clamp-1">
                       {product.title}
                     </h3>
-                    <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
+                    <p className="text-xs sm:text-sm text-muted-foreground mb-2 sm:mb-3 line-clamp-2">
                       {product.description}
                     </p>
-                    <div className="mt-auto flex items-baseline gap-2">
-                      <span className="font-semibold text-foreground">
+                    <div className="mt-auto flex items-baseline gap-1 sm:gap-2">
+                      <span className="font-semibold text-foreground text-sm sm:text-base">
                         KES {product.price.toLocaleString()}
                       </span>
                       {product.discountPercentage > 0 && (
-                        <span className="text-sm text-muted-foreground line-through">
+                        <span className="text-xs sm:text-sm text-muted-foreground line-through hidden sm:inline">
                           KES {(product.price / (1 - product.discountPercentage / 100)).toLocaleString(undefined, { maximumFractionDigits: 0 })}
                         </span>
                       )}

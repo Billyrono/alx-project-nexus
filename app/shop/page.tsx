@@ -287,7 +287,7 @@ export default function ShopPage() {
               {/* Product Grid */}
               <motion.div
                 layout
-                className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+                className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6"
               >
                 <AnimatePresence mode="popLayout">
                   {loading ? (
@@ -521,16 +521,16 @@ function ProductCard({
           </div>
 
           {/* Info */}
-          <div className="p-6 flex-1 flex flex-col">
-            <h3 className="font-serif text-lg text-foreground mb-1 line-clamp-1">
+          <div className="p-4 sm:p-6 flex-1 flex flex-col">
+            <h3 className="font-serif text-sm sm:text-lg text-foreground mb-1 line-clamp-1">
               {product.title}
             </h3>
-            <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
+            <p className="text-xs sm:text-sm text-muted-foreground mb-2 sm:mb-3 line-clamp-2">
               {product.description}
             </p>
 
             {/* Rating */}
-            <div className="flex items-center gap-2 mb-3 mt-auto">
+            <div className="flex items-center gap-2 mb-2 sm:mb-3 mt-auto">
               <div className="flex gap-1">
                 {[...Array(5)].map((_, i) => (
                   <span
@@ -549,16 +549,16 @@ function ProductCard({
             {/* Price & Info */}
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <span className="text-lg font-semibold text-foreground">
+                <span className="text-sm sm:text-lg font-semibold text-foreground">
                   KES {product.price.toLocaleString()}
                 </span>
                 {product.discountPercentage > 0 && (
-                  <span className="text-sm text-muted-foreground line-through">
+                  <span className="text-xs sm:text-sm text-muted-foreground line-through hidden sm:inline">
                     KES {(product.price / (1 - product.discountPercentage / 100)).toLocaleString(undefined, { maximumFractionDigits: 0 })}
                   </span>
                 )}
               </div>
-              <span className="text-sm text-muted-foreground capitalize bg-background/50 px-2 py-0.5 rounded-md">
+              <span className="text-xs text-muted-foreground capitalize bg-background/50 px-2 py-0.5 rounded-md hidden sm:inline">
                 {product.category}
               </span>
             </div>
